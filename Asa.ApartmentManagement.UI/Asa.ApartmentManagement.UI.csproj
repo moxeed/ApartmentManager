@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ASa.ApartmentManagement.Core\ASa.ApartmentManagement.Core.csproj" />
+    <ProjectReference Include="..\Asa.ApartmentSystem.ApplicationService\Asa.ApartmentSystem.ApplicationService.csproj" />
+    <ProjectReference Include="..\Asa.ApartmentSystem.Infra\Asa.ApartmentSystem.Infra.csproj" />
+  </ItemGroup>
+
+
+</Project>
