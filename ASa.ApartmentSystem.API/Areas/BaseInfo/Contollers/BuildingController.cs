@@ -20,7 +20,7 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
         public IActionResult AddBulding([FromBody] BuidlingModel model) 
         {
             var building = new BuildingDto(); // map from model
-            _buildingManerger.AddBuilding(building);
+            _buildingManerger.AddBuildingAsync(building);
             return Created(Request.Path, building.Wrap(Request.Path));
         }
         

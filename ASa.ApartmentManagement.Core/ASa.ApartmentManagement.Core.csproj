@@ -6,8 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Charge\" />
-    <Folder Include="Interfaces\Repositories\" />
-    <Folder Include="Entities\" />
   </ItemGroup>
 
   <ItemGroup>

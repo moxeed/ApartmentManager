@@ -1,4 +1,5 @@
-﻿using Asa.ApartmentManagement.Core.Interfaces.Managers;
+﻿using Asa.ApartmentManagement.Core.BaseInfo.DTOs;
+using Asa.ApartmentManagement.Core.Interfaces.Managers;
 using Asa.ApartmentManagement.Core.Interfaces.Repositories;
 using ASa.ApartmentManagement.Core.BaseInfo.DataGateways;
 using ASa.ApartmentManagement.Core.BaseInfo.DTOs;
@@ -20,30 +21,37 @@ namespace ASa.ApartmentManagement.Core.BaseInfo.Managers
             _repository = repository;
         }
 
-        public async Task AddBuilding(BuildingDto building)
+        public async Task AddBuildingAsync(BuildingDto building)
         {
             ValidateBuilding(building);
-            building.Id = 10;
+            await _repository.AddBuildingAsync(building);
+        }
+
+        public Task EditBuldingNameAsync(BuildingNameDto buildingName)
+        {
+            ValidateBuildingName(buildingName);
+            return _repository.EditBuldingNameAsync(buildingName);
         }
 
         private static void ValidateBuilding(BuildingDto building)
         {
-            const int MAX_BUILDING_NAME_LENGTH = 50;
-            var buildingNameIsValid = string.IsNullOrWhiteSpace(building.Name) || building.Name.Length > MAX_BUILDING_NAME_LENGTH;
-            if (buildingNameIsValid)
+            if (string.IsNullOrWhiteSpace(building.Name))
             {
                 throw new ValidationException(ErrorCodes.Invalid_Building_Name, $"Building name cannot be neither empty nor larger than {MAX_BUILDING_NAME_LENGTH} character");
             }
-            const int MINIMUM_BUILDING_UNITS_COUNT = 1;
+            const int MINIMUM_BUILDING_UNITS_COUNT = 2;
             if (building.NumberOfUnits < MINIMUM_BUILDING_UNITS_COUNT)
             {
                 throw new ValidationException(ErrorCodes.Invalid_Number_Of_Units, $"The number of units cannot be less than {MINIMUM_BUILDING_UNITS_COUNT }.");
             }
         }
 
-        public Task EditBuldingName(BuildingDto building)
+        private static void ValidateBuildingName(BuildingNameDto building)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(building.BuildingName))
+            {
+                throw new ValidationException(ErrorCodes.Invalid_Building_Name, $"Building name cannot be neither empty nor larger than {MAX_BUILDING_NAME_LENGTH} character");
+            }
         }
     }
 }

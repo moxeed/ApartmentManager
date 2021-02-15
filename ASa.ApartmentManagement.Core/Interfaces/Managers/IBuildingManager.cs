@@ -9,7 +9,7 @@ namespace Asa.ApartmentManagement.Core.Interfaces.Managers
 {
     public interface IBuildingManager
     {
-        Task AddBuilding (BuildingDto building);
-        Task EditBuldingName(BuildingDto building);
+        Task AddBuildingAsync (BuildingDto building);
+        Task EditBuldingNameAsync (BuildingNameDto building);
     }
 }

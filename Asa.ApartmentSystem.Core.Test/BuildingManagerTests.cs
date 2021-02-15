@@ -40,7 +40,7 @@ namespace Asa.ApartmentSystem.Core.Test
             BuildingDto building = new BuildingDto { Id = 0, Name = string.Empty, NumberOfUnits = 10 };
             //A => Act
             //A => Assert
-            Assert.CatchAsync(() => buildingManager.AddBuilding(building));
+            Assert.CatchAsync(() => buildingManager.AddBuildingAsync(building));
 
             //AsyncTestDelegate asyncTestDelegate = DoMyAcgtion;
             //Assert.CatchAsync(asyncTestDelegate);
@@ -54,7 +54,7 @@ namespace Asa.ApartmentSystem.Core.Test
             BuildingManager buildingManager = new BuildingManager(new MyFakes.TableGatewyFactory());
             BuildingDto building = new BuildingDto { Id = 0, Name = "My Building", NumberOfUnits = 10 };
             //A => Act
-             await buildingManager.AddBuilding(building);
+             await buildingManager.AddBuildingAsync(building);
             //A => Assert
             Assert.AreEqual(1, building.Id);
         }
@@ -75,7 +75,7 @@ namespace Asa.ApartmentSystem.Core.Test
             BuildingDto building = new BuildingDto { Id = 0, Name = "My Building", NumberOfUnits = 10 };
 
             //A => Act
-            await buildingManager.AddBuilding(building);
+            await buildingManager.AddBuildingAsync(building);
 
             //A => Assert
             Assert.AreEqual(myId, building.Id);
