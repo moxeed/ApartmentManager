@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Asa.ApartmentManagement.Core.Interfaces.Managers;
+using ASa.ApartmentManagement.Core.BaseInfo.Managers;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +11,7 @@ namespace Asa.ApartmentManagement.Core.IOC
     {
         public static IServiceCollection AddCore(this IServiceCollection services)
         {
+            services.AddScoped<IBuildingManager, BuildingManager>();
             return services;
         }
     }

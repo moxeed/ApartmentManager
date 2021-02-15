@@ -1,4 +1,6 @@
-﻿using ASa.ApartmentManagement.Core.BaseInfo.DataGateways;
+﻿using Asa.ApartmentManagement.Core.Interfaces.Managers;
+using Asa.ApartmentManagement.Core.Interfaces.Repositories;
+using ASa.ApartmentManagement.Core.BaseInfo.DataGateways;
 using ASa.ApartmentManagement.Core.BaseInfo.DTOs;
 using ASa.ApartmentManagement.Core.Common;
 using System;
@@ -9,24 +11,19 @@ using System.Threading.Tasks;
 
 namespace ASa.ApartmentManagement.Core.BaseInfo.Managers
 {
-    public class BuildingManager
+    public class BuildingManager : IBuildingManager
     {
-        ITableGatwayFactory _tablegatwayFactory;
-        public BuildingManager(ITableGatwayFactory tablegatwayFactory)
+        private readonly IBuildingRepository _repository;
+
+        public BuildingManager(IBuildingRepository repository)
         {
-            _tablegatwayFactory = tablegatwayFactory;
+            _repository = repository;
         }
-        public int JustForTest(int a, int b)
-        {
-            return a + b;
-        }
+
         public async Task AddBuilding(BuildingDto building)
         {
             ValidateBuilding(building);
-            var tableGateway = _tablegatwayFactory.CreateBuildingTableGateway();
-            var id = await tableGateway.InsertBuildingAsync(building).ConfigureAwait(false);
-            building.Id = id;
-
+            building.Id = 10;
         }
 
         private static void ValidateBuilding(BuildingDto building)
@@ -44,10 +41,9 @@ namespace ASa.ApartmentManagement.Core.BaseInfo.Managers
             }
         }
 
-        public async Task<IEnumerable<ApartmentUnitDTO>> GetAllApartmentUnits(int buildingId)
+        public Task EditBuldingName(BuildingDto building)
         {
-            var tableGateway = _tablegatwayFactory.CreateIApartmentTableGateway();
-            return  await tableGateway.GetAllByBuildingId(buildingId).ConfigureAwait(false);            
+            throw new NotImplementedException();
         }
     }
 }

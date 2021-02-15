@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Asa.ApartmentSystem.API.Controllers
 {
+    [Route("[area]/[controller]")]
+    [ApiController]
     public class ApiBaseController : ControllerBase
     {
-       
     }
 }

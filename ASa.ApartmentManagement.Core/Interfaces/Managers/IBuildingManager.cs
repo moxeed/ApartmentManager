@@ -7,15 +7,9 @@ using System.Threading.Tasks;
 
 namespace Asa.ApartmentManagement.Core.Interfaces.Managers
 {
-    public interface IBaseInfoManager
+    public interface IBuildingManager
     {
-        Task<int> AddPerson(PersonDto person);
-
-
-        Task<int> AddBuilding(BuildingDto person);
-
-
-        Task<int> AddAparement(PersonDto person);
-        IEnumerable<BuildingDto> GetBuidlingsInfo();
+        Task AddBuilding (BuildingDto building);
+        Task EditBuldingName(BuildingDto building);
     }
 }
