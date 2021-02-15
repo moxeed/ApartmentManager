@@ -1,13 +1,9 @@
 ﻿using Asa.ApartmentManagement.Core.BaseInfo.DTOs;
 using Asa.ApartmentManagement.Core.Interfaces.Managers;
 using Asa.ApartmentManagement.Core.Interfaces.Repositories;
-using ASa.ApartmentManagement.Core.BaseInfo.DataGateways;
 using ASa.ApartmentManagement.Core.BaseInfo.DTOs;
 using ASa.ApartmentManagement.Core.Common;
-using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace ASa.ApartmentManagement.Core.BaseInfo.Managers
@@ -16,9 +12,9 @@ namespace ASa.ApartmentManagement.Core.BaseInfo.Managers
     {
         private readonly IBuildingRepository _repository;
 
-        public BuildingManager(IBuildingRepository repository)
+        public BuildingManager()//IBuildingRepository repository)
         {
-            _repository = repository;
+            //_repository = repository;
         }
 
         public async Task AddBuildingAsync(BuildingDto building)
@@ -37,7 +33,7 @@ namespace ASa.ApartmentManagement.Core.BaseInfo.Managers
         {
             if (string.IsNullOrWhiteSpace(building.Name))
             {
-                throw new ValidationException(ErrorCodes.Invalid_Building_Name, $"Building name cannot be neither empty nor larger than {MAX_BUILDING_NAME_LENGTH} character");
+                throw new ValidationException(ErrorCodes.Invalid_Building_Name, $"Building name cannot be neither empty");
             }
             const int MINIMUM_BUILDING_UNITS_COUNT = 2;
             if (building.NumberOfUnits < MINIMUM_BUILDING_UNITS_COUNT)
@@ -50,8 +46,16 @@ namespace ASa.ApartmentManagement.Core.BaseInfo.Managers
         {
             if (string.IsNullOrWhiteSpace(building.BuildingName))
             {
-                throw new ValidationException(ErrorCodes.Invalid_Building_Name, $"Building name cannot be neither empty nor larger than {MAX_BUILDING_NAME_LENGTH} character");
+                throw new ValidationException(ErrorCodes.Invalid_Building_Name, $"Building name cannot be neither empty");
             }
+        }
+
+        public Task<IEnumerable<BuildingDto>> GetBuildings()
+        {
+            return Task.Run(() => (IEnumerable<BuildingDto>)new List<BuildingDto>
+            {
+                new BuildingDto { Id = 1 }
+            });
         }
     }
 }

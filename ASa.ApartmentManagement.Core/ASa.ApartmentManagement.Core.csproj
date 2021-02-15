@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Charge\" />
+    <Folder Include="Charge\DomainModel\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -3,6 +3,7 @@ using Asa.ApartmentSystem.API.Common.Extenstions;
 using Asa.ApartmentSystem.API.Controllers;
 using ASa.ApartmentManagement.Core.BaseInfo.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
 {
@@ -17,17 +18,17 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
         }
 
         [HttpPost]
-        public IActionResult AddBulding([FromBody] BuidlingModel model) 
+        public async Task<IActionResult> AddBulding([FromBody] BuidlingModel model) 
         {
             var building = new BuildingDto(); // map from model
-            _buildingManerger.AddBuildingAsync(building);
+            await _buildingManerger.AddBuildingAsync(building);
             return Created(Request.Path, building.Wrap(Request.Path));
         }
         
         [HttpGet]
-        public IActionResult GetBuilding() 
+        public async Task<IActionResult> GetBuilding() 
         {
-            var buildings = _buildingManerger.GetBuidlingsInfo();
+            var buildings = await _buildingManerger.GetBuildings();
             return Ok(buildings.Wrap(Request.Path));
         }
     }
