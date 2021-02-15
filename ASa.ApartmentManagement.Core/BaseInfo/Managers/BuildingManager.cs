@@ -20,7 +20,7 @@ namespace ASa.ApartmentManagement.Core.BaseInfo.Managers
         {
             return a + b;
         }
-        public async Task AddBuilding(BuildingDTO building)
+        public async Task AddBuilding(BuildingDto building)
         {
             ValidateBuilding(building);
             var tableGateway = _tablegatwayFactory.CreateBuildingTableGateway();
@@ -29,7 +29,7 @@ namespace ASa.ApartmentManagement.Core.BaseInfo.Managers
 
         }
 
-        private static void ValidateBuilding(BuildingDTO building)
+        private static void ValidateBuilding(BuildingDto building)
         {
             const int MAX_BUILDING_NAME_LENGTH = 50;
             var buildingNameIsValid = string.IsNullOrWhiteSpace(building.Name) || building.Name.Length > MAX_BUILDING_NAME_LENGTH;

@@ -3,19 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASa.ApartmentManagement.Core", "ASa.ApartmentManagement.Core\ASa.ApartmentManagement.Core.csproj", "{064EBFC0-BF90-4E35-A67D-86FB55972D15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asa.ApartmentManagement.Core", "ASa.ApartmentManagement.Core\Asa.ApartmentManagement.Core.csproj", "{064EBFC0-BF90-4E35-A67D-86FB55972D15}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asa.ApartmentSystem.Infra", "Asa.ApartmentSystem.Infra\Asa.ApartmentSystem.Infra.csproj", "{C0E47359-E505-4232-A8DD-D462900C3892}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asa.ApartmentSystem.Persistence", "Asa.ApartmentSystem.Infra\Asa.ApartmentSystem.Persistence.csproj", "{C0E47359-E505-4232-A8DD-D462900C3892}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asa.ApartmentSystem.Core.Test", "Asa.ApartmentSystem.Core.Test\Asa.ApartmentSystem.Core.Test.csproj", "{36140403-9866-4F50-8828-5D27F0A3B456}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asa.ApartmentSystem.ApplicationService", "Asa.ApartmentSystem.ApplicationService\Asa.ApartmentSystem.ApplicationService.csproj", "{72A07182-9D9F-48FA-BFE7-21AF3D5AEC82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asa.ApartmentSystem.Services", "Asa.ApartmentSystem.ApplicationService\Asa.ApartmentSystem.Services.csproj", "{72A07182-9D9F-48FA-BFE7-21AF3D5AEC82}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASa.ApartmentSystem.API", "ASa.ApartmentSystem.API\ASa.ApartmentSystem.API.csproj", "{CDB12F46-18A9-410C-8585-00C3ECF7134D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asa.ApartmentSystem.API", "ASa.ApartmentSystem.API\Asa.ApartmentSystem.API.csproj", "{CDB12F46-18A9-410C-8585-00C3ECF7134D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asa.Draft", "Asa.Draft\Asa.Draft.csproj", "{0FF15C2F-06E1-4BE8-828E-04F97E3C969D}"
-EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Asa.ApartmentSystem.DB", "Asa.ApartmentSystem.DB\Asa.ApartmentSystem.DB.sqlproj", "{01ED93AB-7E34-476B-B7D1-95BCBA42E15D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Asa.ApartmentManagment.Test", "Asa.ApartmentManagment.Test", "{8E361667-CA70-4735-B1BE-59A8C5ACB8EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,19 +41,12 @@ Global
 		{CDB12F46-18A9-410C-8585-00C3ECF7134D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDB12F46-18A9-410C-8585-00C3ECF7134D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDB12F46-18A9-410C-8585-00C3ECF7134D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0FF15C2F-06E1-4BE8-828E-04F97E3C969D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0FF15C2F-06E1-4BE8-828E-04F97E3C969D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0FF15C2F-06E1-4BE8-828E-04F97E3C969D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0FF15C2F-06E1-4BE8-828E-04F97E3C969D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{01ED93AB-7E34-476B-B7D1-95BCBA42E15D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{01ED93AB-7E34-476B-B7D1-95BCBA42E15D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{01ED93AB-7E34-476B-B7D1-95BCBA42E15D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{01ED93AB-7E34-476B-B7D1-95BCBA42E15D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{01ED93AB-7E34-476B-B7D1-95BCBA42E15D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{01ED93AB-7E34-476B-B7D1-95BCBA42E15D}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{36140403-9866-4F50-8828-5D27F0A3B456} = {8E361667-CA70-4735-B1BE-59A8C5ACB8EC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E9A02375-8C91-4853-82BE-2FEE03A5B630}

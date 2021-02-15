@@ -9,7 +9,7 @@ namespace Asa.ApartmentSystem.Core.Test.MyFakes
 {
     internal class FakeBuildingTableGateway : IBuildingTableGateway
     {
-        public Task<int> InsertBuildingAsync(BuildingDTO building)
+        public Task<int> InsertBuildingAsync(BuildingDto building)
         {
            return Task.FromResult(1);
         }

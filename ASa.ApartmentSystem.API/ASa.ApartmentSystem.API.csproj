@@ -5,9 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ASa.ApartmentManagement.Core\ASa.ApartmentManagement.Core.csproj" />
-    <ProjectReference Include="..\Asa.ApartmentSystem.ApplicationService\Asa.ApartmentSystem.ApplicationService.csproj" />
-    <ProjectReference Include="..\Asa.ApartmentSystem.Infra\Asa.ApartmentSystem.Infra.csproj" />
+    <ProjectReference Include="..\ASa.ApartmentManagement.Core\Asa.ApartmentManagement.Core.csproj" />
+    <ProjectReference Include="..\Asa.ApartmentSystem.ApplicationService\Asa.ApartmentSystem.Services.csproj" />
+    <ProjectReference Include="..\Asa.ApartmentSystem.Infra\Asa.ApartmentSystem.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Charge\Contollers\" />
+    <Folder Include="Areas\Charge\Models\" />
+    <Folder Include="Areas\Identity\Contollers\" />
+    <Folder Include="Areas\Identity\Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
   </ItemGroup>
 
 

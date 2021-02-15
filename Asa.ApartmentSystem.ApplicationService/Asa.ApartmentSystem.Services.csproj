@@ -5,9 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Charge\" />
-    <Folder Include="Interfaces\Repositories\" />
-    <Folder Include="Entities\" />
+    <ProjectReference Include="..\ASa.ApartmentManagement.Core\Asa.ApartmentManagement.Core.csproj" />
+    <ProjectReference Include="..\Asa.ApartmentSystem.Infra\Asa.ApartmentSystem.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="implementation\" />
   </ItemGroup>
 
   <ItemGroup>
