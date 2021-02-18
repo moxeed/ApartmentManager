@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ASa.ApartmentManagement.Core\Asa.ApartmentManagement.Core.csproj" />
-    <ProjectReference Include="..\Asa.ApartmentSystem.Infra\Asa.ApartmentSystem.Persistence.csproj" />
+    <ProjectReference Include="..\Asa.ApartmentManagement.persistence\Asa.ApartmentManagement.Persistence.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -5,12 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ASa.ApartmentManagement.Core\Asa.ApartmentManagement.Core.csproj" />
-    <ProjectReference Include="..\Asa.ApartmentSystem.ApplicationService\Asa.ApartmentSystem.Services.csproj" />
-    <ProjectReference Include="..\Asa.ApartmentSystem.Infra\Asa.ApartmentSystem.Persistence.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Areas\Charge\Contollers\" />
     <Folder Include="Areas\Charge\Models\" />
     <Folder Include="Areas\Identity\Contollers\" />
@@ -19,6 +13,20 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.12">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.12">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Asa.ApartmentManagement.ApplicationService\Asa.ApartmentManagement.ApplicationServices.csproj" />
+    <ProjectReference Include="..\ASa.ApartmentManagement.Core\Asa.ApartmentManagement.Core.csproj" />
+    <ProjectReference Include="..\Asa.ApartmentManagement.persistence\Asa.ApartmentManagement.Persistence.csproj" />
   </ItemGroup>
 
 

@@ -1,4 +1,4 @@
-﻿namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
+﻿namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Models
 {
     public class BuidlingModel
     {

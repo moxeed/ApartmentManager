@@ -1,9 +1,10 @@
 ﻿using Asa.ApartmentManagement.Core.Interfaces.Managers;
 using Asa.ApartmentSystem.API.Common.Extenstions;
 using Asa.ApartmentSystem.API.Controllers;
-using ASa.ApartmentManagement.Core.BaseInfo.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Asa.ApartmentManagement.Core.BaseInfo.DTOs;
+using Asa.ApartmentSystem.API.Areas.BaseInfo.Models;
 
 namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
 {

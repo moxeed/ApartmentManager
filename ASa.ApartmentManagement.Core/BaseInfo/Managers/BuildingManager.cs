@@ -1,12 +1,11 @@
-﻿using Asa.ApartmentManagement.Core.BaseInfo.DTOs;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Asa.ApartmentManagement.Core.BaseInfo.DTOs;
+using Asa.ApartmentManagement.Core.Common;
 using Asa.ApartmentManagement.Core.Interfaces.Managers;
 using Asa.ApartmentManagement.Core.Interfaces.Repositories;
-using ASa.ApartmentManagement.Core.BaseInfo.DTOs;
-using ASa.ApartmentManagement.Core.Common;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
-namespace ASa.ApartmentManagement.Core.BaseInfo.Managers
+namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
 {
     public class BuildingManager : IBuildingManager
     {

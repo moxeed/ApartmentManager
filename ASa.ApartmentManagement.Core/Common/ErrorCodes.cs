@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ASa.ApartmentManagement.Core.Common
+﻿namespace Asa.ApartmentManagement.Core.Common
 {
     public class ErrorCodes
     {

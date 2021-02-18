@@ -1,9 +1,9 @@
 ﻿using Asa.ApartmentManagement.Core.Interfaces.Managers;
-using ASa.ApartmentManagement.Core.BaseInfo.Managers;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Asa.ApartmentManagement.Core.BaseInfo.Managers;
 
 namespace Asa.ApartmentManagement.Core.IOC
 {

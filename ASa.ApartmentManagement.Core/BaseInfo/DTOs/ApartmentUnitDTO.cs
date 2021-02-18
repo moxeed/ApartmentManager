@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ASa.ApartmentManagement.Core.BaseInfo.DTOs
+﻿namespace Asa.ApartmentManagement.Core.BaseInfo.DTOs
 {
     public class ApartmentUnitDTO
     {

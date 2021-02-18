@@ -1,9 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Asa.ApartmentSystem.Services.IOC
+namespace Asa.ApartmentManagement.ApplicationServices.IOC
 {
     public static class AddServicesExtenstion
     {

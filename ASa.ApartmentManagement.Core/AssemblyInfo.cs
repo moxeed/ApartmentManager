@@ -1,2 +1,2 @@
-﻿[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Asa.ApartmentSystem.Core.Test")]
+﻿[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Asa.ApartmentManager.Core.Test")]
 
