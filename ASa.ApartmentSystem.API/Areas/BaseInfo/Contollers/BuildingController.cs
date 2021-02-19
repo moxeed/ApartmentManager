@@ -5,10 +5,14 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Asa.ApartmentManagement.Core.BaseInfo.DTOs;
 using Asa.ApartmentSystem.API.Areas.BaseInfo.Models;
+using Asa.ApartmentSystem.API.Mappers;
+using Asa.ApartmentSystem.API.Areas.BaseInfo.Models.Requests;
+using System;
 
 namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
 {
     [Area("BaseInfo")]
+    [ApiController]
     public class BuildingController : ApiBaseController
     {
         private readonly IBuildingManager _buildingManerger;
@@ -19,18 +23,27 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddBulding([FromBody] BuidlingModel model) 
+        public async Task<IActionResult> AddBulding([FromBody] AddBuildingRequest request) 
         {
-            var building = new BuildingDto(); // map from model
+            var building = request.ToDto(); 
             await _buildingManerger.AddBuildingAsync(building);
-            return Created(Request.Path, building.Wrap(Request.Path));
+            return Created(Request.Path, building.WrapResponse(Request.Path));
+        }
+
+        [HttpPatch]
+        public async Task<IActionResult> RenameBulding([FromBody] RenameBuildingRequest request) 
+        {
+            var buildingName = request.ToDto(); 
+            await _buildingManerger.EditBuldingNameAsync(buildingName);
+            return Created(Request.Path, buildingName.WrapResponse(Request.Path));
         }
         
         [HttpGet]
         public async Task<IActionResult> GetBuilding() 
         {
             var buildings = await _buildingManerger.GetBuildings();
-            return Ok(buildings.Wrap(Request.Path));
+            var buildingModels = buildings.Project();
+            return Ok(buildingModels.WrapResponse(Request.Path));
         }
     }
 }
