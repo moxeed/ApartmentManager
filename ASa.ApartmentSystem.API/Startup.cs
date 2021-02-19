@@ -1,6 +1,8 @@
 using Asa.ApartmentManagement.ApplicationServices.IOC;
 using Asa.ApartmentManagement.Core.IOC;
 using Asa.ApartmentManagement.Persistence.IOC;
+using Asa.ApartmentSystem.API.Controllers;
+using Asa.ApartmentSystem.API.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -20,11 +22,12 @@ namespace Asa.ApartmentSystem.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddPersistence(Configuration);
-            services.AddServices();
             services.AddCore();
+            services.AddServices();
+            services.AddPersistence(Configuration);
 
             services.AddControllers();
+            services.ConfigureApiOptions();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -34,8 +37,9 @@ namespace Asa.ApartmentSystem.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseAsaExceptionHandler();
             app.UseHttpsRedirection();
-
+            
             app.UseRouting();
 
             app.UseAuthorization();
