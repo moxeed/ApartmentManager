@@ -28,8 +28,8 @@ namespace Asa.ApartmentSystem.API.Mappers
         {
             return new BuildingDto
             {
-                NumberOfUnits = addBuildingRequest.AparatmentCount 
-                ?? throw new NullReferenceException($"{nameof(addBuildingRequest.AparatmentCount)} Was Null"),
+                NumberOfUnits = addBuildingRequest.ApartmentCount 
+                ?? throw new NullReferenceException($"{nameof(addBuildingRequest.ApartmentCount)} Was Null"),
                 Name = addBuildingRequest.Name
             };
         }
