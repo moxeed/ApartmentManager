@@ -5,6 +5,8 @@ using System.Text;
 
 namespace Asa.ApartmentManagement.Core.ChargeCalculation.Formulas
 {
+
+    [CalculationFormula(FormulaType.AreaBased)]
     public class AreaBaseFormula : IFormula
     {
         public List<(int payerId, decimal share)> CalculateShares(Building building, IEnumerable<(int payerId, int DaysLived)> payers, decimal amount, int apartmentId)

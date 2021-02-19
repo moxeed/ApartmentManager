@@ -5,6 +5,15 @@ namespace Asa.ApartmentManagement.Core.ChargeCalculation
 {
     public class Expens
     {
+
+
+        public Expens(IFormula formula)
+        {
+            Formula = formula;
+        }
+        public Expens() { }
+
+
         public int ExpensId { get; set; }
         public decimal Amount { get; set; }
         public DateTime From { get; set; }
