@@ -12,7 +12,6 @@ using System;
 namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
 {
     [Area("BaseInfo")]
-    [ApiController]
     public class BuildingController : ApiBaseController
     {
         private readonly IBuildingManager _buildingManerger;
