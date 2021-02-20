@@ -53,7 +53,7 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
         {
             return Task.Run(() => (IEnumerable<BuildingDto>)new List<BuildingDto>
             {
-                new BuildingDto { Id = 1 }
+                new BuildingDto { BuildingId = 1 }
             });
         }
     }

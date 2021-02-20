@@ -14,7 +14,7 @@ namespace Asa.ApartmentSystem.API.Mappers
         {
             return new BuidlingResponse
             {
-                BuildingId = building.Id,
+                BuildingId = building.BuildingId,
                 ApartmentCount = building.NumberOfUnits,
                 OcuupantCount = 0,
                 Budget = 0

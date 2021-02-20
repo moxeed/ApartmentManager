@@ -14,7 +14,7 @@ namespace Asa.ApartmentSystem.API.Mappers
         {
             return new ApartmentResponse
             {
-                ApartmentId = apartment.Id,
+                ApartmentId = apartment.ApartmentId,
                 Area = apartment.Area,
                 CurrentOccupant = "NoOne",
                 Number = apartment.Number

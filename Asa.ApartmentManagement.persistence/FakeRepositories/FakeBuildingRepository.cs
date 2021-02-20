@@ -16,19 +16,19 @@ namespace Asa.ApartmentManagement.Persistence.FakeRepositories
 
         public async Task AddApartmentAsync(ApartmentDto apartment)
         {
-            apartment.Id = _apartments.Max(a => a.Id) + 1;
+            apartment.ApartmentId = _apartments.Max(a => a.ApartmentId) + 1;
             _apartments.Add(apartment);
         }
 
         public async Task AddBuildingAsync(BuildingDto building)
         {
-            building.Id = _buildings.Max(a => a.Id) + 1;
+            building.BuildingId = _buildings.Max(a => a.BuildingId) + 1;
             _buildings.Add(building);
         }
 
         public async Task EditBuldingNameAsync(BuildingNameDto buildingName)
         {
-            var building = _buildings.FirstOrDefault(b => b.Id == buildingName.BuildingId);
+            var building = _buildings.FirstOrDefault(b => b.BuildingId == buildingName.BuildingId);
             if (building is null)
                 throw new NullReferenceException();
             building.Name = buildingName.BuildingName;
@@ -41,7 +41,7 @@ namespace Asa.ApartmentManagement.Persistence.FakeRepositories
 
         public async Task<BuildingDto> GetBuildingAsync(int buildingId)
         {
-            return _buildings.FirstOrDefault(b => b.Id == buildingId);
+            return _buildings.FirstOrDefault(b => b.BuildingId == buildingId);
         }
 
         public async Task<IEnumerable<BuildingDto>> GetBuildingsAsync()

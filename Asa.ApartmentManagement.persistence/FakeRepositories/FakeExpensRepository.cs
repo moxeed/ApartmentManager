@@ -9,22 +9,11 @@ using System.Threading.Tasks;
 
 namespace Asa.ApartmentManagement.Persistence.FakeRepositories
 {
-    public class FakeExpensRepository : IPersonRepository
+    public class FakeExpensRepository : IExpenseRepository
     {
-        private readonly ICollection<PersonDto> _persons;
-
-        public async Task AddPersongAsync(PersonDto person)
+        public Task<ICollection<Core.BaseInfo.Domain.Expens>> GetAllByDateAsync(DateTime from, DateTime to)
         {
-            person.PersonId = _persons.Max(p => p.PersonId) + 1;
-            _persons.Add(person);
-        }
-
-        public async Task EditPersongAsync(PersonDto person)
-        {
-            var entry = _persons.FirstOrDefault(p => p.PersonId == person.PersonId);
-            if (entry is null) throw new NullReferenceException();
-            _persons.Remove(entry);
-            _persons.Add(person);
+            throw new NotImplementedException();
         }
     }
 }
