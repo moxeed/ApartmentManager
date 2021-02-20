@@ -27,7 +27,7 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Building> GetBuilding(int buildingId)
+        public Task<Building> GetBuildingAsync(int buildingId)
         {
             return _context.Building
                 .Include(b => b.Apartments)

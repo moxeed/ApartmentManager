@@ -4,13 +4,13 @@ namespace Asa.ApartmentManagement.Core.ChargeCalculation.Formulas
 {
     public  class FormulaName
     {
-        public FormulaName(string title, string typeName)
+        public FormulaName(FormulaType title, string typeName)
         {
-            Title = title ?? throw new ArgumentNullException(nameof(title));
+            Title = title;
             TypeName = typeName ?? throw new ArgumentNullException(nameof(typeName));
         }
 
-        public string Title { get; }
+        public FormulaType Title { get; }
         public string TypeName { get; }
     }
 }

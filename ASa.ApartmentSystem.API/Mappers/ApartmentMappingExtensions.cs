@@ -10,7 +10,7 @@ namespace Asa.ApartmentSystem.API.Mappers
 {
     public static class AparrtmentMappingExtensions
     {
-        public static ApartmentResponse ToModel(this ApartmentUnitDTO apartment) 
+        public static ApartmentResponse ToModel(this ApartmentDTO apartment) 
         {
             return new ApartmentResponse
             {
@@ -21,12 +21,12 @@ namespace Asa.ApartmentSystem.API.Mappers
             };
         }
         
-        public static IEnumerable<ApartmentResponse> Project(this IEnumerable<ApartmentUnitDTO> apartments) 
+        public static IEnumerable<ApartmentResponse> Project(this IEnumerable<ApartmentDTO> apartments) 
             => apartments.Select(b => b.ToModel());
 
-        public static ApartmentUnitDTO ToDto(this AddApartmentRequest addApartmentRequest)
+        public static ApartmentDTO ToDto(this AddApartmentRequest addApartmentRequest)
         {
-            return new ApartmentUnitDTO
+            return new ApartmentDTO
             {
                 Number = addApartmentRequest.Number 
                 ?? throw new NullReferenceException($"{nameof(addApartmentRequest.Number)} Was Nulll"),

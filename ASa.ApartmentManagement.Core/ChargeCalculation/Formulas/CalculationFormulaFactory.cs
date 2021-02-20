@@ -9,8 +9,8 @@ namespace Asa.ApartmentManagement.Core.ChargeCalculation.Formulas
     {
 
         static List<FormulaName> formulaNames;
-        static Dictionary<string, Type> formulaTypesDictionary;
-        static Dictionary<string, IFormula> formulaInstances = new Dictionary<string, IFormula>();
+        static Dictionary<FormulaType, Type> formulaTypesDictionary;
+        static Dictionary<FormulaType, IFormula> formulaInstances = new Dictionary<FormulaType, IFormula>();
         static readonly object lockToken = new object();
         public static List<FormulaName> GetAll()
         {
@@ -58,7 +58,7 @@ namespace Asa.ApartmentManagement.Core.ChargeCalculation.Formulas
         {
             var domainAssembly = typeof(CalculationFormulaFactory).Assembly;
             var allTypes = domainAssembly.GetTypes();
-            formulaTypesDictionary = new Dictionary<string, Type>();
+            formulaTypesDictionary = new Dictionary<FormulaType, Type>();
             foreach (var type in allTypes)
             {
                 var allInterfaces = type.GetInterfaces();

@@ -9,13 +9,12 @@ namespace Asa.ApartmentManagement.Core.ChargeCalculation.Formulas
 
     sealed class CalculationFormulaAttribute : Attribute
     {
-        private Enum v;
+        public FormulaType FormulaTitle { get; }
 
         public CalculationFormulaAttribute(FormulaType v)
         {
-            this.v = v;
+            this.FormulaTitle = v;
         }
 
-        public string FormulaTitle { get; internal set; }
     }
 }
