@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Asa.ApartmentManagement.Persistence.FakeRepositories
 {
-    public class FakeExpensRepository : IExpenseRepository
+    public class FakeExpenseRepository : IExpenseRepository
     {
-        public Task<ICollection<Core.BaseInfo.Domain.Expens>> GetAllByDateAsync(DateTime from, DateTime to)
+        public Task<ICollection<Core.BaseInfo.Domain.Expense>> GetAllByDateAsync(DateTime from, DateTime to)
         {
             throw new NotImplementedException();
         }

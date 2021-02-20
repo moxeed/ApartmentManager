@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Asa.ApartmentManagement.Core.BaseInfo.Domain
 {
-    public class Expens
+    public class Expense
     {
         public int ExpensId { get; set; }
         public decimal Amount { get; set; }

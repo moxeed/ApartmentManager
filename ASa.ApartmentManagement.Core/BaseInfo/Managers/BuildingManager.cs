@@ -11,9 +11,10 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
     {
         private readonly IBuildingRepository _repository;
 
-        public BuildingManager()//IBuildingRepository repository)
+
+        public BuildingManager(IBuildingRepository repository)
         {
-            //_repository = repository;
+            _repository = repository;
         }
 
         public async Task AddBuildingAsync(BuildingDto building)
