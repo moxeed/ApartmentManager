@@ -10,7 +10,5 @@ namespace Asa.ApartmentManagement.Core.Interfaces.Repositories
     {
         Task  AddPersongAsync(PersonDto person);
         Task  EditPersongAsync(PersonDto person);
- 
-        
     }
 }

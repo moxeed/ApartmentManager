@@ -1,4 +1,5 @@
-﻿using Asa.ApartmentManagement.Core.ChargeCalculation;
+﻿using Asa.ApartmentManagement.Core.BaseInfo.Domain;
+using Asa.ApartmentManagement.Core.ChargeCalculation;
 using Asa.ApartmentManagement.Core.Interfaces.Repositories;
 using Asa.ApartmentManagement.Persistence.Context;
 using System;
@@ -12,15 +13,8 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
     {
         private ApplicationDbContext _applicationDbContext;
 
-        public ExpenseRepository(ApplicationDbContext applicationDbContext)
+        public Task<ICollection<Core.BaseInfo.Domain.Expens>> GetAllByDateAsync(DateTime from, DateTime to)
         {
-            _applicationDbContext = applicationDbContext;
-        }
-
-        public Task<ICollection<Expens>> GetAllByDateAsync(DateTime from, DateTime to)
-        {
-
-            //TODO: GET all expenses in the That range of Time
             throw new NotImplementedException();
         }
     }

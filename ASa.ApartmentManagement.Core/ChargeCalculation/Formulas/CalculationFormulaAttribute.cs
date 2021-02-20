@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Asa.ApartmentManagement.Core.Common;
+using System;
 using System.Collections.Generic;
 using System.Text;
 

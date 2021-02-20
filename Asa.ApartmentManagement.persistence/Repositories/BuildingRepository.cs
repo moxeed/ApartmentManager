@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Asa.ApartmentManagement.Core.BaseInfo.Domain;
 using Asa.ApartmentManagement.Core.BaseInfo.DTOs;
 using Asa.ApartmentManagement.Core.ChargeCalculation;
 using Asa.ApartmentManagement.Core.Interfaces.Repositories;
@@ -17,6 +19,11 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
             _context = context;
         }
 
+        public Task AddApartmentAsync(ApartmentDto apartment)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task AddBuildingAsync(BuildingDto building)
         {
             throw new NotImplementedException();
@@ -27,12 +34,19 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Building> GetBuildingAsync(int buildingId)
+        public Task<IEnumerable<ApartmentDto>> GetBuildingApartments(int buildingId)
         {
-            return _context.Building
-                .Include(b => b.Apartments)
-                .ThenInclude(a => a.Payers)
-                .FirstOrDefaultAsync(b => b.BuildingId == buildingId);
+            throw new NotImplementedException();
+        }
+
+        public Task<BuildingDto> GetBuildingAsync(int buildingId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<BuildingDto>> GetBuildingsAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

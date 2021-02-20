@@ -10,8 +10,10 @@ namespace Asa.ApartmentManagement.Core.Interfaces.Repositories
     {
         Task AddBuildingAsync (BuildingDto building);
         Task EditBuldingNameAsync (BuildingNameDto buildingName);
-        Task<Building> GetBuildingAsync(int buildingId);
-        Task AddApartmentAsync(ApartmentDTO apartment);
-        Task<IEnumerable<ApartmentDTO>> GetBuildingApartments();
+        Task<BuildingDto> GetBuildingAsync(int buildingId);
+        Task<IEnumerable<BuildingDto>> GetBuildingsAsync();
+
+        Task AddApartmentAsync(ApartmentDto apartment);
+        Task<IEnumerable<ApartmentDto>> GetBuildingApartments(int buildingId);
     }
 }

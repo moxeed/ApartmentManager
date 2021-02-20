@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Asa.ApartmentManagement.Core.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Asa.ApartmentManagement.Core.ChargeCalculation.Formulas
@@ -64,13 +66,14 @@ namespace Asa.ApartmentManagement.Core.ChargeCalculation.Formulas
                 var allInterfaces = type.GetInterfaces();
                 if (allInterfaces != null && allInterfaces.Any(x => x == typeof(IFormula)))
                 {
-                    formulaTypesDictionary.Add(type.FullName, type);
+                    var attr = type.GetCustomAttribute<CalculationFormulaAttribute>();
+                    formulaTypesDictionary.Add(attr.FormulaTitle, type);
                 }
             }
 
         }
 
-        public static IFormula Create(string typeFullName)
+        public static IFormula Create(FormulaType typeFullName)
         {
             if (formulaInstances.ContainsKey(typeFullName))
             {
@@ -82,7 +85,7 @@ namespace Asa.ApartmentManagement.Core.ChargeCalculation.Formulas
             }
         }
 
-        private static IFormula CreateFormulaInstance(string typeFullName)
+        private static IFormula CreateFormulaInstance(FormulaType typeFullName)
         {
             if (formulaTypesDictionary.ContainsKey(typeFullName))
             {

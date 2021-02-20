@@ -1,4 +1,5 @@
-﻿using Asa.ApartmentManagement.Core.ChargeCalculation;
+﻿using Asa.ApartmentManagement.Core.BaseInfo.Domain;
+using Asa.ApartmentManagement.Core.ChargeCalculation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Asa.ApartmentManagement.Core.Interfaces.Repositories
 {
     public interface IExpenseRepository
     {
-        Task<ICollection<Expens>> GetAllByDateAsync(DateTime from, DateTime to);
+        Task<ICollection<BaseInfo.Domain.Expens>> GetAllByDateAsync(DateTime from, DateTime to);
     }
 }

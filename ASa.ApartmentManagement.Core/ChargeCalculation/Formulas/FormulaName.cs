@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Asa.ApartmentManagement.Core.Common;
+using System;
 
 namespace Asa.ApartmentManagement.Core.ChargeCalculation.Formulas
 {

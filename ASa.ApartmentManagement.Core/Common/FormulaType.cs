@@ -1,4 +1,4 @@
-﻿namespace Asa.ApartmentManagement.Core.ChargeCalculation
+﻿namespace Asa.ApartmentManagement.Core.Common
 {
     public enum FormulaType
     {

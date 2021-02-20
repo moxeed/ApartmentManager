@@ -1,18 +1,13 @@
-﻿using Asa.ApartmentManagement.Core.ChargeCalculation;
-using Asa.ApartmentManagement.Core.Interfaces.Repositories;
-using Asa.ApartmentManagement.Persistence.Repositories;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Asa.ApartmentManagement.Persistence.Context
 {
-    public class ApplicationDbContext : DbContext , IUnitOfwork
+    public class ApplicationDbContext : DbContext 
     {
         public ApplicationDbContext() : base() { }
 
         public ApplicationDbContext(DbContextOptions options) : base(options) { }
 
-        public DbSet<Building> Building { get; set; }
-
-        public IBuildingRepository BuildingRepository => new BuildingRepository(this);
+        public DbSet<Core.BaseInfo.Domain.Building> Building { get; set; }
     }
 }
