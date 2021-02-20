@@ -1,6 +1,6 @@
 ﻿namespace Asa.ApartmentManagement.Core.BaseInfo.DTOs
 {
-    public class ApartmentUnitDTO
+    public class ApartmentDTO
     {
         public int Number { get; set; }
         public int Id { get; set; }
