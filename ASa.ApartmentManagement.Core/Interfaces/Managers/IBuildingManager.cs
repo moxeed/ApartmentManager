@@ -11,5 +11,10 @@ namespace Asa.ApartmentManagement.Core.Interfaces.Managers
         Task AddBuildingAsync (BuildingDto building);
         Task EditBuldingNameAsync (BuildingNameDto building);
         Task<IEnumerable<BuildingDto>> GetBuildings();
+        Task AddAppartment(ApartmentDto apartment);
+        Task<IEnumerable<ApartmentDto>> GetApartmentsOfBuilding(int buildingId);
+
     }
 }
+
+

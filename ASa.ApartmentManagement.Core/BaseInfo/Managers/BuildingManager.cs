@@ -17,19 +17,7 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
             _repository = repository;
         }
 
-        public async Task AddBuildingAsync(BuildingDto building)
-        {
-            ValidateBuilding(building);
-            await _repository.AddBuildingAsync(building);
-        }
-
-        public Task EditBuldingNameAsync(BuildingNameDto buildingName)
-        {
-            ValidateBuildingName(buildingName);
-            return _repository.EditBuldingNameAsync(buildingName);
-        }
-
-        private static void ValidateBuilding(BuildingDto building)
+        private void ValidateBuilding(BuildingDto building)
         {
             if (string.IsNullOrWhiteSpace(building.Name))
             {
@@ -42,12 +30,48 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
             }
         }
 
-        private static void ValidateBuildingName(BuildingNameDto building)
+        private  void ValidateBuildingName(BuildingNameDto building)
         {
             if (string.IsNullOrWhiteSpace(building.BuildingName))
             {
                 throw new ValidationException(ErrorCodes.Invalid_Building_Name, $"Building name cannot be neither empty");
             }
+        }
+
+        private async void ValidateApartment(ApartmentDto apartment)
+        {
+            const int MIN_AREA_FOR_UNIT = 20;
+            if(apartment.Number < MIN_AREA_FOR_UNIT)
+            {
+                throw new ValidationException(ErrorCodes.Invalid_Area, $"Area of an Apartment can not be smaller than 20");
+            }
+            var building  = await  _repository.GetBuildingAsync(apartment.BuidlingId);
+            if(building.NumberOfUnits < apartment.Number)
+            {
+                throw new ValidationException(ErrorCodes.Max_Apartment_Number, $"Number Unit should not be greater than counts of building aparment");
+            }
+
+            foreach (var c in await _repository.GetBuildingApartments(building.BuildingId))
+            {
+                if(c.Number == apartment.Number)
+                {
+                    throw new ValidationException(ErrorCodes.Invalid_Apartment_Number, $"This apartment Number Already exists");
+                }
+            }
+
+        }
+
+        public async Task AddBuildingAsync(BuildingDto building)
+        {
+            ValidateBuilding(building);
+            await _repository.AddBuildingAsync(building);
+        }
+
+
+        public Task EditBuldingNameAsync(BuildingNameDto buildingName)
+        {
+            ValidateBuildingName(buildingName);
+            return _repository.EditBuldingNameAsync(buildingName);
         }
 
         public Task<IEnumerable<BuildingDto>> GetBuildings()
@@ -56,6 +80,17 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
             {
                 new BuildingDto { BuildingId = 1 }
             });
+        }
+
+        public async Task AddAppartment(ApartmentDto apartment)
+        {
+            ValidateApartment(apartment);
+            await _repository.AddApartmentAsync(apartment);   
+        }
+
+        public Task<IEnumerable<ApartmentDto>> GetApartmentsOfBuilding(int buildingId)
+        {
+            return _repository.GetBuildingApartments(buildingId);
         }
     }
 }
