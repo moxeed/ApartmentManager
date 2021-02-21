@@ -1,6 +1,8 @@
-﻿namespace Asa.ApartmentManagement.Core.BaseInfo.Domain
+﻿using Asa.ApartmentManagement.Core.Common;
+
+namespace Asa.ApartmentManagement.Core.BaseInfo.Domain
 {
-    public class Person
+    public class PersonInfo : IEntity
     {
         public int PersonId { get; set; }
 

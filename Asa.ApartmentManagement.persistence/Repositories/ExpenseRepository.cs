@@ -13,7 +13,7 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
     {
         private ApplicationDbContext _applicationDbContext;
 
-        public Task<ICollection<Core.BaseInfo.Domain.Expense>> GetAllByDateAsync(DateTime from, DateTime to)
+        public Task<ICollection<Core.BaseInfo.Domain.ExpenseInfo>> GetAllByDateAsync(DateTime from, DateTime to)
         {
             throw new NotImplementedException();
         }

@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Asa.ApartmentManagement.Core.Common;
+using System;
 
 namespace Asa.ApartmentManagement.Core.ChargeCalculation
 {
-    public class Payer
+    public class Payer : IEntity
     {
         public int PayerId { get; set; }
         public int OccupantCount { get; set; }

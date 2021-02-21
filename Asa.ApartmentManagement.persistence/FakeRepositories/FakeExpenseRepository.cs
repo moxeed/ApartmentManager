@@ -11,7 +11,7 @@ namespace Asa.ApartmentManagement.Persistence.FakeRepositories
 {
     public class FakeExpenseRepository : IExpenseRepository
     {
-        public Task<ICollection<Core.BaseInfo.Domain.Expense>> GetAllByDateAsync(DateTime from, DateTime to)
+        public Task<ICollection<Core.BaseInfo.Domain.ExpenseInfo>> GetAllByDateAsync(DateTime from, DateTime to)
         {
             throw new NotImplementedException();
         }

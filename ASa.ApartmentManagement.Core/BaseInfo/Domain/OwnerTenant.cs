@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Asa.ApartmentManagement.Core.Common;
+using System;
 
 namespace Asa.ApartmentManagement.Core.BaseInfo.Domain
 {
-    public class OwnerTenant
+    public class OwnerTenant : IEntity
     {
         public int OwnerTenantId { get; set; }
         public int? OccupantCount { get; set; }
@@ -12,7 +13,7 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Domain
 
         public int PersonId { get; set; }
         public int ApartmentId { get; set; }
-        public Person Person { get; set; }
-        public Apartment Apartment{ get; set; }
+        public PersonInfo Person { get; set; }
+        public ApartmentInfo Apartment{ get; set; }
     }
 }

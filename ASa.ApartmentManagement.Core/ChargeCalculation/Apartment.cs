@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Asa.ApartmentManagement.Core.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Asa.ApartmentManagement.Core.ChargeCalculation
 {
-    public class Apartment
+    public class Apartment : IEntity
     {
         public int ApartmentId { get; set; }
         public decimal Area { get; set; }

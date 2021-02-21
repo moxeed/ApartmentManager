@@ -4,15 +4,15 @@ using System.Collections.Generic;
 
 namespace Asa.ApartmentManagement.Core.ChargeCalculation
 {
-    public class Expens
+    public class Expense : IEntity
     {
 
 
-        public Expens(IFormula formula)
+        public Expense(IFormula formula)
         {
             Formula = formula;
         }
-        public Expens() { }
+        public Expense() { }
 
 
         public int ExpensId { get; set; }

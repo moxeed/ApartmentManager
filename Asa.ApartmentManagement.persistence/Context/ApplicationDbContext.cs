@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Asa.ApartmentManagement.Core.BaseInfo.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace Asa.ApartmentManagement.Persistence.Context
 {
@@ -8,6 +9,6 @@ namespace Asa.ApartmentManagement.Persistence.Context
 
         public ApplicationDbContext(DbContextOptions options) : base(options) { }
 
-        public DbSet<Core.BaseInfo.Domain.Building> Building { get; set; }
+        public DbSet<BuildingInfo> Building { get; set; }
     }
 }

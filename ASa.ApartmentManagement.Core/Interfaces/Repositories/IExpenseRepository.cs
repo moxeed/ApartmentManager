@@ -9,6 +9,6 @@ namespace Asa.ApartmentManagement.Core.Interfaces.Repositories
 {
     public interface IExpenseRepository
     {
-        Task<ICollection<BaseInfo.Domain.Expense>> GetAllByDateAsync(DateTime from, DateTime to);
+        Task<ICollection<BaseInfo.Domain.ExpenseInfo>> GetAllByDateAsync(DateTime from, DateTime to);
     }
 }

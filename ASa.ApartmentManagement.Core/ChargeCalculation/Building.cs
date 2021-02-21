@@ -1,16 +1,17 @@
-﻿using System;
+﻿using Asa.ApartmentManagement.Core.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Asa.ApartmentManagement.Core.ChargeCalculation
 {
-    public class Building
+    public class Building : IEntity
     {
         public int BuildingId { get; set; }
         public ICollection<Apartment> Apartments { get; set; }
         public decimal Area => Apartments.Sum(a => a.Area);
 
-        public IEnumerable<Charge> CalculateCharge(DateTime from, DateTime to, IEnumerable<Expens> expenses) 
+        public IEnumerable<Charge> CalculateCharge(DateTime from, DateTime to, IEnumerable<Expense> expenses) 
         {
             var charges = new List<Charge>();
             foreach (var expens in expenses) 

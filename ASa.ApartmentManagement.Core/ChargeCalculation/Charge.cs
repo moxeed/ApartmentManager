@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Asa.ApartmentManagement.Core.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Asa.ApartmentManagement.Core.ChargeCalculation
 {
-    public class Charge
+    public class Charge : IEntity 
     {
         public Charge(int apartmentId, DateTime from, DateTime to)
         {
@@ -20,7 +21,7 @@ namespace Asa.ApartmentManagement.Core.ChargeCalculation
         public DateTime To { get; set; }
         public ICollection<ChargeItem> Items { get; set; }
 
-        public void CalculateBuildingCharge(Building building, Expens expens) 
+        public void CalculateBuildingCharge(Building building, Expense expens) 
         {
             var shares = expens.CalculateExpenseShares(building, this, ApartmentId);
             Items = shares.Select(s => new ChargeItem { 
