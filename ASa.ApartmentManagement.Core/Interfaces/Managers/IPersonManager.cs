@@ -11,6 +11,9 @@ namespace Asa.ApartmentManagement.Core.Interfaces.Managers
 
         Task AddPersonAsync(PersonDto person);
         Task EditPersonAsync(PersonDto person );
+        Task AddOwnerTenantAsync(OwnerTenantDto ow);
+  
+
 
     }
 }

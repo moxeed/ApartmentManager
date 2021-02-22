@@ -9,6 +9,9 @@ namespace Asa.ApartmentManagement.Core.Interfaces.Repositories
     public interface IPersonRepository
     {
         Task  AddPersongAsync(PersonDto person);
-        Task  EditPersongAsync(PersonDto person);
+        Task EditPersongAsync(PersonDto person);
+        Task AddOwnerTenant(OwnerTenantDto owner);
+        Task<IEnumerable<OwnerTenantDto>> GetAllOwnerTenants();
+
     }
 }

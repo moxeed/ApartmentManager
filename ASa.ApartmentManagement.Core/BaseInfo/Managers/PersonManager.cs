@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using Asa.ApartmentManagement.Core.Interfaces.Repositories;
 
 namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
 {
@@ -13,17 +14,17 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
     {
 
 
-        private readonly IPersonManager _repository;
+        private readonly IPersonRepository _personRepository;
 
 
-        public PersonManager(IPersonManager repository)
+        public PersonManager(IPersonRepository repository)
         {
-            _repository = repository;
+            _personRepository = repository;
         }
 
-        private static void ValidatePerson(PersonDto person)
+        private void ValidatePerson(PersonDto person)
         {
-            //Name andn LastName should not be 
+     
             if (string.IsNullOrWhiteSpace(person.Name))
             {
                 throw new ValidationException(ErrorCodes.Invalid_Person_Name, $"Person name cannot be neither empty");
@@ -32,7 +33,7 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
             {
                 throw new ValidationException(ErrorCodes.Invalid_Person_LastName, $"Person LastName cannot be Empty");
             }
-            //Phone number check (\+98|0)?9\d{9}
+         
             Regex re = new Regex(@"(\+98|0)?9\d{9}");
             if (re.Match(person.PhoneNumber).Success)
             {
@@ -40,16 +41,55 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
             }
         }
 
+        private async void ValidateOwnerTenant(OwnerTenantDto ownertenant)
+        {
+            var allOwnersOfBuilding = await _personRepository.GetAllOwnerTenants();
+            if(ownertenant.To < ownertenant.From)
+            {
+                throw new ValidationException(ErrorCodes.Invalid_Entrence_Time, $"Date entrance should not be greater than Exit Time ");
+            }
+
+
+            bool Taken = false;
+            foreach (var ot in allOwnersOfBuilding)
+            {
+                //TODO: checking if that unit is taken or not 
+            }
+            if (Taken)
+            {
+                throw new ValidationException(ErrorCodes.Apartment_Is_Taken, $"This apartment Is occupied");
+            }//
+
+
+
+            if(ownertenant.IsOwner == false )
+                if(ownertenant.OccupantCount < 1)
+                {
+                    throw new ValidationException(ErrorCodes.OccupantCount_Error, $"The counts of the occupant should not be smaller than 1");
+                }
+
+        }
+
+
+
         public async Task AddPersonAsync(PersonDto person)
         {
             ValidatePerson(person);
-            await _repository.AddPersonAsync(person);
+            await _personRepository.AddPersongAsync(person);
         }
 
         public Task EditPersonAsync(PersonDto person)
         {
             ValidatePerson(person);
-            return _repository.EditPersonAsync(person);
+            return _personRepository.EditPersongAsync(person);
         }
+
+        public async Task AddOwnerTenantAsync(OwnerTenantDto ow)
+        {
+            ValidateOwnerTenant(ow);
+            await _personRepository.AddOwnerTenant(ow);
+        }
+
+
     }
 }

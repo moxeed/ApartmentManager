@@ -48,5 +48,8 @@ namespace Asa.ApartmentManagement.Persistence.FakeRepositories
         {
             return _buildings;
         }
+
+
+
     }
 }

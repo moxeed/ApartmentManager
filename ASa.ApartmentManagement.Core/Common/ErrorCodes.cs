@@ -11,6 +11,8 @@
         public const int Invalid_Person_Name = 1005;
         public const int Invalid_Person_LastName = 1006;
         public const int Invalid_Phone_Number = 1007;
-
+        public const int Invalid_Entrence_Time = 1008;
+        public const int Apartment_Is_Taken = 1009;
+        public const int OccupantCount_Error = 1010;
     }
 }

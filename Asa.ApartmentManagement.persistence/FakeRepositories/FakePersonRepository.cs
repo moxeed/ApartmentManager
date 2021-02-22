@@ -9,9 +9,18 @@ using System.Threading.Tasks;
 
 namespace Asa.ApartmentManagement.Persistence.FakeRepositories
 {
+
+
     public class FakePersonRepository : IPersonRepository
     {
+
+        private readonly ICollection<OwnerTenantDto> _ownertenants;
         private readonly ICollection<PersonDto> _persons;
+
+        public Task AddOwnerTenant(OwnerTenantDto owner)
+        {
+            throw new NotImplementedException();
+        }
 
         public async Task AddPersongAsync(PersonDto person)
         {
@@ -25,6 +34,13 @@ namespace Asa.ApartmentManagement.Persistence.FakeRepositories
             if (entry is null) throw new NullReferenceException();
             _persons.Remove(entry);
             _persons.Add(person);
+
         }
+
+        public async Task<IEnumerable<OwnerTenantDto>> GetAllOwnerTenants()
+        {
+            return _ownertenants;   
+        }
+
     }
 }
