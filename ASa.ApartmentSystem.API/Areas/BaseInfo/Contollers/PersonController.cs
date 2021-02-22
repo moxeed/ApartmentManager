@@ -14,15 +14,19 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
     [Area("BaseInfo")]
     public class PersonController : ApiBaseController
     {
-        public PersonController()
+
+        private readonly IPersonManager _personManger;
+        public PersonController(IPersonManager personManager)
         {
+            _personManger = personManager;
         }
 
         [HttpPost]
         public async Task<IActionResult> AddPerson([FromBody] PersonRequest request) 
         {
-            var apartment = request.ToDto();
-            return Created(Request.Path, apartment);
+            var person = request.ToDto();
+            await _personManger.AddPersonAsync(person);
+            return Created(Request.Path, person);
         }
         
         [HttpPut]
@@ -31,11 +35,17 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
             var apartment = request.ToDto();
             return Created(Request.Path, apartment);
         }
-        
-        [HttpGet]
-        public async Task<IActionResult> GetBuildingApartments() 
+
+
+        [HttpPost] 
+        [Route("/addtounit")]
+        public async Task<IActionResult> AddOwnerTenant([FromBody] AddOwnerTenantRequest request)
         {
-            return Ok();
+            var ownertenant = request.ToDto();
+            await _personManger.AddOwnerTenantAsync(ownertenant);
+            return Created(Request.Path, ownertenant);
         }
+        
+
     }
 }

@@ -13,5 +13,7 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Models.Requests
 
         [Required]
         public int? Number { get; set; }
+
+        public int BuildingID { get; set; }
     }
 }

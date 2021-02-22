@@ -14,21 +14,27 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
     [Area("BaseInfo")]
     public class ApartmentController : ApiBaseController
     {
-        public ApartmentController()
+        private readonly IBuildingManager buildingManager;
+        public ApartmentController(IBuildingManager buildingManager)
         {
+            this.buildingManager = buildingManager;
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddBulding([FromBody] AddApartmentRequest request) 
+        public async Task<IActionResult> AddApartment([FromBody] AddApartmentRequest request) 
         {
             var apartment = request.ToDto();
+            await buildingManager.AddAppartment(apartment);
             return Created(Request.Path, apartment);
         }
         
-        [HttpGet]
-        public async Task<IActionResult> GetBuildingApartments() 
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetBuildingApartments(int buildingId ) 
         {
-            return Ok();
+            var apartments = await buildingManager.GetApartmentsOfBuilding(buildingId);
+            var apartmentmodels = apartments.Project();
+            return Ok(apartmentmodels.WrapResponse(Request.Path));
+
         }
     }
 }
