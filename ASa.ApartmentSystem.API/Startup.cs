@@ -41,11 +41,11 @@ namespace Asa.ApartmentSystem.API
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors("React");
+
             app.UseAsaExceptionHandler();
             app.UseHttpsRedirection();
-            
             app.UseRouting();
+            app.UseCors("React");
 
             app.UseAuthorization();
 
