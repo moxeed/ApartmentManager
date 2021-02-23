@@ -12,6 +12,6 @@ namespace Asa.ApartmentManagement.Core.Interfaces.Repositories
         Task EditPersongAsync(PersonDto person);
         Task AddOwnerTenant(OwnerTenantDto owner);
         Task<IEnumerable<OwnerTenantDto>> GetAllOwnerTenants();
-
+        Task EditOwnerTenantAsync(OwnerTenantDto owner);
     }
 }

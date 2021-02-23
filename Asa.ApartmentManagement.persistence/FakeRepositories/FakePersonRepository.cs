@@ -17,15 +17,21 @@ namespace Asa.ApartmentManagement.Persistence.FakeRepositories
         private readonly ICollection<OwnerTenantDto> _ownertenants;
         private readonly ICollection<PersonDto> _persons;
 
-        public Task AddOwnerTenant(OwnerTenantDto owner)
+        public async Task AddOwnerTenant(OwnerTenantDto owner)
         {
-            throw new NotImplementedException();
+            owner.OwnerTenantId = _ownertenants.Max(a => a.OwnerTenantId) + 1;
+            _ownertenants.Add(owner);
         }
 
         public async Task AddPersongAsync(PersonDto person)
         {
             person.PersonId = _persons.Max(p => p.PersonId) + 1;
             _persons.Add(person);
+        }
+
+        public Task EditOwnerTenantAsync(OwnerTenantDto owner)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task EditPersongAsync(PersonDto person)
@@ -44,3 +50,6 @@ namespace Asa.ApartmentManagement.Persistence.FakeRepositories
 
     }
 }
+
+
+

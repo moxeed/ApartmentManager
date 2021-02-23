@@ -38,7 +38,7 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
 
 
         [HttpPost] 
-        [Route("/addtounit")]
+        [Route("/AddToUnit")]
         public async Task<IActionResult> AddOwnerTenant([FromBody] AddOwnerTenantRequest request)
         {
             var ownertenant = request.ToDto();

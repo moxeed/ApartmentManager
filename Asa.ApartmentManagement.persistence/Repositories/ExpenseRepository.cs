@@ -1,4 +1,5 @@
 ﻿using Asa.ApartmentManagement.Core.BaseInfo.Domain;
+using Asa.ApartmentManagement.Core.BaseInfo.DTOs;
 using Asa.ApartmentManagement.Core.ChargeCalculation;
 using Asa.ApartmentManagement.Core.Interfaces.Repositories;
 using Asa.ApartmentManagement.Persistence.Context;
@@ -11,7 +12,27 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
 {
     public class ExpenseRepository : IExpenseRepository
     {
-        private ApplicationDbContext _applicationDbContext;
+
+        private readonly ApplicationDbContext _context;
+
+        public ExpenseRepository(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+        public Task AddExpense(ExpenseDto expense)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteExpense(int expenseid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task EditExpense(ExpenseDto expense)
+        {
+            throw new NotImplementedException();
+        }
 
         public Task<ICollection<Core.BaseInfo.Domain.ExpenseInfo>> GetAllByDateAsync(DateTime from, DateTime to)
         {

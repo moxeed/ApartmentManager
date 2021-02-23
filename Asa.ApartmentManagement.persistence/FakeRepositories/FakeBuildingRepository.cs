@@ -46,7 +46,11 @@ namespace Asa.ApartmentManagement.Persistence.FakeRepositories
 
         public async Task<IEnumerable<BuildingDto>> GetBuildingsAsync()
         {
-            return _buildings;
+            
+            return await Task.Run(() => (IEnumerable<BuildingDto>)new List<BuildingDto>
+            {
+                new BuildingDto { BuildingId = 1 }
+            });
         }
 
 

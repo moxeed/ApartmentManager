@@ -1,5 +1,6 @@
 ﻿using Asa.ApartmentManagement.Core.BaseInfo.DTOs;
 using Asa.ApartmentManagement.Core.Interfaces.Repositories;
+using Asa.ApartmentManagement.Persistence.Context;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,13 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
 {
     public class PersonRepository : IPersonRepository
     {
+
+
+        private readonly ApplicationDbContext _context;
+        public PersonRepository(ApplicationDbContext context)
+        {
+            _context = context;
+        }
         public Task AddOwnerTenant(OwnerTenantDto owner)
         {
             throw new NotImplementedException();

@@ -76,10 +76,7 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
 
         public Task<IEnumerable<BuildingDto>> GetBuildings()
         {
-            return Task.Run(() => (IEnumerable<BuildingDto>)new List<BuildingDto>
-            {
-                new BuildingDto { BuildingId = 1 }
-            });
+            return _repository.GetBuildingsAsync();
         }
 
         public async Task AddAppartment(ApartmentDto apartment)

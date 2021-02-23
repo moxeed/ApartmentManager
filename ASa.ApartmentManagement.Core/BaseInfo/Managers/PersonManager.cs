@@ -90,6 +90,12 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
             await _personRepository.AddOwnerTenant(ow);
         }
 
+        public Task EditOwnerTenantAsync(OwnerTenantDto ow)
+        {
 
+            //TODO : check for occupants change if not owner to regenerate an ownertenant
+            //TODO : Check for From and TO when changes to regenerate an ownertenant
+            throw new NotImplementedException();
+        }
     }
 }
