@@ -27,6 +27,11 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
             throw new NotImplementedException();
         }
 
+        public Task EditOwnerTenantAsync(OwnerTenantDto owner)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task EditPersongAsync(PersonDto person)
         {
             throw new NotImplementedException();
