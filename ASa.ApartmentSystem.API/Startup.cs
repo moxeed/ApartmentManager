@@ -28,6 +28,11 @@ namespace Asa.ApartmentSystem.API
 
             services.AddControllers();
             services.ConfigureApiOptions();
+            services.AddCors(c => 
+                c.AddPolicy("React", builder => 
+                builder.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod()));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -36,7 +41,7 @@ namespace Asa.ApartmentSystem.API
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors("React");
             app.UseAsaExceptionHandler();
             app.UseHttpsRedirection();
             

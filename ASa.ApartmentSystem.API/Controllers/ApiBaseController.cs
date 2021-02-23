@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ namespace Asa.ApartmentSystem.API.Controllers
 {
     [Route("[area]/[controller]")]
     [ApiController]
+    [EnableCors("React")]
     public class ApiBaseController : ControllerBase
     {
     }
