@@ -13,6 +13,7 @@ namespace Asa.ApartmentManagement.Core.IOC
         {
             services.AddScoped<IBuildingManager, BuildingManager>();
             services.AddScoped<IPersonManager, PersonManager>();
+            
             return services;
         }
     }

@@ -89,5 +89,14 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
         {
             return _repository.GetBuildingApartments(buildingId);
         }
+        public Task<IEnumerable<OwnerTenantDto>> GetAllCurrentOwnerTenants(int buildingId)
+        {
+            return _repository.GetAllCurrentOwnerTenants(buildingId);
+        }
+
+        public Task<int> GetBuildingOfUnit(int apartmentId)
+        {
+            return _repository.GetBuildingIdByUnit(apartmentId);
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
         {
             _context = context;
         }
-        public Task AddOwnerTenant(OwnerTenantDto owner)
+        public Task AddOwnerTenantAsync(OwnerTenantDto owner)
         {
             throw new NotImplementedException();
         }
@@ -37,7 +37,12 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<OwnerTenantDto>> GetAllOwnerTenants()
+        public Task<IEnumerable<OwnerTenantDto>> GetAllCurrentOwnerTenants(int buildingId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<OwnerTenantDto> GetCurrentOwnerTenantById(int ownertenantId)
         {
             throw new NotImplementedException();
         }
