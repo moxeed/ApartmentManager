@@ -8,7 +8,7 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Domain
     public class ExpenseInfo : IEntity
     {
         public int ExpensId { get; set; }
-        public decimal Amount { get; set; }
+        public int Amount { get; set; }
         public DateTime From { get; set; }
         public DateTime To { get; set; }
         public int ExpensCategoryId { get; set; }

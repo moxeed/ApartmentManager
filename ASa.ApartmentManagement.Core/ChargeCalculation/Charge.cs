@@ -26,7 +26,7 @@ namespace Asa.ApartmentManagement.Core.ChargeCalculation
             var shares = expens.CalculateExpenseShares(building, this, ApartmentId);
             Items = shares.Select(s => new ChargeItem { 
                 Amount = s.amount, 
-                ExpensId = expens.ExpensId, 
+                ExpensId = expens.ExpenseId, 
                 PayerId = s.payerId 
             }).ToList();
         }
