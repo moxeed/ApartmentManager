@@ -21,6 +21,11 @@ namespace Asa.ApartmentManagement.Persistence.FakeRepositories
             _expenses.Add(expense);
         }
 
+        public Task AddExpenseCategoryAsync(ExpenseCategoryDto expenseCategory)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task DeleteExpense(int expenseid)
         {
             foreach (var e in _expenses)
@@ -47,5 +52,9 @@ namespace Asa.ApartmentManagement.Persistence.FakeRepositories
             return (Task<ICollection<Core.BaseInfo.Domain.ExpenseInfo>>)_expenses;
         }
 
+        public Task<IEnumerable<ExpenseCategoryDto>> GetAllExpenseCategories()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

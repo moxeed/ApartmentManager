@@ -1,4 +1,5 @@
 ﻿using Asa.ApartmentManagement.Core.BaseInfo.Domain;
+using Asa.ApartmentManagement.Core.BaseInfo.DTOs;
 using Asa.ApartmentManagement.Core.ChargeCalculation;
 using Microsoft.EntityFrameworkCore;
 
@@ -41,6 +42,7 @@ namespace Asa.ApartmentManagement.Persistence.Context
 
             modelBuilder.Entity<Expense>().Ignore(c => c.Formula);
             modelBuilder.Entity<ExpenseInfo>().ToTable(nameof(Expense)).HasKey(c => c.ExpensId);
+            modelBuilder.Entity<ExpenseInfo>().Property(c => c.ExpensId).UseIdentityColumn();
             modelBuilder.Entity<ExpenseInfo>().HasOne<Expense>().WithOne().HasForeignKey<ExpenseInfo>(c => c.ExpensId);
 
             modelBuilder.Entity<Payer>().ToTable("Person");

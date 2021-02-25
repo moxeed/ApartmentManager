@@ -20,5 +20,7 @@ namespace Asa.ApartmentManagement.Core.Interfaces.Repositories
         Task DeleteExpense(int expenseid);
 
         Task<ICollection<BaseInfo.Domain.ExpenseInfo>> GetAllByDateAsync(DateTime from, DateTime to);
+        Task AddExpenseCategoryAsync(ExpenseCategoryDto expenseCategory);
+        Task<IEnumerable<ExpenseCategoryDto>> GetAllExpenseCategories();
     }
 }

@@ -1,4 +1,5 @@
-﻿using Asa.ApartmentManagement.Core.ChargeCalculation;
+﻿using Asa.ApartmentManagement.Core.BaseInfo.DTOs;
+using Asa.ApartmentManagement.Core.ChargeCalculation;
 using Asa.ApartmentManagement.Core.Common;
 using System;
 using System.Collections.Generic;
