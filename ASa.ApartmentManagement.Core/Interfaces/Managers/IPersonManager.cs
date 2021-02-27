@@ -13,8 +13,7 @@ namespace Asa.ApartmentManagement.Core.Interfaces.Managers
         Task EditPersonAsync(PersonDto person );
         Task AddOwnerTenantAsync(OwnerTenantDto ow);
         Task EditOwnerTenantAsync(OwnerTenantDto ow);
-  
-
+        Task<OwnerTenantDto> GetCurrentOwnerTenantById(int ownertenantId);
 
     }
 }

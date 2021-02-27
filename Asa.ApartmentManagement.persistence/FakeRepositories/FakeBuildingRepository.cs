@@ -33,6 +33,12 @@ namespace Asa.ApartmentManagement.Persistence.FakeRepositories
                 throw new NullReferenceException();
             building.Name = buildingName.BuildingName;
         }
+        
+
+        public Task<IEnumerable<OwnerTenantDto>> GetAllCurrentOwnerTenants(int buildingId)
+        {
+            throw new NotImplementedException();
+        }
 
         public async Task<IEnumerable<ApartmentDto>> GetBuildingApartments(int buildingId)
         {
@@ -42,6 +48,11 @@ namespace Asa.ApartmentManagement.Persistence.FakeRepositories
         public async Task<BuildingDto> GetBuildingAsync(int buildingId)
         {
             return _buildings.FirstOrDefault(b => b.BuildingId == buildingId);
+        }
+
+        public Task<int> GetBuildingIdByUnit(int apartmentId)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<IEnumerable<BuildingDto>> GetBuildingsAsync()

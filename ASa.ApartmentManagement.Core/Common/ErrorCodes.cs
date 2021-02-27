@@ -14,5 +14,6 @@
         public const int Invalid_Entrence_Time = 1008;
         public const int Apartment_Is_Taken = 1009;
         public const int OccupantCount_Error = 1010;
+        public const int No_Such_OwnerTenant = 1011;
     }
 }

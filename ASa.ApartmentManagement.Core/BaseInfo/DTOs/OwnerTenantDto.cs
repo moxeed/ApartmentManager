@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Asa.ApartmentManagement.Core.BaseInfo.Domain;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,6 +14,7 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.DTOs
         public DateTime? To { get; set; }
         public int PersonId { get; set; }
         public int ApartmentId { get; set; }
-
+        public Person Person { get; set; }
+        public ApartmentInfo Apartment { get; set; }
     }
 }

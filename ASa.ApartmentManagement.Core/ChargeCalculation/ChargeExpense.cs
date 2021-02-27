@@ -4,25 +4,17 @@ using System.Collections.Generic;
 
 namespace Asa.ApartmentManagement.Core.ChargeCalculation
 {
-    public class Expense : IEntity
+    public class ChargeExpense : Expense
     {
-
-
-        public Expense(IFormula formula)
+        public ChargeExpense(IFormula formula)
         {
             Formula = formula;
         }
-        public Expense() { }
-
-
-        public int ExpensId { get; set; }
-        public decimal Amount { get; set; }
-        public DateTime From { get; set; }
-        public DateTime To { get; set; }
+        public ChargeExpense() { }
         public FormulaType FormulaType { get; set; }
         public IFormula Formula { get; set; }
 
-        public IEnumerable<(int payerId, decimal amount)> CalculateExpenseShares(Building building, Charge charge, int apartmentId)
+        public IEnumerable<(int payerId, int amount)> CalculateExpenseShares(ChargeBuilding building, Charge charge, int apartmentId)
         {
             var currentRangeAmount = Amount * (charge.To - charge.From).Days / (To - From).Days;
             var payers = building.GetApartmentPayerResidenceInfos(From, To, apartmentId);

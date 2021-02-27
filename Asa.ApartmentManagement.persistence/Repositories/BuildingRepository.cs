@@ -34,12 +34,22 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
             throw new NotImplementedException();
         }
 
+        public Task<IEnumerable<OwnerTenantDto>> GetAllCurrentOwnerTenants(int buildingId)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<IEnumerable<ApartmentDto>> GetBuildingApartments(int buildingId)
         {
             throw new NotImplementedException();
         }
 
         public Task<BuildingDto> GetBuildingAsync(int buildingId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> GetBuildingIdByUnit(int apartmentId)
         {
             throw new NotImplementedException();
         }

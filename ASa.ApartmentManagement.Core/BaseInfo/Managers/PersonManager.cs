@@ -15,13 +15,14 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
 
 
         private readonly IPersonRepository _personRepository;
+        private readonly IBuildingManager _buildingManager;
 
-
-        public PersonManager(IPersonRepository repository)
+        public PersonManager(IPersonRepository repository , IBuildingManager buildingManager)
         {
             _personRepository = repository;
+            _buildingManager = buildingManager;
         }
-
+  
         private void ValidatePerson(PersonDto person)
         {
      
@@ -41,36 +42,31 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
             }
         }
 
-        private async void ValidateOwnerTenant(OwnerTenantDto ownertenant)
+        private async Task ValidateOwnerTenantAsync(OwnerTenantDto ownertenant)
         {
-            var allOwnersOfBuilding = await _personRepository.GetAllOwnerTenants();
-            if(ownertenant.To < ownertenant.From)
+            if (ownertenant.To < ownertenant.From)
             {
                 throw new ValidationException(ErrorCodes.Invalid_Entrence_Time, $"Date entrance should not be greater than Exit Time ");
             }
+            //TODO : get the building id for the current unit
+            var buildingId = 1;
+            var allCurrentOwners = await _buildingManager.GetAllCurrentOwnerTenants(buildingId);
 
-
-            bool Taken = false;
-            foreach (var ot in allOwnersOfBuilding)
+            foreach (var ot in allCurrentOwners)
             {
-                //TODO: checking if that unit is taken or not 
+                if (ot.ApartmentId == ownertenant.ApartmentId)
+                {
+                    throw new ValidationException(ErrorCodes.Apartment_Is_Taken, $"This apartment Is occupied");
+                }
             }
-            if (Taken)
-            {
-                throw new ValidationException(ErrorCodes.Apartment_Is_Taken, $"This apartment Is occupied");
-            }//
 
-
-
-            if(ownertenant.IsOwner == false )
-                if(ownertenant.OccupantCount < 1)
+            if (!(ownertenant.IsOwner))
+                if (ownertenant.OccupantCount < 1)
                 {
                     throw new ValidationException(ErrorCodes.OccupantCount_Error, $"The counts of the occupant should not be smaller than 1");
                 }
 
         }
-
-
 
         public async Task AddPersonAsync(PersonDto person)
         {
@@ -84,18 +80,46 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
             return _personRepository.EditPersongAsync(person);
         }
 
-        public async Task AddOwnerTenantAsync(OwnerTenantDto ow)
+        public async Task AddOwnerTenantAsync(OwnerTenantDto ow )
         {
-            ValidateOwnerTenant(ow);
-            await _personRepository.AddOwnerTenant(ow);
+            await ValidateOwnerTenantAsync(ow);
+            await _personRepository.AddOwnerTenantAsync(ow);
         }
 
-        public Task EditOwnerTenantAsync(OwnerTenantDto ow)
+        public async Task EditOwnerTenantAsync(OwnerTenantDto ow)
         {
+            var prevOwnerTenant = await GetCurrentOwnerTenantById(ow.OwnerTenantId);
 
-            //TODO : check for occupants change if not owner to regenerate an ownertenant
-            //TODO : Check for From and TO when changes to regenerate an ownertenant
-            throw new NotImplementedException();
+            if (ow.OccupantCount != prevOwnerTenant.OccupantCount)
+            {
+                if (prevOwnerTenant.From != ow.From)
+                {
+
+                    //TODO : recalculate charge must happen
+                    await _personRepository.EditOwnerTenantAsync(ow);
+                }
+                else
+                {
+                    ow.From = DateTime.Now;
+                    prevOwnerTenant.To = DateTime.Now;
+                    await _personRepository.AddOwnerTenantAsync(ow);
+                    await _personRepository.EditOwnerTenantAsync(prevOwnerTenant);
+                }
+            }
+            if (prevOwnerTenant.From != prevOwnerTenant.From)
+            {
+                //TODO : recalculate charge must happen
+                await _personRepository.EditOwnerTenantAsync(ow);
+            }
+
         }
+
+        public Task<OwnerTenantDto> GetCurrentOwnerTenantById(int ownertenantId)
+        {
+             return  _personRepository.GetCurrentOwnerTenantById(ownertenantId);
+        }
+
     }
 }
+
+

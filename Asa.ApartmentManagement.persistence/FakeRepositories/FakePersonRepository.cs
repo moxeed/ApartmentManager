@@ -23,6 +23,11 @@ namespace Asa.ApartmentManagement.Persistence.FakeRepositories
             _ownertenants.Add(owner);
         }
 
+        public Task AddOwnerTenantAsync(OwnerTenantDto owner)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task AddPersongAsync(PersonDto person)
         {
             person.PersonId = _persons.Max(p => p.PersonId) + 1;
@@ -43,11 +48,15 @@ namespace Asa.ApartmentManagement.Persistence.FakeRepositories
 
         }
 
-        public async Task<IEnumerable<OwnerTenantDto>> GetAllOwnerTenants()
+        public async Task<IEnumerable<OwnerTenantDto>> GetAllCurrentOwnerTenants()
         {
             return _ownertenants;   
         }
 
+        public Task<OwnerTenantDto> GetCurrentOwnerTenantById(int ownertenantId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

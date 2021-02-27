@@ -1,4 +1,5 @@
 ﻿using Asa.ApartmentManagement.Core.ChargeCalculation;
+using Asa.ApartmentManagement.Core.Shared;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -11,14 +12,14 @@ namespace Asa.ApartmentManager.Core.Test.ChargeCalculation
         [Test]
         public void Building_Can_Calculate_Total_Area() 
         {
-            var building = new Building
+            var building = new ChargeBuilding
             {
                 BuildingId = 1,
-                Apartments = new List<Apartment>
+                Apartments = new List<ChargeApartment>
                 {
-                    new Apartment { ApartmentId = 1, Area = 100 },
-                    new Apartment { ApartmentId = 1, Area = 120 },
-                    new Apartment { ApartmentId = 1, Area = 300 },
+                    new ChargeApartment { ApartmentId = 1, Area = 100 },
+                    new ChargeApartment { ApartmentId = 1, Area = 120 },
+                    new ChargeApartment { ApartmentId = 1, Area = 300 },
                 }
             };
             var totalArea = building.Area;
@@ -29,14 +30,14 @@ namespace Asa.ApartmentManager.Core.Test.ChargeCalculation
         [Test]
         public void Building_Throws_Exception_If_Request_For_Not_Existed_Apartment_Area() 
         {
-            var building = new Building
+            var building = new ChargeBuilding
             {
                 BuildingId = 1,
-                Apartments = new List<Apartment>
+                Apartments = new List<ChargeApartment>
                 {
-                    new Apartment { ApartmentId = 1, Area = 100 },
-                    new Apartment { ApartmentId = 2, Area = 120 },
-                    new Apartment { ApartmentId = 3, Area = 300 },
+                    new ChargeApartment { ApartmentId = 1, Area = 100 },
+                    new ChargeApartment { ApartmentId = 1, Area = 120 },
+                    new ChargeApartment { ApartmentId = 1, Area = 300 },
                 }
             };
             
@@ -47,14 +48,14 @@ namespace Asa.ApartmentManager.Core.Test.ChargeCalculation
         public void Building_Gives_Correct_Area_If_Apartment_Exists() 
         {
             var targetApartment = new Apartment { ApartmentId = 2, Area = 120 };
-            var building = new Building
+            var building = new ChargeBuilding
             {
                 BuildingId = 1,
-                Apartments = new List<Apartment>
+                Apartments = new List<ChargeApartment>
                 {
-                    new Apartment { ApartmentId = 1, Area = 100 },
-                    new Apartment { ApartmentId = 3, Area = 300 },
-                    targetApartment
+                    new ChargeApartment { ApartmentId = 1, Area = 100 },
+                    new ChargeApartment { ApartmentId = 1, Area = 120 },
+                    new ChargeApartment { ApartmentId = 1, Area = 300 },
                 }
             };
 

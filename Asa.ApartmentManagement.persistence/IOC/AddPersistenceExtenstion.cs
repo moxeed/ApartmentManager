@@ -17,7 +17,7 @@ namespace Asa.ApartmentManagement.Persistence.IOC
 
             services.AddScoped<IBuildingRepository, FakeBuildingRepository>();
             services.AddScoped<IPersonRepository, FakePersonRepository>();
-            services.AddScoped<IExpenseRepository, FakeExpenseRepository>();
+            services.AddScoped<IExpenseRepository, ExpenseRepository>();
             return services;
         }
     }
