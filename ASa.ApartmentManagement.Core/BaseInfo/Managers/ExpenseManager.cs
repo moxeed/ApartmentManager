@@ -49,5 +49,10 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
             await _expenseRepository.DeleteExpense(expenseId);
 
         }
+
+        public async Task AddExpenseCategory(ExpenseCategoryDto expenseCategory)
+        {
+            await _expenseRepository.AddExpenseCategoryAsync(expenseCategory);
+        }
     }
 }

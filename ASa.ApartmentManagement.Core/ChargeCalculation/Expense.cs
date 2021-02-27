@@ -15,14 +15,14 @@ namespace Asa.ApartmentManagement.Core.ChargeCalculation
         public Expense() { }
 
 
-        public int ExpensId { get; set; }
-        public decimal Amount { get; set; }
+        public int ExpenseId { get; set; }
+        public int Amount { get; set; }
         public DateTime From { get; set; }
         public DateTime To { get; set; }
         public FormulaType FormulaType { get; set; }
         public IFormula Formula { get; set; }
 
-        public IEnumerable<(int payerId, decimal amount)> CalculateExpenseShares(Building building, Charge charge, int apartmentId)
+        public IEnumerable<(int payerId, int amount)> CalculateExpenseShares(Building building, Charge charge, int apartmentId)
         {
             var currentRangeAmount = Amount * (charge.To - charge.From).Days / (To - From).Days;
             var payers = building.GetApartmentPayerResidenceInfos(From, To, apartmentId);

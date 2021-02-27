@@ -13,5 +13,7 @@ namespace Asa.ApartmentManagement.Core.Interfaces.Managers
         Task EditExpenseAsync(ExpenseDto expense);
 
         Task DeleteExpenseAsync(int expenseId);
+
+        Task AddExpenseCategory(ExpenseCategoryDto expenseCategory);
     }
 }

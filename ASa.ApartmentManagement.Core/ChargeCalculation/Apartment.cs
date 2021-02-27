@@ -10,6 +10,8 @@ namespace Asa.ApartmentManagement.Core.ChargeCalculation
         public int ApartmentId { get; set; }
         public decimal Area { get; set; }
         public int Number { get; set; }
+        public int BuildingId { get; set; }
+        public Building Building{ get; set; }
         public ICollection<Payer> Payers { get; set; }
 
         internal IEnumerable<(int PayerId, int DaysLived)> GetPayerResisdenceInfo(DateTime from, DateTime to)

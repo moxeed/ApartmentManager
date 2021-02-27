@@ -1,4 +1,5 @@
 ﻿using Asa.ApartmentManagement.Core.Interfaces.Managers;
+using Asa.ApartmentManagement.Core.Interfaces.Repositories;
 using Asa.ApartmentSystem.API.Areas.BaseInfo.Models.Requests;
 using Asa.ApartmentSystem.API.Common.Extenstions;
 using Asa.ApartmentSystem.API.Controllers;
@@ -18,11 +19,15 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
     {
 
         private readonly IExpenseManager _expenseManerger;
+        private readonly IExpenseRepository _expenseRepository;
 
-        public ExpenseController(IExpenseManager expenseManerger)
+        public ExpenseController(IExpenseManager expenseManerger,
+            IExpenseRepository expenseRepository)
         {
             _expenseManerger = expenseManerger;
+            _expenseRepository = expenseRepository;
         }
+
         [HttpPost]
         public async Task<IActionResult> AddExpense([FromBody] AddExpenseRequest request)
         {
@@ -32,13 +37,6 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
         }
 
 
-        [HttpPut]
-        public async Task<IActionResult> EditExpense([FromBody] AddExpenseRequest request) 
-        {
-            var expense = request.ToDto();
-            await _expenseManerger.EditExpenseAsync(expense);
-            return Created(Request.Path, expense);
-        }
 
     }
 }

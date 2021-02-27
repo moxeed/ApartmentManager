@@ -3,8 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Models.Requests
 {
-    public class AddExpenseRequest
+    public class EditExpenseRequest
     {
+        [Required]
+        public int? ExpenseId { get; set; }
         [Required]
         public int? ExpenseCategoryId { get; set; }
         [Required]

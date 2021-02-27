@@ -10,6 +10,7 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Domain
     {
         public int BuildingId { get; set; }
         public string BuildingName { get; set; }
+        public int ApartmentCount{ get; set; }
         public ICollection<ApartmentInfo> Apartments { get; set; }
     }
 }
