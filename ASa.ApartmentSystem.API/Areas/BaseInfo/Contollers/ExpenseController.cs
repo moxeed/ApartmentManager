@@ -32,7 +32,15 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
         }
 
 
+        [HttpPut]
+        public async Task<IActionResult> EditExpense([FromBody] AddExpenseRequest request) 
+        {
+            var expense = request.ToDto();
+            await _expenseManerger.EditExpenseAsync(expense);
+            return Created(Request.Path, expense);
+        }
 
     }
 }
+
 
