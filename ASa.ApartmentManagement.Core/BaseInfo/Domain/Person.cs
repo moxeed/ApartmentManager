@@ -1,8 +1,10 @@
 ﻿using Asa.ApartmentManagement.Core.Common;
+using Asa.ApartmentManagement.Core.Shared;
+using System.Collections.Generic;
 
 namespace Asa.ApartmentManagement.Core.BaseInfo.Domain
 {
-    public class PersonInfo : IEntity
+    public class Person : IEntity
     {
         public int PersonId { get; set; }
 
@@ -11,5 +13,6 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Domain
         public string LastName { get; set; }
 
         public string PhoneNumber { get; set; }
+        public ICollection<OwnerTenant> OwnerTenants { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using Asa.ApartmentManagement.Core.BaseInfo.DTOs;
 using Asa.ApartmentManagement.Core.ChargeCalculation;
 using Asa.ApartmentManagement.Core.Interfaces.Repositories;
 using Asa.ApartmentManagement.Persistence.Context;
+using Asa.ApartmentManagement.Persistence.Mappers;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -26,8 +27,9 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
             //todo move mapping
             var entry = new ExpenseInfo
             {
-                Amount = expense.Price,
-                ExpensCategoryId = expense.ExpenseCategoryID,
+                Title = expense.Title,
+                Amount = expense.Amount,
+                ExpenseCategoryId = expense.ExpenseCategoryId,
                 From = expense.From,
                 To = expense.To
             };
@@ -35,14 +37,14 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
             _context.ExpenseInfos.Add(entry);
             await _context.SaveChangesAsync();
 
-            expense.ExpenseID = entry.ExpensId;
+            expense.ExpenseId = entry.ExpenseId;
         }
 
   
 
         public async Task DeleteExpense(int expenseid)
         {
-            var expense = _context.ExpenseInfos.FirstOrDefault(c => c.ExpensId == expenseid);
+            var expense = _context.ExpenseInfos.FirstOrDefault(c => c.ExpenseId == expenseid);
 
             if (expense is null)
                 throw new NullReferenceException($"Cannot Find Expense with {expenseid} id");
@@ -54,16 +56,16 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
 
         public async Task EditExpense(ExpenseDto expense)
         {
-            if (!_context.ExpenseInfos.Any(c => c.ExpensId == expense.ExpenseID))
-                throw new NullReferenceException($"Cannot Find Expense with {expense.ExpenseID} id");
-
+            if (!_context.ExpenseInfos.Any(c => c.ExpenseId == expense.ExpenseId))
+                throw new NullReferenceException($"Cannot Find Expense with {expense.ExpenseId} id");
 
             //todo move mapping
             var entry = new ExpenseInfo
             {
-                ExpensId = expense.ExpenseID,
-                Amount = expense.Price,
-                ExpensCategoryId = expense.ExpenseCategoryID,
+                Title = expense.Title,
+                ExpenseId = expense.ExpenseId,
+                Amount = expense.Amount,
+                ExpenseCategoryId = expense.ExpenseCategoryId,
                 From = expense.From,
                 To = expense.To
             };
@@ -72,16 +74,17 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<ICollection<ExpenseInfo>> GetAllByDateAsync(DateTime from, DateTime to)
+        public async Task<IEnumerable<ExpenseDto>> GetAllByDateAsync(DateTime from, DateTime to)
         {
-            return await _context.ExpenseInfos.ToListAsync();
+            var expenses = await _context.ExpenseInfos.Include(c => c.ExpenseCategory).ToListAsync();
+            return expenses.Project();
         }
 
         public async Task AddExpenseCategoryAsync(ExpenseCategoryDto expenseCategory)
         {
-            var entry = new ExpensCategory
+            var entry = new ExpenseCategory
             {
-                ExpensCategoryName = expenseCategory.ExpensCategoryName,
+                ExpenseCategoryName = expenseCategory.ExpensCategoryName,
                 FormulaType = expenseCategory.FormulaType
             };
 
@@ -94,8 +97,8 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
             var categories = await _context.ExpensCategories.ToListAsync();
             return categories.Select(p => new ExpenseCategoryDto
             {
-                ExpensCategoryId = p.ExpensCategoryId,
-                ExpensCategoryName = p.ExpensCategoryName,
+                ExpensCategoryId = p.ExpenseCategoryId,
+                ExpensCategoryName = p.ExpenseCategoryName,
                 FormulaType = p.FormulaType
             });
         }

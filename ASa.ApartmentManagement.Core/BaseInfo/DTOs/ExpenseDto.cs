@@ -6,13 +6,12 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.DTOs
 {
     public class ExpenseDto
     {
-
-        public int ExpenseID ;
-        public int ExpenseCategoryID;
-        public string Title;
-        public int Price;
-        public DateTime From;
-        public DateTime To;
+        public int ExpenseId { get; set; }
+        public int ExpenseCategoryId { get; set; }
+        public string ExpenseCategoryName { get; set; }
+        public string Title { get; set; }
+        public int Amount { get; set; }
+        public DateTime From { get; set; }
+        public DateTime To { get; set; }
     }
-
 }

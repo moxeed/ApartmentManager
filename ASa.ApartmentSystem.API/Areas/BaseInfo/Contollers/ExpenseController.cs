@@ -58,7 +58,13 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
             return Ok(expenses.WrapResponse(Request.Path));
         }
         
-        
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetExpense(int id)
+        {
+            var expenses = await _expenseRepository.GetAllByDateAsync(DateTime.MinValue, DateTime.MaxValue);
+            return Ok(expenses.FirstOrDefault(c => c.ExpenseId == id).WrapResponse(Request.Path));
+        }
+
         [HttpPost("Category")]
         public async Task<IActionResult> AddExpenseCategory(AddExpenseCategoryRequest addExpenseCategory)
         {
