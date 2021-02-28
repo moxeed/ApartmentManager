@@ -36,21 +36,6 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
             return Created(Request.Path, expense.WrapResponse(Request.Path));
         }
 
-        [HttpPut]
-        public async Task<IActionResult> EditExpense([FromBody] EditExpenseRequest request)
-        {
-            var expense = request.ToDto();
-            await _expenseManerger.EditExpenseAsync(expense);
-            return Created(Request.Path, expense.WrapResponse(Request.Path));
-        }
-        
-        [HttpDelete("{expenseId:int}")]
-        public async Task<IActionResult> DeleteExpense(int expenseId)
-        {
-            await _expenseManerger.DeleteExpenseAsync(expenseId);
-            return Ok(expenseId.WrapResponse(Request.Path));
-        }
-
         [HttpGet]
         public async Task<IActionResult> GetAllExpense()
         {
@@ -73,12 +58,7 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
             return Created(Request.Path, expenseCategory.WrapResponse(Request.Path));
         }
 
-        [HttpGet("Category")]
-        public async Task<IActionResult> GetAllExpenseCategory()
-        {
-            var expenseCategories = await _expenseRepository.GetAllExpenseCategories();
-            return Ok(expenseCategories.WrapResponse(Request.Path));
-        }
     }
 }
+
 
