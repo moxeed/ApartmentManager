@@ -10,16 +10,13 @@ namespace Asa.ApartmentManagement.Core.Interfaces.Repositories
 {
     public interface IExpenseRepository
     {
-
-
-
         Task AddExpense(ExpenseDto expense);
 
         Task EditExpense(ExpenseDto expense);
 
         Task DeleteExpense(int expenseid);
 
-        Task<ICollection<BaseInfo.Domain.ExpenseInfo>> GetAllByDateAsync(DateTime from, DateTime to);
+        Task<IEnumerable<ExpenseDto>> GetAllByDateAsync(DateTime from, DateTime to);
         Task AddExpenseCategoryAsync(ExpenseCategoryDto expenseCategory);
         Task<IEnumerable<ExpenseCategoryDto>> GetAllExpenseCategories();
     }

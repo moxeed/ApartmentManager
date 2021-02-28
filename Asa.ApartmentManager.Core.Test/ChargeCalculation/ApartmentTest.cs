@@ -1,4 +1,5 @@
 ﻿using Asa.ApartmentManagement.Core.ChargeCalculation;
+using Asa.ApartmentManagement.Core.Shared;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -11,15 +12,15 @@ namespace Asa.ApartmentManager.Core.Test.ChargeCalculation
         [Test]
         public void Aaprtment_Can_Find_One_Payer_In_A_Interval() 
         {
-            var apartment = new Apartment
+            var apartment = new ChargeApartment
             {
                 ApartmentId = 1,
                 Area = 1000,
-                Payers = new List<Payer>
+                Payers = new List<OwnerTenant>
                 {
-                    new Payer{ IsOwner = false, From = DateTime.Now.AddDays(-30), To = DateTime.Now.AddDays(-15), OccupantCount = 3, PayerId = 1},
-                    new Payer{ IsOwner = false, From = DateTime.Now.AddDays(-60), To = DateTime.Now.AddDays(-40), OccupantCount = 1, PayerId = 2},
-                    new Payer{ IsOwner = false, From = DateTime.Now.AddDays(-25), To = DateTime.Now.AddDays(10), OccupantCount = 5, PayerId = 3},
+                    new OwnerTenant{ IsOwner = false, From = DateTime.Now.AddDays(-30), To = DateTime.Now.AddDays(-15), OccupantCount = 3, PersonId = 1},
+                    new OwnerTenant{ IsOwner = false, From = DateTime.Now.AddDays(-60), To = DateTime.Now.AddDays(-40), OccupantCount = 1, PersonId = 2},
+                    new OwnerTenant{ IsOwner = false, From = DateTime.Now.AddDays(-25), To = DateTime.Now.AddDays(10), OccupantCount = 5, PersonId = 3},
                 }
             };
 
@@ -34,15 +35,15 @@ namespace Asa.ApartmentManager.Core.Test.ChargeCalculation
         [Test]
         public void Aaprtment_Can_Find_Payers_In_A_Interval() 
         {
-            var apartment = new Apartment
+            var apartment = new ChargeApartment
             {
                 ApartmentId = 1,
                 Area = 1000,
-                Payers = new List<Payer>
+                Payers = new List<OwnerTenant>
                 {
-                    new Payer{ IsOwner = false, From = DateTime.Now.AddDays(-30), To = DateTime.Now.AddDays(-15), OccupantCount = 3, PayerId = 1},
-                    new Payer{ IsOwner = false, From = DateTime.Now.AddDays(-60), To = DateTime.Now.AddDays(-40), OccupantCount = 1, PayerId = 2},
-                    new Payer{ IsOwner = false, From = DateTime.Now.AddDays(-25), To = DateTime.Now.AddDays(10), OccupantCount = 5, PayerId = 3},
+                    new OwnerTenant{ IsOwner = false, From = DateTime.Now.AddDays(-30), To = DateTime.Now.AddDays(-15), OccupantCount = 3, PersonId = 1},
+                    new OwnerTenant{ IsOwner = false, From = DateTime.Now.AddDays(-60), To = DateTime.Now.AddDays(-40), OccupantCount = 1, PersonId = 2},
+                    new OwnerTenant{ IsOwner = false, From = DateTime.Now.AddDays(-25), To = DateTime.Now.AddDays(10), OccupantCount = 5, PersonId = 3},
                 }
             };
 

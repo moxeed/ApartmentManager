@@ -1,4 +1,5 @@
 ﻿using Asa.ApartmentManagement.Core.Common;
+using Asa.ApartmentManagement.Core.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,12 +22,12 @@ namespace Asa.ApartmentManagement.Core.ChargeCalculation
         public DateTime To { get; set; }
         public ICollection<ChargeItem> Items { get; set; }
 
-        public void CalculateBuildingCharge(Building building, Expense expens) 
+        public void CalculateBuildingCharge(ChargeBuilding building, ChargeExpense expens) 
         {
             var shares = expens.CalculateExpenseShares(building, this, ApartmentId);
             Items = shares.Select(s => new ChargeItem { 
                 Amount = s.amount, 
-                ExpensId = expens.ExpenseId, 
+                ExpenseId = expens.ExpenseId, 
                 PayerId = s.payerId 
             }).ToList();
         }

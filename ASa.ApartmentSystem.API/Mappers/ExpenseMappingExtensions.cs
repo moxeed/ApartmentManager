@@ -12,10 +12,10 @@ namespace Asa.ApartmentSystem.API.Mappers
         {
             return new ExpenseDto
             {
-                ExpenseCategoryID = addExpenseRequest.ExpenseCategoryId
+                ExpenseCategoryId = addExpenseRequest.ExpenseCategoryId
                 ?? throw new NullReferenceException($"{nameof(addExpenseRequest.ExpenseCategoryId)} Was Nulll"),
                 Title = addExpenseRequest.Title ,
-                Price = addExpenseRequest.Amount
+                Amount = addExpenseRequest.Amount
                 ?? throw new NullReferenceException($"{nameof(addExpenseRequest.Amount)} Was Nulll"), 
                 From = addExpenseRequest.From
                 ?? throw new NullReferenceException($"{nameof(addExpenseRequest.From)} Was Nulll"), 
@@ -28,12 +28,12 @@ namespace Asa.ApartmentSystem.API.Mappers
         {
             return new ExpenseDto
             {
-                ExpenseID  = editExpenseRequest.ExpenseId
+                ExpenseId  = editExpenseRequest.ExpenseId
                 ?? throw new NullReferenceException($"{nameof(editExpenseRequest.ExpenseId)} Was Nulll"),
-                ExpenseCategoryID = editExpenseRequest.ExpenseCategoryId
+                ExpenseCategoryId = editExpenseRequest.ExpenseCategoryId
                 ?? throw new NullReferenceException($"{nameof(editExpenseRequest.ExpenseCategoryId)} Was Nulll"),
                 Title = editExpenseRequest.Title,
-                Price = editExpenseRequest.Amount
+                Amount = editExpenseRequest.Amount
                 ?? throw new NullReferenceException($"{nameof(editExpenseRequest.Amount)} Was Nulll"),
                 From = editExpenseRequest.From
                 ?? throw new NullReferenceException($"{nameof(editExpenseRequest.From)} Was Nulll"),
