@@ -12,23 +12,29 @@ namespace Asa.ApartmentManagement.Core.ChargeCalculation
             ApartmentId = apartmentId;
             From = from;
             To = to;
+            Items = new HashSet<ChargeItem>();
         }
 
         public int ChargeId { get; set; }
-        public int ApartmentId { get; set; } 
-        public DateTime CalculateDateTime { get; set; }
+        public int ApartmentId { get; set; }
+        public DateTime CalculateDateTime { get; set; } = DateTime.Now;
         public DateTime From { get; set; }
         public DateTime To { get; set; }
         public ICollection<ChargeItem> Items { get; set; }
 
-        public void CalculateBuildingCharge(ChargeBuilding building, ChargeExpense expens) 
+        public void CalculateBuildingCharge(ChargeBuilding building, IEnumerable<ChargeExpense> expenses) 
         {
-            var shares = expens.CalculateExpenseShares(building, this, ApartmentId);
-            Items = shares.Select(s => new ChargeItem { 
-                Amount = s.amount, 
-                ExpenseId = expens.ExpenseId, 
-                PayerId = s.payerId 
-            }).ToList();
+            var items = new List<ChargeItem>();
+            foreach (var expense in expenses) 
+            {
+                var shares = expense.CalculateExpenseShares(building, this, ApartmentId);
+                items.AddRange(shares.Select(s => new ChargeItem { 
+                    Amount = s.amount, 
+                    ExpenseId = expense.ExpenseId, 
+                    PayerId = s.payerId 
+                }));
+            }
+            Items = items;
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Asa.ApartmentSystem.API.Mappers
             return new ApartmentDto
             {
 
-                BuidlingId = addApartmentRequest.BuildingID ,
+                BuildingId = addApartmentRequest.BuildingID ,
                 Number = addApartmentRequest.Number 
                 ?? throw new NullReferenceException($"{nameof(addApartmentRequest.Number)} Was Nulll"),
                 Area = addApartmentRequest.Area

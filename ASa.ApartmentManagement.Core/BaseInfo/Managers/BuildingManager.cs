@@ -45,7 +45,7 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
             {
                 throw new ValidationException(ErrorCodes.Invalid_Area, $"Area of an Apartment can not be smaller than 20");
             }
-            var building  = await  _repository.GetBuildingAsync(apartment.BuidlingId);
+            var building  = await  _repository.GetBuildingAsync(apartment.BuildingId);
             if(building.NumberOfUnits < apartment.Number)
             {
                 throw new ValidationException(ErrorCodes.Max_Apartment_Number, $"Number Unit should not be greater than counts of building aparment");

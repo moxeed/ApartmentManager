@@ -11,11 +11,12 @@ namespace Asa.ApartmentManagement.Core.ChargeCalculation
         public decimal Area { get; set; }
         public int Number { get; set; }
         public int BuildingId { get; set; }
+        public ChargeBuilding Building {get;set;}
         public ICollection<Payer> Payers { get; set; }
 
         internal IEnumerable<(int PayerId, int DaysLived)> GetPayerResisdenceInfo(DateTime from, DateTime to)
         {
-            return Payers.Where(p => p.From < to && p.To > from && !p.IsOwner)
+            return Payers.Where(p => p.From < to && (p.To > from || p.To == null)  && !p.IsOwner)
                 .Select(p => (p.PersonId,
                 CalculateDaysLived(from, to, p)));
 

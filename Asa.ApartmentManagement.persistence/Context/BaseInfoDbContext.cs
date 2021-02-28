@@ -30,5 +30,10 @@ namespace Asa.ApartmentManagement.Persistence.Context
             modelBuilder.Entity<ExpenseInfo>().ToTable("Expense").HasKey(e => e.ExpenseId);
             modelBuilder.Entity<OwnerTenant>().ToTable("OwnerTenant").HasKey(e => e.OwnerTenantId);
         }
+
+        internal object firstOrDefalt()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

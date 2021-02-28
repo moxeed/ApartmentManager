@@ -10,10 +10,15 @@ namespace Asa.ApartmentSystem.API.Mappers
 {
     public static class PersonMappingExtensions
     {
-        public static PersonDto ToDto(this PersonRequest personRequest)
+        public static PersonDto ToDto(this PersonRequest personRequest, int id = 0)
         {
             return new PersonDto
-            {};
+            {
+                PersonId = id,
+                Name = personRequest.Name,
+                LastName = personRequest.LastName,
+                PhoneNumber = personRequest.PhoneNumber
+            };
         }
     }
 }

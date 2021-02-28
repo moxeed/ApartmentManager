@@ -5,18 +5,14 @@ using Asa.ApartmentSystem.API.Common.Extenstions;
 using Asa.ApartmentSystem.API.Controllers;
 using Asa.ApartmentSystem.API.Mappers;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
 {
-
     [Area("BaseInfo")]
-
     public class ExpenseController : ApiBaseController
     {
-
         private readonly IExpenseManager _expenseManerger;
         private readonly IExpenseRepository _expenseRepository;
 
