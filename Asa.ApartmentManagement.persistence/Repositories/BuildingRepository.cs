@@ -53,7 +53,9 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
 
         public async Task<IEnumerable<ApartmentDto>> GetBuildingApartments(int buildingId)
         {
-            var apartments = await _baseInfoContext.ApartmentInfos.Where(c => c.BuildingId == buildingId).ToListAsync();
+            var apartments = await _baseInfoContext.ApartmentInfos
+                .Include(a => a.OwnerTenants)
+                .Where(c => c.BuildingId == buildingId).ToListAsync();
             return apartments.Project();
         }
 
