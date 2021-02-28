@@ -45,7 +45,7 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
             {
                 throw new ValidationException(ErrorCodes.Invalid_Area, $"Area of an Apartment can not be smaller than 20");
             }
-            var building  = await  _repository.GetBuildingAsync(apartment.BuidlingId);
+            var building  = await  _repository.GetBuildingAsync(apartment.BuildingId);
             if(building.NumberOfUnits < apartment.Number)
             {
                 throw new ValidationException(ErrorCodes.Max_Apartment_Number, $"Number Unit should not be greater than counts of building aparment");
@@ -92,11 +92,6 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
         public Task<IEnumerable<OwnerTenantDto>> GetAllCurrentOwnerTenants(int buildingId)
         {
             return _repository.GetAllCurrentOwnerTenants(buildingId);
-        }
-
-        public Task<int> GetBuildingOfUnit(int apartmentId)
-        {
-            return _repository.GetBuildingIdByUnit(apartmentId);
         }
     }
 }

@@ -14,14 +14,12 @@ namespace Asa.ApartmentManagement.Core.ChargeCalculation
         public IEnumerable<Charge> CalculateCharge(DateTime from, DateTime to, IEnumerable<ChargeExpense> expenses) 
         {
             var charges = new List<Charge>();
-            foreach (var expens in expenses) 
+            
+            foreach (var apartment in Apartments)
             {
-                foreach (var apartment in Apartments)
-                {
-                    var charge = new Charge(apartment.ApartmentId, from, to);
-                    charge.CalculateBuildingCharge(this, expens);
-                    charges.Add(charge);
-                }
+                var charge = new Charge(apartment.ApartmentId, from, to);
+                charge.CalculateBuildingCharge(this, expenses);
+                charges.Add(charge);
             }
             return charges;
         }

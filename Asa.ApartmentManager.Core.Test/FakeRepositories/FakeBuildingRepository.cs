@@ -53,7 +53,7 @@ namespace Asa.ApartmentManagement.Persistence.FakeRepositories
 
         public async Task<IEnumerable<ApartmentDto>> GetBuildingApartments(int buildingId)
         {
-            return _apartments.Where(a => a.BuidlingId == buildingId);
+            return _apartments.Where(a => a.BuildingId == buildingId);
         }
 
         public async Task<BuildingDto> GetBuildingAsync(int buildingId)

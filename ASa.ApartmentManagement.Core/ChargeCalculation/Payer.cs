@@ -11,5 +11,6 @@ namespace Asa.ApartmentManagement.Core.ChargeCalculation
         public DateTime? To { get; set; }
         public int PersonId { get; set; }
         public int ApartmentId { get; set; }
+        public ChargeApartment Apartment { get; set; }
     }
 }

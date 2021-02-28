@@ -3,15 +3,12 @@ using Asa.ApartmentManagement.Core.Interfaces.Repositories;
 using Asa.ApartmentManagement.Persistence.Context;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Asa.ApartmentManagement.Persistence.Repositories
 {
     public class PersonRepository : IPersonRepository
     {
-
-
         private readonly BaseInfoDbContext _context;
         public PersonRepository(BaseInfoDbContext context)
         {

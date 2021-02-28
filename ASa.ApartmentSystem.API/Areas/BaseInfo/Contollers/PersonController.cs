@@ -3,18 +3,14 @@ using Asa.ApartmentSystem.API.Common.Extenstions;
 using Asa.ApartmentSystem.API.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Asa.ApartmentManagement.Core.BaseInfo.DTOs;
-using Asa.ApartmentSystem.API.Areas.BaseInfo.Models;
 using Asa.ApartmentSystem.API.Mappers;
 using Asa.ApartmentSystem.API.Areas.BaseInfo.Models.Requests;
-using System;
 
 namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
 {
     [Area("BaseInfo")]
     public class PersonController : ApiBaseController
     {
-
         private readonly IPersonManager _personManger;
         public PersonController(IPersonManager personManager)
         {
@@ -29,13 +25,13 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
             return Created(Request.Path, person);
         }
         
-        [HttpPut]
+        [HttpPut("{id:int}")]
         public async Task<IActionResult> EditPerson(int id,[FromBody] PersonRequest request) 
         {
-            var apartment = request.ToDto();
-            return Created(Request.Path, apartment);
+            var person = request.ToDto(id);
+            await _personManger.AddPersonAsync(person);
+            return Created(Request.Path, person.WrapResponse(Request.Path));
         }
-
 
         [HttpPost] 
         [Route("/AddToUnit")]
@@ -45,7 +41,5 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
             await _personManger.AddOwnerTenantAsync(ownertenant);
             return Created(Request.Path, ownertenant);
         }
-        
-
     }
 }

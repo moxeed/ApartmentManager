@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Asa.ApartmentManagement.Core.BaseInfo.Domain;
 using Asa.ApartmentManagement.Core.BaseInfo.DTOs;
 using Asa.ApartmentManagement.Core.ChargeCalculation;
 using Asa.ApartmentManagement.Core.Interfaces.Repositories;
 using Asa.ApartmentManagement.Persistence.Context;
+using Asa.ApartmentManagement.Persistence.Mappers;
 using Microsoft.EntityFrameworkCore;
 
 namespace Asa.ApartmentManagement.Persistence.Repositories
@@ -21,44 +23,52 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
             _baseInfoContext = baseInfoContext;
         }
 
-        public Task AddApartmentAsync(ApartmentDto apartment)
+        public async Task AddApartmentAsync(ApartmentDto apartment)
         {
-            throw new NotImplementedException();
+            var entry = apartment.ToEntry();
+            await _baseInfoContext.ApartmentInfos.AddAsync(entry);
+            await _baseInfoContext.SaveChangesAsync();
         }
 
-        public Task AddBuildingAsync(BuildingDto building)
+        public async Task AddBuildingAsync(BuildingDto building)
         {
-            throw new NotImplementedException();
+            var entry = building.ToEntry();
+            await _baseInfoContext.BuildingInfos.AddAsync(entry);
+            await _baseInfoContext.SaveChangesAsync();
         }
 
-        public Task EditBuldingNameAsync(BuildingNameDto buildingName)
+        public async Task EditBuldingNameAsync(BuildingNameDto buildingName)
         {
-            throw new NotImplementedException();
+            var building = await _baseInfoContext.BuildingInfos.FirstOrDefaultAsync(b => b.BuildingId == buildingName.BuildingId);
+            var entry = buildingName.ToEntry(building);
+            await _baseInfoContext.BuildingInfos.AddAsync(entry);
+            await _baseInfoContext.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<OwnerTenantDto>> GetAllCurrentOwnerTenants(int buildingId)
+        public async Task<IEnumerable<OwnerTenantDto>> GetAllCurrentOwnerTenants(int buildingId)
         {
-            throw new NotImplementedException();
+            var ownerTenants = await _baseInfoContext.OwnerTenants.Where(o => o.To == null).ToListAsync();
+            return ownerTenants.Project();
         }
 
-        public Task<IEnumerable<ApartmentDto>> GetBuildingApartments(int buildingId)
+        public async Task<IEnumerable<ApartmentDto>> GetBuildingApartments(int buildingId)
         {
-            throw new NotImplementedException();
+            var apartments = await _baseInfoContext.ApartmentInfos
+                .Include(a => a.OwnerTenants)
+                .Where(c => c.BuildingId == buildingId).ToListAsync();
+            return apartments.Project();
         }
 
-        public Task<BuildingDto> GetBuildingAsync(int buildingId)
+        public async Task<BuildingDto> GetBuildingAsync(int buildingId)
         {
-            throw new NotImplementedException();
+            var building = await _baseInfoContext.BuildingInfos.FirstOrDefaultAsync(b => b.BuildingId == buildingId);
+            return building.ToDto();
         }
 
-        public Task<int> GetBuildingIdByUnit(int apartmentId)
+        public async Task<IEnumerable<BuildingDto>> GetBuildingsAsync()
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<BuildingDto>> GetBuildingsAsync()
-        {
-            throw new NotImplementedException();
+            var building = await _baseInfoContext.BuildingInfos.ToListAsync();
+            return building.Project();
         }
 
         public Task<ChargeBuilding> GetChargeBuildingAsync(int buildingId)

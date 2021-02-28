@@ -26,8 +26,8 @@ namespace Asa.ApartmentManagement.Persistence.Context
             modelBuilder.Entity<ChargeExpense>().Ignore(x => x.Formula);
             modelBuilder.Entity<ChargeItem>().ToTable(nameof(ChargeItem));
 
-            modelBuilder.Entity<ChargeBuilding>().ToTable("Building").HasKey(e => e.BuildingId).HasName("BuildingId");
-            modelBuilder.Entity<ChargeApartment>().ToTable("Apartment").HasKey(e => e.ApartmentId).HasName("ApartmentId");
+            modelBuilder.Entity<ChargeBuilding>().ToTable("Building").HasKey(e => e.BuildingId);
+            modelBuilder.Entity<ChargeApartment>().ToTable("Apartment").HasKey(e => e.ApartmentId);
             modelBuilder.Entity<ChargeExpense>().ToTable("Expense").HasKey(e => e.ExpenseId);
             modelBuilder.Entity<Payer>().ToTable("OwnerTenant").HasKey(e => e.OwnerTenantId);
         }

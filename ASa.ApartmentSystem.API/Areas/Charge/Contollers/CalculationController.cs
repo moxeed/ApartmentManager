@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 namespace Asa.ApartmentSystem.API.Areas.Charge.Contollers
 {
     [Area("Charge")]
-    public class ChargeCalculatioinController : ApiBaseController
+    public class CalculationController : ApiBaseController
     {
-        private readonly IBuildingRepository _buildingRepository;
         private readonly IChargeCalculationApplicationService _chargeCalculationApplicationService;
 
-        public ChargeCalculatioinController(IChargeCalculationApplicationService chargeCalculationApplicationService)
+        public CalculationController(IChargeCalculationApplicationService chargeCalculationApplicationService)
         {
             _chargeCalculationApplicationService = chargeCalculationApplicationService;
         }

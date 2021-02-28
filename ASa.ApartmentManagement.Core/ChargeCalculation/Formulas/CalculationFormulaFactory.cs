@@ -14,6 +14,12 @@ namespace Asa.ApartmentManagement.Core.ChargeCalculation.Formulas
         static Dictionary<FormulaType, Type> formulaTypesDictionary;
         static Dictionary<FormulaType, IFormula> formulaInstances = new Dictionary<FormulaType, IFormula>();
         static readonly object lockToken = new object();
+
+        static CalculationFormulaFactory()
+        {
+            ExtractFormulaNames();
+        }
+
         public static List<FormulaName> GetAll()
         {
             if (formulaNames == null)
