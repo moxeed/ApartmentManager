@@ -1,4 +1,5 @@
-﻿using Asa.ApartmentManagement.Core.Interfaces.Repositories;
+﻿using Asa.ApartmentManagement.ApplicationServices.Interfaces.ApplicationServices;
+using Asa.ApartmentManagement.Core.Interfaces.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,30 +7,32 @@ using System.Threading.Tasks;
 
 namespace Asa.ApartmentManagement.ApplicationServices.ChargeCalculation
 {
-    class ChargeCalculationApplicationService
+    class ChargeCalculationApplicationService : IChargeCalculationApplicationService
     {
-        private readonly IBuildingRepository buildingRepository;
-        private readonly IChargeRepository chargeRepository;
-        private readonly IExpenseRepository expenseRepository;
+        private readonly IBuildingRepository _buildingRepository;
+        private readonly IChargeRepository _chargeRepository;
+        private readonly IExpenseRepository _expenseRepository;
 
         public ChargeCalculationApplicationService(IBuildingRepository buildingRepository, IChargeRepository chargeRepository, IExpenseRepository expenseRepository)
         {
-            this.buildingRepository = buildingRepository;
-            this.chargeRepository = chargeRepository;
-            this.expenseRepository = expenseRepository;
+            _buildingRepository = buildingRepository;
+            _chargeRepository = chargeRepository;
+            _expenseRepository = expenseRepository;
         }
 
-        public async Task CalculateCharge(int buildbingId, DateTime from, DateTime to) 
+        public async Task CalculateChargeAsync(int buildbingId, DateTime from, DateTime to) 
         {
-            var expenses = await expenseRepository.GetChargeExpenseAsync();
-            var budling = await buildingRepository.GetChargeBuildingAsync(buildbingId);
+            var expenses = await _expenseRepository.GetChargeExpenseAsync(from, to);
+            var building = await _buildingRepository.GetChargeBuildingAsync(buildbingId);
 
-            var charges = budling.CalculateCharge(from, to, expenses);
+            var charges = building.CalculateCharge(from, to, expenses);
 
             foreach (var charge in charges)
             {
-                await chargeRepository.AddChargeAsync(charge);
+                _chargeRepository.AddCharge(charge);
             }
+
+            await _chargeRepository.Commit();
         }
     }
 }

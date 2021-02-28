@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Asa.ApartmentManagement.Persistence.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(ChargeDbContext))]
     [Migration("20210227094414_DbInit")]
     partial class DbInit
     {

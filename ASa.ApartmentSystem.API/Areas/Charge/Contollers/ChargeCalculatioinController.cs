@@ -1,4 +1,5 @@
-﻿ using Asa.ApartmentManagement.Core.Interfaces.Repositories;
+﻿using Asa.ApartmentManagement.ApplicationServices.Interfaces.ApplicationServices;
+using Asa.ApartmentManagement.Core.Interfaces.Repositories;
 using Asa.ApartmentSystem.API.Areas.Charge.Models.Requests;
 using Asa.ApartmentSystem.API.Controllers;
 using Microsoft.AspNetCore.Mvc;
@@ -10,21 +11,17 @@ namespace Asa.ApartmentSystem.API.Areas.Charge.Contollers
     public class ChargeCalculatioinController : ApiBaseController
     {
         private readonly IBuildingRepository _buildingRepository;
+        private readonly IChargeCalculationApplicationService _chargeCalculationApplicationService;
 
-        public ChargeCalculatioinController(IBuildingRepository buildingRepository)
+        public ChargeCalculatioinController(IChargeCalculationApplicationService chargeCalculationApplicationService)
         {
-            _buildingRepository = buildingRepository;
+            _chargeCalculationApplicationService = chargeCalculationApplicationService;
         }
 
         [HttpPost]
         public async Task<IActionResult> CalculateBuildingCharge(BuildingChargeRequest request) 
         {
-            var building = _buildingRepository.GetBuildingAsync(request.BuildingId.Value);
-            if (building is null) 
-            {
-                ModelState.AddModelError(string.Empty, "No building with this Id exists");
-                return BadRequest(ModelState);
-            }
+            await _chargeCalculationApplicationService.CalculateChargeAsync(request.BuildingId.Value, request.From.Value, request.To.Value);
             return Ok();
         }
     }

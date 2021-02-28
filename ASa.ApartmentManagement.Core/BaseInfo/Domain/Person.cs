@@ -1,5 +1,4 @@
 ﻿using Asa.ApartmentManagement.Core.Common;
-using Asa.ApartmentManagement.Core.Shared;
 using System.Collections.Generic;
 
 namespace Asa.ApartmentManagement.Core.BaseInfo.Domain

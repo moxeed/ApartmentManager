@@ -11,12 +11,16 @@ namespace Asa.ApartmentManagement.Persistence.IOC
     {
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<ChargeDbContext>(options =>
+            options.UseSqlServer(configuration.GetConnectionString("Default")));
+
+            services.AddDbContext<BaseInfoDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("Default")));
 
             services.AddScoped<IBuildingRepository, BuildingRepository>();
-            services.AddScoped<IPersonRepository, PersonRepository>();
             services.AddScoped<IExpenseRepository, ExpenseRepository>();
+            services.AddScoped<IPersonRepository, PersonRepository>();
+            services.AddScoped<IChargeRepository, ChargeRepository>();
             return services;
         }
     }
