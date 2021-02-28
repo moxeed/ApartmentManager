@@ -12,11 +12,13 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
 {
     public class BuildingRepository : IBuildingRepository
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ChargeDbContext _chargeContext;
+        private readonly BaseInfoDbContext _baseInfoContext;
 
-        public BuildingRepository(ApplicationDbContext context)
+        public BuildingRepository(ChargeDbContext chargeContext, BaseInfoDbContext baseInfoContext)
         {
-            _context = context;
+            _chargeContext = chargeContext;
+            _baseInfoContext = baseInfoContext;
         }
 
         public Task AddApartmentAsync(ApartmentDto apartment)
@@ -60,8 +62,9 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
         }
 
         public Task<ChargeBuilding> GetChargeBuildingAsync(int buildingId)
-        {
-            throw new NotImplementedException();
-        }
+            => _chargeContext.ChargeBuildings
+                .Include(b => b.Apartments)
+                .ThenInclude(a => a.Payers)
+                .FirstOrDefaultAsync(b => b.BuildingId == buildingId);
     }
 }

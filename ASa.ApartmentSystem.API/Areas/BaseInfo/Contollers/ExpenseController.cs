@@ -6,7 +6,6 @@ using Asa.ApartmentSystem.API.Controllers;
 using Asa.ApartmentSystem.API.Mappers;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -36,17 +35,32 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
             return Created(Request.Path, expense.WrapResponse(Request.Path));
         }
 
+        [HttpPut]
+        public async Task<IActionResult> EditExpense([FromBody] EditExpenseRequest request)
+        {
+            var expense = request.ToDto();
+            await _expenseManerger.EditExpenseAsync(expense);
+            return Created(Request.Path, expense.WrapResponse(Request.Path));
+        }
+
+        [HttpDelete("{expenseId:int}")]
+        public async Task<IActionResult> DeleteExpense(int expenseId)
+        {
+            await _expenseManerger.DeleteExpenseAsync(expenseId);
+            return Ok(expenseId.WrapResponse(Request.Path));
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAllExpense()
         {
-            var expenses = await _expenseRepository.GetAllByDateAsync(DateTime.MinValue, DateTime.MaxValue);
+            var expenses = await _expenseRepository.GetAllAsync();
             return Ok(expenses.WrapResponse(Request.Path));
         }
-        
+
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetExpense(int id)
         {
-            var expenses = await _expenseRepository.GetAllByDateAsync(DateTime.MinValue, DateTime.MaxValue);
+            var expenses = await _expenseRepository.GetAllAsync();
             return Ok(expenses.FirstOrDefault(c => c.ExpenseId == id).WrapResponse(Request.Path));
         }
 
@@ -58,6 +72,12 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
             return Created(Request.Path, expenseCategory.WrapResponse(Request.Path));
         }
 
+        [HttpGet("Category")]
+        public async Task<IActionResult> GetAllExpenseCategory()
+        {
+            var expenseCategories = await _expenseRepository.GetAllExpenseCategories();
+            return Ok(expenseCategories.WrapResponse(Request.Path));
+        }
     }
 }
 

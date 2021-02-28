@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Asa.ApartmentManagement.Core.BaseInfo.Managers;
+using Asa.ApartmentManagement.Core.ChargeCalculation.Formulas;
 
 namespace Asa.ApartmentManagement.Core.IOC
 {

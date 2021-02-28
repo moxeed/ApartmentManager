@@ -1,14 +1,17 @@
 ﻿using Asa.ApartmentManagement.Core.Common;
-using Asa.ApartmentManagement.Core.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Asa.ApartmentManagement.Core.BaseInfo.Domain
 {
-    public class ApartmentInfo : Apartment
+    public class ApartmentInfo : IEntity
     {
-        public new BuildingInfo Building { get; set; }
+        public int ApartmentId { get; set; }
+        public decimal Area { get; set; }
+        public int Number { get; set; }
+        public int BuildingId { get; set; }
+        public BuildingInfo Building { get; set; }
         public ICollection<OwnerTenant> OwnerTenants { get; set; }
     }
 }

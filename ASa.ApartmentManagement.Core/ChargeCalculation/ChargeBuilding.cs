@@ -1,12 +1,11 @@
 ﻿using Asa.ApartmentManagement.Core.Common;
-using Asa.ApartmentManagement.Core.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Asa.ApartmentManagement.Core.ChargeCalculation
 {
-    public class ChargeBuilding : Building
+    public class ChargeBuilding : IEntity
     {
         public int BuildingId { get; set; }
         public ICollection<ChargeApartment> Apartments { get; set; }

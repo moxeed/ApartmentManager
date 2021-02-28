@@ -16,10 +16,10 @@ namespace Asa.ApartmentManagement.Core.Interfaces.Repositories
 
         Task DeleteExpense(int expenseid);
 
-        Task<IEnumerable<ExpenseDto>> GetAllByDateAsync(DateTime from, DateTime to);
+        Task<IEnumerable<ExpenseDto>> GetAllAsync();
         Task AddExpenseCategoryAsync(ExpenseCategoryDto expenseCategory);
         Task<IEnumerable<ExpenseCategoryDto>> GetAllExpenseCategories();
-        Task<IEnumerable<ChargeExpense>> GetChargeExpenseAsync();
+        Task<IEnumerable<ChargeExpense>> GetChargeExpenseAsync(DateTime from, DateTime to);
 
     }
 }

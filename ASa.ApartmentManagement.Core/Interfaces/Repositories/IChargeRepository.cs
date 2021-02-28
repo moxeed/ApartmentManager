@@ -8,9 +8,12 @@ namespace Asa.ApartmentManagement.Core.Interfaces.Repositories
 { 
     public interface IChargeRepository
     {
-        Task AddChargeAsync(Charge charge);
-        Task GetChargeAsync();
-        Task DeleteChargeAsync(int chargeId); 
-        
+        void AddCharge(Charge charge);
+        void DeleteCharge(int chargeId);
+
+        Task<IEnumerable<ChargeItem>> GetChargeApartmentChargesAsync(int apartmentId);
+        Task<IEnumerable<ChargeItem>> GetChargePayerChargesAsync(int payerId);
+
+        Task Commit();
     }
 }

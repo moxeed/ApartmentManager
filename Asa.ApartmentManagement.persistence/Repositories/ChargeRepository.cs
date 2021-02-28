@@ -12,37 +12,31 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
 {
     public class ChargeRepository : IChargeRepository
     {
+        private readonly ChargeDbContext _context;
 
-        private readonly ApplicationDbContext _context;
-
-        public ChargeRepository(ApplicationDbContext context)
+        public ChargeRepository(ChargeDbContext context)
         {
             _context = context;
         }
 
+        public void AddCharge(Charge charge) => _context.Add(charge);
 
-        public async Task AddChargeAsync(Charge charge)
-        {
-            _context.Add(charge);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task DeleteChargeAsync(int chargeId)
+        public void DeleteCharge(int chargeId)
         {
             var charge = _context.Charges.FirstOrDefault(c => c.ChargeId == chargeId);
-
             if (charge is null)
                 throw new NullReferenceException($"Cannot Find Charge with {chargeId} id");
 
             _context.Charges.Remove(charge);
-
-            await _context.SaveChangesAsync();
-
         }
 
-        public Task GetChargeAsync()
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<IEnumerable<ChargeItem>> GetChargeApartmentChargesAsync(int apartmentId)
+            => await _context.ChargeItems.Where(i => _context.Payers.Any(p => p.ApartmentId == apartmentId && p.PersonId == i.PayerId)).ToListAsync();
+
+        public async Task<IEnumerable<ChargeItem>> GetChargePayerChargesAsync(int payerId)
+            => await _context.ChargeItems.Where(i => i.PayerId == payerId).ToListAsync();
+
+        public Task Commit() => _context.SaveChangesAsync();
+
     }
 }

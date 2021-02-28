@@ -12,11 +12,12 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
     {
 
 
-        private readonly ApplicationDbContext _context;
-        public PersonRepository(ApplicationDbContext context)
+        private readonly BaseInfoDbContext _context;
+        public PersonRepository(BaseInfoDbContext context)
         {
             _context = context;
         }
+
         public Task AddOwnerTenantAsync(OwnerTenantDto owner)
         {
             throw new NotImplementedException();
