@@ -14,6 +14,13 @@ namespace Asa.ApartmentManagement.Persistence.FakeRepositories
         private readonly ICollection<BuildingDto> _buildings;
         private readonly ICollection<ApartmentDto> _apartments;
 
+
+        public FakeBuildingRepository()
+        {
+            _buildings = new List<BuildingDto>();
+            _apartments = new List<ApartmentDto>();
+        }
+
         public async Task AddApartmentAsync(ApartmentDto apartment)
         {
             apartment.ApartmentId = _apartments.Max(a => a.ApartmentId) + 1;
