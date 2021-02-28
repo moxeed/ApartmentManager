@@ -102,5 +102,10 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
                 FormulaType = p.FormulaType
             });
         }
+
+        public Task<IEnumerable<ChargeExpense>> GetChargeExpenseAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

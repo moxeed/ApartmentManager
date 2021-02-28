@@ -19,5 +19,7 @@ namespace Asa.ApartmentManagement.Core.Interfaces.Repositories
         Task<IEnumerable<ExpenseDto>> GetAllByDateAsync(DateTime from, DateTime to);
         Task AddExpenseCategoryAsync(ExpenseCategoryDto expenseCategory);
         Task<IEnumerable<ExpenseCategoryDto>> GetAllExpenseCategories();
+        Task<IEnumerable<ChargeExpense>> GetChargeExpenseAsync();
+
     }
 }

@@ -58,5 +58,10 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public Task<ChargeBuilding> GetChargeBuildingAsync(int buildingId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

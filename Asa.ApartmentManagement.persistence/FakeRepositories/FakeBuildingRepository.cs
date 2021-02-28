@@ -64,7 +64,9 @@ namespace Asa.ApartmentManagement.Persistence.FakeRepositories
             });
         }
 
-
-
+        public Task<ChargeBuilding> GetChargeBuildingAsync(int buildingId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

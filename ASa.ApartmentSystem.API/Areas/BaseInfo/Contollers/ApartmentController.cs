@@ -21,7 +21,7 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddApartment([FromBody] AddApartmentRequest request) 
+        public async Task<ActionResult> AddApartment([FromBody] AddApartmentRequest request) 
         {
             var apartment = request.ToDto();
             await buildingManager.AddAppartment(apartment);
