@@ -14,6 +14,15 @@ namespace Asa.ApartmentManagement.Persistence.FakeRepositories
         private readonly ICollection<BuildingDto> _buildings;
         private readonly ICollection<ApartmentDto> _apartments;
 
+
+        public FakeBuildingRepository()
+        {
+            _buildings = new List<BuildingDto>();
+            BuildingDto building = new BuildingDto { BuildingId = 0, Name = "Test", NumberOfUnits = 10 };
+            _buildings.Add(building);
+            _apartments = new List<ApartmentDto>();
+        }
+
         public async Task AddApartmentAsync(ApartmentDto apartment)
         {
             apartment.ApartmentId = _apartments.Max(a => a.ApartmentId) + 1;
@@ -31,7 +40,9 @@ namespace Asa.ApartmentManagement.Persistence.FakeRepositories
             var building = _buildings.FirstOrDefault(b => b.BuildingId == buildingName.BuildingId);
             if (building is null)
                 throw new NullReferenceException();
+            _buildings.Remove(building);
             building.Name = buildingName.BuildingName;
+            _buildings.Add(building);
         }
         
 
@@ -47,7 +58,7 @@ namespace Asa.ApartmentManagement.Persistence.FakeRepositories
 
         public async Task<BuildingDto> GetBuildingAsync(int buildingId)
         {
-            return _buildings.FirstOrDefault(b => b.BuildingId == buildingId);
+            return  _buildings.FirstOrDefault(b => b.BuildingId == buildingId);
         }
 
         public Task<int> GetBuildingIdByUnit(int apartmentId)

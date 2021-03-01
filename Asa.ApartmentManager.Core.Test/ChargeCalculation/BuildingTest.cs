@@ -53,13 +53,15 @@ namespace Asa.ApartmentManager.Core.Test.ChargeCalculation
                 Apartments = new List<ChargeApartment>
                 {
                     new ChargeApartment { ApartmentId = 1, Area = 100 },
-                    new ChargeApartment { ApartmentId = 1, Area = 120 },
+                    new ChargeApartment { ApartmentId = 2, Area = 120 },
                     new ChargeApartment { ApartmentId = 1, Area = 300 },
                 }
             };
 
             decimal area = -1;
+            Console.WriteLine(area);
             Assert.DoesNotThrow(() => area = building.GetApartmentArea(targetApartment.ApartmentId));
+            Console.WriteLine(targetApartment.Area);
             Assert.AreEqual(area, targetApartment.Area);
         }
     }

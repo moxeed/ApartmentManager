@@ -1,6 +1,5 @@
 ﻿using Asa.ApartmentManagement.Core.Interfaces.Repositories;
 using Asa.ApartmentManagement.Persistence.Context;
-using Asa.ApartmentManagement.Persistence.FakeRepositories;
 using Asa.ApartmentManagement.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
