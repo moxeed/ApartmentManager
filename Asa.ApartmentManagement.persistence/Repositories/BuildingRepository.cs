@@ -41,7 +41,7 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
         {
             var building = await _baseInfoContext.BuildingInfos.FirstOrDefaultAsync(b => b.BuildingId == buildingName.BuildingId);
             var entry = buildingName.ToEntry(building);
-            await _baseInfoContext.BuildingInfos.AddAsync(entry);
+            _baseInfoContext.BuildingInfos.Update(entry);
             await _baseInfoContext.SaveChangesAsync();
         }
 

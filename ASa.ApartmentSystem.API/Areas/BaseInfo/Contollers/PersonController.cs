@@ -11,17 +11,17 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
     [Area("BaseInfo")]
     public class PersonController : ApiBaseController
     {
-        private readonly IPersonManager _personManger;
+        private readonly IPersonManager _personManager;
         public PersonController(IPersonManager personManager)
         {
-            _personManger = personManager;
+            _personManager = personManager;
         }
 
         [HttpPost]
         public async Task<IActionResult> AddPerson([FromBody] PersonRequest request) 
         {
             var person = request.ToDto();
-            await _personManger.AddPersonAsync(person);
+            await _personManager.AddPersonAsync(person);
             return Created(Request.Path, person);
         }
         
@@ -29,7 +29,7 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
         public async Task<IActionResult> EditPerson(int id,[FromBody] PersonRequest request) 
         {
             var person = request.ToDto(id);
-            await _personManger.AddPersonAsync(person);
+            await _personManager.EditPersonAsync(person);
             return Created(Request.Path, person.WrapResponse(Request.Path));
         }
 
@@ -38,7 +38,7 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
         public async Task<IActionResult> AddOwnerTenant([FromBody] AddOwnerTenantRequest request)
         {
             var ownertenant = request.ToDto();
-            await _personManger.AddOwnerTenantAsync(ownertenant);
+            await _personManager.AddOwnerTenantAsync(ownertenant);
             return Created(Request.Path, ownertenant);
         }
     }
