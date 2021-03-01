@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Swashbuckle.Swagger;
 
 namespace Asa.ApartmentSystem.API
 {
@@ -33,15 +34,23 @@ namespace Asa.ApartmentSystem.API
                 builder.AllowAnyOrigin()
                 .AllowAnyHeader()
                 .AllowAnyMethod()));
+            services.AddSwaggerGen();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "API-V1");
+            });
             app.UseAsaExceptionHandler();
             app.UseHttpsRedirection();
             app.UseRouting();
