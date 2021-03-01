@@ -17,6 +17,7 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
         private readonly IPersonRepository _personRepository;
         private readonly IBuildingManager _buildingManager;
 
+
         public PersonManager(IPersonRepository repository , IBuildingManager buildingManager)
         {
             _personRepository = repository;
@@ -49,7 +50,7 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
                 throw new ValidationException(ErrorCodes.Invalid_Entrence_Time, $"Date entrance should not be greater than Exit Time ");
             }
             //TODO : get the building id for the current unit
-            var buildingId = 1;
+            var buildingId = 2;
             var allCurrentOwners = await _buildingManager.GetAllCurrentOwnerTenants(buildingId);
 
             foreach (var ot in allCurrentOwners)
@@ -92,25 +93,23 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
 
             if (ow.OccupantCount != prevOwnerTenant.OccupantCount)
             {
+                ow.From = DateTime.Now;
+                prevOwnerTenant.To = DateTime.Now;
+                await _personRepository.AddOwnerTenantAsync(ow);
                 if (prevOwnerTenant.From != ow.From)
                 {
-
                     //TODO : recalculate charge must happen
                     await _personRepository.EditOwnerTenantAsync(ow);
                 }
-                else
-                {
-                    ow.From = DateTime.Now;
-                    prevOwnerTenant.To = DateTime.Now;
-                    await _personRepository.AddOwnerTenantAsync(ow);
-                    await _personRepository.EditOwnerTenantAsync(prevOwnerTenant);
-                }
+ 
             }
-            if (prevOwnerTenant.From != prevOwnerTenant.From)
-            {
-                //TODO : recalculate charge must happen
-                await _personRepository.EditOwnerTenantAsync(ow);
-            }
+            else if (prevOwnerTenant.From != ow.From)
+              {
+                    //TODO : recalculate charge must happen
+                    await _personRepository.EditOwnerTenantAsync(ow);
+              }
+
+           
 
         }
 

@@ -40,6 +40,10 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
         public async Task EditBuldingNameAsync(BuildingNameDto buildingName)
         {
             var building = await _baseInfoContext.BuildingInfos.FirstOrDefaultAsync(b => b.BuildingId == buildingName.BuildingId);
+            if (building == null)
+            {
+                throw new NullReferenceException($"There is not a building with given Id");
+            }
             var entry = buildingName.ToEntry(building);
             _baseInfoContext.BuildingInfos.Update(entry);
             await _baseInfoContext.SaveChangesAsync();

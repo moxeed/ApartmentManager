@@ -23,5 +23,18 @@ namespace Asa.ApartmentSystem.API.Mappers
             };
         }
 
+        public static OwnerTenantDto ToDto(this EditOwnerTenantRequest request)
+        {
+            return new OwnerTenantDto
+            {
+                OwnerTenantId = request.OwnerTenantId ,
+                OccupantCount = request.OccupantCount,
+                IsOwner = request.IsOwner,
+                From = request.From,
+                To = request.To,
+            };
+
+        }
+
     }
 }

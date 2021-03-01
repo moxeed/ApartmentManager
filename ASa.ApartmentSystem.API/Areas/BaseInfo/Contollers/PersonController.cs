@@ -34,12 +34,23 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
         }
 
         [HttpPost] 
-        [Route("/AddToUnit")]
+        [Route("AddToUnit")]
         public async Task<IActionResult> AddOwnerTenant([FromBody] AddOwnerTenantRequest request)
         {
             var ownertenant = request.ToDto();
             await _personManager.AddOwnerTenantAsync(ownertenant);
-            return Created(Request.Path, ownertenant);
+            return Created(Request.Path, ownertenant.WrapResponse(Request.Path));
         }
+        
+        [HttpPut("EditOwnerTenant")]
+        public async Task<IActionResult> EditOwnerTenant([FromBody] EditOwnerTenantRequest request)
+        {
+            var ownertenant = request.ToDto();
+            await _personManager.EditOwnerTenantAsync(ownertenant);
+            return Created(Request.Path, ownertenant.WrapResponse(Request.Path));
+        }
+
+
+
     }
 }

@@ -68,7 +68,7 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
                 FormulaType = expenseCategory.FormulaType
             };
 
-            _baseInfoContext.ExpensCategories.Add(entry);
+            await _baseInfoContext.ExpensCategories.AddAsync(entry);
             await _baseInfoContext.SaveChangesAsync();
         }
 

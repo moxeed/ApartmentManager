@@ -6,7 +6,7 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Domain
     public class OwnerTenant : IEntity
     {
         public int OwnerTenantId { get; set; }
-        public int OccupantCount { get; set; }
+        public int? OccupantCount { get; set; }
         public bool IsOwner { get; set; }
         public DateTime From { get; set; }
         public DateTime? To { get; set; }

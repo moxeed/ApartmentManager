@@ -9,12 +9,12 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
 {
     public class BuildingManager : IBuildingManager
     {
-        private readonly IBuildingRepository _repository;
+        private readonly IBuildingRepository _buildingrepository;
 
 
         public BuildingManager(IBuildingRepository repository)
         {
-            _repository = repository;
+            _buildingrepository = repository;
         }
 
         private void ValidateBuilding(BuildingDto building)
@@ -38,20 +38,20 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
             }
         }
 
-        private async void ValidateApartment(ApartmentDto apartment)
+        private async Task ValidateApartment(ApartmentDto apartment)
         {
             const int MIN_AREA_FOR_UNIT = 20;
-            if(apartment.Number < MIN_AREA_FOR_UNIT)
+            if(apartment.Area < MIN_AREA_FOR_UNIT)
             {
                 throw new ValidationException(ErrorCodes.Invalid_Area, $"Area of an Apartment can not be smaller than 20");
             }
-            var building  = await  _repository.GetBuildingAsync(apartment.BuildingId);
+            var building  = await  _buildingrepository.GetBuildingAsync(apartment.BuildingId);
             if(building.NumberOfUnits < apartment.Number)
             {
                 throw new ValidationException(ErrorCodes.Max_Apartment_Number, $"Number Unit should not be greater than counts of building aparment");
             }
 
-            foreach (var c in await _repository.GetBuildingApartments(building.BuildingId))
+            foreach (var c in await _buildingrepository.GetBuildingApartments(building.BuildingId))
             {
                 if(c.Number == apartment.Number)
                 {
@@ -64,34 +64,34 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
         public async Task AddBuildingAsync(BuildingDto building)
         {
             ValidateBuilding(building);
-            await _repository.AddBuildingAsync(building);
+            await _buildingrepository.AddBuildingAsync(building);
         }
 
 
         public Task EditBuldingNameAsync(BuildingNameDto buildingName)
         {
             ValidateBuildingName(buildingName);
-            return _repository.EditBuldingNameAsync(buildingName);
+            return _buildingrepository.EditBuldingNameAsync(buildingName);
         }
 
         public Task<IEnumerable<BuildingDto>> GetBuildings()
         {
-            return _repository.GetBuildingsAsync();
+            return _buildingrepository.GetBuildingsAsync();
         }
 
         public async Task AddAppartment(ApartmentDto apartment)
         {
-            ValidateApartment(apartment);
-            await _repository.AddApartmentAsync(apartment);   
+            await ValidateApartment(apartment);
+            await _buildingrepository.AddApartmentAsync(apartment);   
         }
 
         public Task<IEnumerable<ApartmentDto>> GetApartmentsOfBuilding(int buildingId)
         {
-            return _repository.GetBuildingApartments(buildingId);
+            return _buildingrepository.GetBuildingApartments(buildingId);
         }
         public Task<IEnumerable<OwnerTenantDto>> GetAllCurrentOwnerTenants(int buildingId)
         {
-            return _repository.GetAllCurrentOwnerTenants(buildingId);
+            return _buildingrepository.GetAllCurrentOwnerTenants(buildingId);
         }
     }
 }

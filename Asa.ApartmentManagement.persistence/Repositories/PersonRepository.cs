@@ -2,47 +2,63 @@
 using Asa.ApartmentManagement.Core.Interfaces.Repositories;
 using Asa.ApartmentManagement.Persistence.Context;
 using System;
+using Asa.ApartmentManagement.Persistence.Mappers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Asa.ApartmentManagement.Persistence.Repositories
 {
     public class PersonRepository : IPersonRepository
     {
-        private readonly BaseInfoDbContext _context;
+        private readonly BaseInfoDbContext _baseInfoContext;
         public PersonRepository(BaseInfoDbContext context)
         {
-            _context = context;
+            _baseInfoContext = context;
         }
 
-        public Task AddOwnerTenantAsync(OwnerTenantDto owner)
+        public async Task AddOwnerTenantAsync(OwnerTenantDto owner)
         {
-            throw new NotImplementedException();
+            var entry = owner.ToEntry();
+            await _baseInfoContext.OwnerTenants.AddAsync(entry);
+            await _baseInfoContext.SaveChangesAsync();
         }
 
-        public Task AddPersongAsync(PersonDto person)
+        public async Task AddPersongAsync(PersonDto person)
         {
-            throw new NotImplementedException();
+            var entry = person.ToEntry();
+            await _baseInfoContext.PersonInfos.AddAsync(entry);
+            await _baseInfoContext.SaveChangesAsync();
         }
 
-        public Task EditOwnerTenantAsync(OwnerTenantDto owner)
+        public async Task EditOwnerTenantAsync(OwnerTenantDto owner)
         {
-            throw new NotImplementedException();
+
+            var ownertenant = await _baseInfoContext.OwnerTenants.FirstOrDefaultAsync(b => b.OwnerTenantId == owner.OwnerTenantId);
+            if (ownertenant == null)
+            {
+                throw new NullReferenceException($"Cannot Find OwnerTenant with {owner.OwnerTenantId} id");
+            }
+            var entry = owner.ToEntry();
+            _baseInfoContext.OwnerTenants.Update(entry);
+            await _baseInfoContext.SaveChangesAsync();
         }
 
-        public Task EditPersongAsync(PersonDto person)
+        public async Task EditPersongAsync(PersonDto person)
         {
-            throw new NotImplementedException();
+            if (!_baseInfoContext.PersonInfos.Any(c => c.PersonId == person.PersonId))
+                throw new NullReferenceException($"Cannot Find Person with {person.PersonId} id");
+            var entry = person.ToEntry();
+            _baseInfoContext.PersonInfos.Update(entry);
+            await _baseInfoContext.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<OwnerTenantDto>> GetAllCurrentOwnerTenants(int buildingId)
+        public async Task<OwnerTenantDto> GetCurrentOwnerTenantById(int ownertenantId)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<OwnerTenantDto> GetCurrentOwnerTenantById(int ownertenantId)
-        {
-            throw new NotImplementedException();
+           var ownertenant =  await _baseInfoContext.OwnerTenants.FirstOrDefaultAsync(b => b.OwnerTenantId == ownertenantId);
+           var ownertenantDto = ownertenant.ToDto();
+           return ownertenantDto;
         }
     }
 }

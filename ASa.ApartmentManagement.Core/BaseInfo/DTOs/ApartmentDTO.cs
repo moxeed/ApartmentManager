@@ -8,6 +8,6 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.DTOs
         public int Number { get; set; }
         public int BuildingId { get; set; }
         public decimal Area { get; set; }
-        public int OccupantCount { get; set; }
+        public int? OccupantCount { get; set; }
     }
 }

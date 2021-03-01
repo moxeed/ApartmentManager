@@ -32,7 +32,8 @@ namespace Asa.ApartmentSystem.Core.Test
         {
             BuildingDto building = new BuildingDto { BuildingId = 1, Name = "MyBuilding", NumberOfUnits = 10 };
             await buildingManager.AddBuildingAsync(building);
-            Assert.AreEqual(1, building.BuildingId);
+            var addedbuilding = await _repository.GetBuildingAsync(building.BuildingId);
+            Assert.AreEqual(1, addedbuilding.BuildingId);
         }
 
         [Test]
