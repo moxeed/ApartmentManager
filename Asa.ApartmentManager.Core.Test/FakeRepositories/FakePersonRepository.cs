@@ -17,6 +17,16 @@ namespace Asa.ApartmentManagement.Persistence.FakeRepositories
         private readonly ICollection<OwnerTenantDto> _ownertenants;
         private readonly ICollection<PersonDto> _persons;
 
+
+
+        public FakePersonRepository()
+        {
+            _persons = new List<PersonDto>();
+            PersonDto building = new PersonDto { PersonId = 0, Name = "Test", LastName="TestAgain", PhoneNumber = "0999282618"};
+            _persons.Add(building);
+            _ownertenants = new List<OwnerTenantDto>();
+        }
+
         public async Task AddOwnerTenant(OwnerTenantDto owner)
         {
             owner.OwnerTenantId = _ownertenants.Max(a => a.OwnerTenantId) + 1;
@@ -32,6 +42,11 @@ namespace Asa.ApartmentManagement.Persistence.FakeRepositories
         {
             person.PersonId = _persons.Max(p => p.PersonId) + 1;
             _persons.Add(person);
+        }
+
+        internal async Task<PersonDto> GetPersonById(int personId)
+        {
+            return _persons.FirstOrDefault(p=> p.PersonId == personId);
         }
 
         public Task EditOwnerTenantAsync(OwnerTenantDto owner)

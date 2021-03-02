@@ -14,6 +14,8 @@ namespace Asa.ApartmentManagement.Core.Interfaces.Managers
         Task AddAppartment(ApartmentDto apartment);
         Task<IEnumerable<ApartmentDto>> GetApartmentsOfBuilding(int buildingId);
         Task<IEnumerable<OwnerTenantDto>> GetAllCurrentOwnerTenants(int buildingId);
+
+        Task<int> GetBuildingIdOfOwnerTenant(int apartmentId);
     }
 }
 

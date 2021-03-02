@@ -93,5 +93,11 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
         {
             return _buildingrepository.GetAllCurrentOwnerTenants(buildingId);
         }
+
+        public async Task<int> GetBuildingIdOfOwnerTenant(int apartmentId)
+        {
+            var buildingId= await _buildingrepository.GetBuildingIdByApartmentId(apartmentId);
+            return buildingId;
+        }
     }
 }

@@ -55,6 +55,18 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
             return ownerTenants.Project();
         }
 
+        public async Task<int> GetBuildingIdByApartmentId(int apartmentId)
+        {
+            var Apartment = await _baseInfoContext.ApartmentInfos.FirstOrDefaultAsync(b => b.ApartmentId == apartmentId);
+            if(Apartment == null)
+            {
+                throw new NullReferenceException($"There is not such an apartment with given Id");
+            }
+            return Apartment.BuildingId;
+        }
+      
+
+
         public async Task<IEnumerable<ApartmentDto>> GetBuildingApartments(int buildingId)
         {
             var apartments = await _baseInfoContext.ApartmentInfos

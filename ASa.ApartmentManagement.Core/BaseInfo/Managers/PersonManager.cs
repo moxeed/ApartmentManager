@@ -26,7 +26,7 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
   
         private void ValidatePerson(PersonDto person)
         {
-     
+            
             if (string.IsNullOrWhiteSpace(person.Name))
             {
                 throw new ValidationException(ErrorCodes.Invalid_Person_Name, $"Person name cannot be neither empty");
@@ -49,8 +49,9 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
             {
                 throw new ValidationException(ErrorCodes.Invalid_Entrence_Time, $"Date entrance should not be greater than Exit Time ");
             }
-            //TODO : get the building id for the current unit
-            var buildingId = 2;
+
+
+            var buildingId = await _buildingManager.GetBuildingIdOfOwnerTenant(ownertenant.ApartmentId);
             var allCurrentOwners = await _buildingManager.GetAllCurrentOwnerTenants(buildingId);
 
             foreach (var ot in allCurrentOwners)

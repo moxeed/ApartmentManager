@@ -38,7 +38,7 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
         public async Task<IActionResult> AddOwnerTenant([FromBody] AddOwnerTenantRequest request)
         {
             var ownertenant = request.ToDto();
-            await _personManager.AddOwnerTenantAsync(ownertenant);
+            await _personManager.AddOwnerTenantAsync(ownertenant); 
             return Created(Request.Path, ownertenant.WrapResponse(Request.Path));
         }
         

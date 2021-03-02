@@ -61,6 +61,11 @@ namespace Asa.ApartmentManagement.Persistence.FakeRepositories
             return  _buildings.FirstOrDefault(b => b.BuildingId == buildingId);
         }
 
+        public Task<int> GetBuildingIdByApartmentId(int apartmentId)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<int> GetBuildingIdByUnit(int apartmentId)
         {
             throw new NotImplementedException();
