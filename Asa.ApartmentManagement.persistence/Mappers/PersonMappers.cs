@@ -47,9 +47,7 @@ namespace Asa.ApartmentManagement.Persistence.Mappers
                 ApartmentId = ownertenant.ApartmentId,
             };
         }
-        public static Task<IEnumerable<OwnerTenantDto>> OProject(this IEnumerable<OwnerTenant> ownertenant)
-        => (Task<IEnumerable<OwnerTenantDto>>)ownertenant.Select(ToDto);
-
-
+        public static IEnumerable<OwnerTenantDto> Project(this IEnumerable<OwnerTenant> ownertenant)
+            => ownertenant.Select(ToDto);
     }
 }
