@@ -2,7 +2,9 @@
 using Asa.ApartmentManagement.Core.BaseInfo.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Asa.ApartmentManagement.Persistence.Mappers
 {
@@ -30,8 +32,23 @@ namespace Asa.ApartmentManagement.Persistence.Mappers
                 To = ownertenantDto.To, 
                 PersonId = ownertenantDto.PersonId , 
                 ApartmentId = ownertenantDto.ApartmentId ,
-        };
+            };
         }
+        public static OwnerTenantDto ToDto(this OwnerTenant ownertenant)
+        {
+            return new OwnerTenantDto
+            {
+                OccupantCount = ownertenant.OccupantCount,
+                OwnerTenantId = ownertenant.OwnerTenantId,
+                IsOwner = ownertenant.IsOwner,
+                From = ownertenant.From,
+                To = ownertenant.To,
+                PersonId = ownertenant.PersonId,
+                ApartmentId = ownertenant.ApartmentId,
+            };
+        }
+        public static Task<IEnumerable<OwnerTenantDto>> OProject(this IEnumerable<OwnerTenant> ownertenant)
+        => (Task<IEnumerable<OwnerTenantDto>>)ownertenant.Select(ToDto);
 
 
     }

@@ -25,7 +25,7 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
             return Created(Request.Path, apartment);
         }
         
-        [HttpGet("{id:int}")]
+        [HttpGet("{buildingId:int}")]
         public async Task<IActionResult> GetBuildingApartments(int buildingId ) 
         {
             var apartments = await buildingManager.GetApartmentsOfBuilding(buildingId);
@@ -33,5 +33,15 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
             return Ok(apartmentmodels.WrapResponse(Request.Path));
 
         }
+
+
+
+        [HttpGet("{apartmentId:int}")]
+        public async Task<IActionResult> GetAllOwnerTenatsOfApartment(int apartmentId)
+        {
+            throw new System.Exception();
+        }
+
+
     }
 }

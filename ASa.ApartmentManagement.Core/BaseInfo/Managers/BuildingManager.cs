@@ -74,9 +74,9 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
             return _buildingrepository.EditBuldingNameAsync(buildingName);
         }
 
-        public Task<IEnumerable<BuildingDto>> GetBuildings()
+        public async Task<IEnumerable<BuildingDto>> GetBuildings()
         {
-            return _buildingrepository.GetBuildingsAsync();
+            return await _buildingrepository.GetBuildingsAsync();
         }
 
         public async Task AddAppartment(ApartmentDto apartment)
@@ -85,19 +85,24 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
             await _buildingrepository.AddApartmentAsync(apartment);   
         }
 
-        public Task<IEnumerable<ApartmentDto>> GetApartmentsOfBuilding(int buildingId)
+        public async Task<IEnumerable<ApartmentDto>> GetApartmentsOfBuilding(int buildingId)
         {
-            return _buildingrepository.GetBuildingApartments(buildingId);
+            return await _buildingrepository.GetBuildingApartments(buildingId);
         }
-        public Task<IEnumerable<OwnerTenantDto>> GetAllCurrentOwnerTenants(int buildingId)
+        public async Task<IEnumerable<OwnerTenantDto>> GetAllCurrentOwnerTenants(int buildingId)
         {
-            return _buildingrepository.GetAllCurrentOwnerTenants(buildingId);
+            return await _buildingrepository. GetAllCurrentOwnerTenants(buildingId);
         }
 
         public async Task<int> GetBuildingIdOfOwnerTenant(int apartmentId)
         {
             var buildingId= await _buildingrepository.GetBuildingIdByApartmentId(apartmentId);
             return buildingId;
+        }
+
+        public async Task<IEnumerable<OwnerTenantDto>> GetAllCurrrentOwnerOfApartment(int apartmentId)
+        {
+            return await _buildingrepository.GetAllCurrentOwnerTenants(apartmentId);
         }
     }
 }
