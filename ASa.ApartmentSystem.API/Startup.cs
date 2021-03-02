@@ -56,6 +56,7 @@ namespace Asa.ApartmentSystem.API
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapSwagger();
                 endpoints.MapControllers();
             });
         }
