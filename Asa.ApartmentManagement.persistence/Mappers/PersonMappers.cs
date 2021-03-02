@@ -49,5 +49,20 @@ namespace Asa.ApartmentManagement.Persistence.Mappers
         }
         public static IEnumerable<OwnerTenantDto> Project(this IEnumerable<OwnerTenant> ownertenant)
             => ownertenant.Select(ToDto);
+
+
+        public static PersonDto ToDto(this Person person)
+        {
+            return new PersonDto
+            {
+                PersonId = person.PersonId , 
+                Name = person.Name , 
+                LastName = person.LastName , 
+                PhoneNumber = person.PhoneNumber
+            };
+        }
+
+        public static IEnumerable<PersonDto> Project(this IEnumerable<Person> personss)
+            => personss.Select(ToDto);
     }
 }

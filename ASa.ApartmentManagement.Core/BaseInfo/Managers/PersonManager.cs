@@ -111,6 +111,10 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
              return  _personRepository.GetCurrentOwnerTenantById(ownertenantId);
         }
 
+        public async Task<IEnumerable<PersonDto>> GetPersonsAsync()
+        {
+            return await _personRepository.GetPersonsAsync();
+        }
     }
 }
 

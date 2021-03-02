@@ -60,5 +60,11 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
            var ownertenantDto = ownertenant.ToDto();
            return ownertenantDto;
         }
+
+        public async Task<IEnumerable<PersonDto>> GetPersonsAsync()
+        {
+            var persons = await _baseInfoContext.PersonInfos.ToListAsync();
+            return persons.Project();
+        }
     }
 }

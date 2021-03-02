@@ -16,7 +16,6 @@ namespace Asa.ApartmentSystem.API.Areas.Charge.Contollers
         {
             _chargeCalculationApplicationService = chargeCalculationApplicationService;
         }
-
         [HttpPost]
         public async Task<IActionResult> CalculateBuildingCharge(BuildingChargeRequest request) 
         {
