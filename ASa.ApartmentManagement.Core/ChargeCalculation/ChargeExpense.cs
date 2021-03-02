@@ -20,9 +20,15 @@ namespace Asa.ApartmentManagement.Core.ChargeCalculation
 
         public IEnumerable<(int payerId, int amount)> CalculateExpenseShares(ChargeBuilding building, Charge charge, int apartmentId)
         {
-            var currentRangeAmount = Amount * (charge.To - charge.From).Days / (To - From).Days;
-            var payers = building.GetApartmentPayerResidenceInfos(From, To, apartmentId);
-            return Formula.CalculateShares(building, payers, currentRangeAmount, apartmentId);
+            var intersectionStart = charge.From > From ? charge.From : From;
+            var intersectionEnd = charge.To > To ? To : charge.To;
+
+            if ((To - From).Days == 0)
+                throw new InvalidOperationException("Invalid chagre was requested ");
+
+            var currentRangeAmount = Amount * (intersectionEnd - intersectionStart).Days / (To - From).Days;
+            var buildingService = new BuildingTimeSpanInfoService(building, From, To);
+            return Formula.CalculateShares(buildingService, currentRangeAmount, apartmentId);
         }
     }
 }

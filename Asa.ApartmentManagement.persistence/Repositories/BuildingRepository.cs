@@ -64,8 +64,6 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
             }
             return Apartment.BuildingId;
         }
-      
-
 
         public async Task<IEnumerable<ApartmentDto>> GetBuildingApartments(int buildingId)
         {

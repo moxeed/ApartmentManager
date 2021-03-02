@@ -14,11 +14,11 @@ namespace Asa.ApartmentManagement.Core.ChargeCalculation
         public ChargeBuilding Building {get;set;}
         public ICollection<Payer> Payers { get; set; }
 
-        internal IEnumerable<(int PayerId, int DaysLived)> GetPayerResisdenceInfo(DateTime from, DateTime to)
+        internal IEnumerable<(int PayerId, int DaysLived, int OccupantCount)> GetPayerResisdenceInfo(DateTime from, DateTime to)
         {
             return Payers.Where(p => p.From < to && (p.To > from || p.To == null)  && !p.IsOwner)
                 .Select(p => (p.PersonId,
-                CalculateDaysLived(from, to, p)));
+                CalculateDaysLived(from, to, p), p.OccupantCount));
 
             //todo consider owner as payer when no one lives at this apartment
         }

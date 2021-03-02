@@ -82,36 +82,28 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
             return _personRepository.EditPersongAsync(person);
         }
 
-        public async Task AddOwnerTenantAsync(OwnerTenantDto ow )
+        public async Task AddOwnerTenantAsync(OwnerTenantDto ownerTenant )
         {
-            await ValidateOwnerTenantAsync(ow);
-            await _personRepository.AddOwnerTenantAsync(ow);
+            await ValidateOwnerTenantAsync(ownerTenant);
+            await _personRepository.AddOwnerTenantAsync(ownerTenant);
         }
 
-        public async Task EditOwnerTenantAsync(OwnerTenantDto ow)
+        public async Task EditOwnerTenantAsync(OwnerTenantDto ownerTenant)
         {
-            var prevOwnerTenant = await GetCurrentOwnerTenantById(ow.OwnerTenantId);
+            var prevOwnerTenant = await GetCurrentOwnerTenantById(ownerTenant.OwnerTenantId);
 
-            if (ow.OccupantCount != prevOwnerTenant.OccupantCount)
+            if (ownerTenant.OccupantCount != prevOwnerTenant.OccupantCount)
             {
-                ow.From = DateTime.Now;
+                ownerTenant.From = DateTime.Now;
                 prevOwnerTenant.To = DateTime.Now;
-                await _personRepository.AddOwnerTenantAsync(ow);
-                if (prevOwnerTenant.From != ow.From)
-                {
-                    //TODO : recalculate charge must happen
-                    await _personRepository.EditOwnerTenantAsync(ow);
+                await _personRepository.AddOwnerTenantAsync(ownerTenant);
+                if (prevOwnerTenant.From != ownerTenant.From)
+                { 
+                    await _personRepository.EditOwnerTenantAsync(ownerTenant);
                 }
  
             }
-            else if (prevOwnerTenant.From != ow.From)
-              {
-                    //TODO : recalculate charge must happen
-                    await _personRepository.EditOwnerTenantAsync(ow);
-              }
-
-           
-
+            await _personRepository.EditOwnerTenantAsync(ownerTenant);
         }
 
         public Task<OwnerTenantDto> GetCurrentOwnerTenantById(int ownertenantId)

@@ -9,6 +9,8 @@ namespace Asa.ApartmentManagement.ApplicationServices.IOC
         public static IServiceCollection AddServices(this IServiceCollection services) 
         {
             services.AddScoped<IChargeCalculationApplicationService, ChargeCalculationApplicationService>();
+            services.AddScoped<IOwnerTenenatApplicationService, OwnerTenenatApplicationService>();
+
             return services;
         }
     }

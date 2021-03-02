@@ -14,6 +14,5 @@ namespace Asa.ApartmentManagement.Core.Interfaces.Managers
         Task AddOwnerTenantAsync(OwnerTenantDto ow);
         Task EditOwnerTenantAsync(OwnerTenantDto ow);
         Task<OwnerTenantDto> GetCurrentOwnerTenantById(int ownertenantId);
-
     }
 }

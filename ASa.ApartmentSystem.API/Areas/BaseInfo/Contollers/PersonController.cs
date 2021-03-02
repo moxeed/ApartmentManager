@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Asa.ApartmentSystem.API.Mappers;
 using Asa.ApartmentSystem.API.Areas.BaseInfo.Models.Requests;
+using Asa.ApartmentManagement.ApplicationServices.Interfaces.ApplicationServices;
 
 namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
 {
@@ -12,9 +13,13 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
     public class PersonController : ApiBaseController
     {
         private readonly IPersonManager _personManager;
-        public PersonController(IPersonManager personManager)
+        private readonly IOwnerTenenatApplicationService _ownerTenenatApplicationService;
+
+        public PersonController(IPersonManager personManager,
+            IOwnerTenenatApplicationService ownerTenenatApplicationService)
         {
             _personManager = personManager;
+            _ownerTenenatApplicationService = ownerTenenatApplicationService;
         }
 
         [HttpPost]
@@ -46,11 +51,8 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
         public async Task<IActionResult> EditOwnerTenant([FromBody] EditOwnerTenantRequest request)
         {
             var ownertenant = request.ToDto();
-            await _personManager.EditOwnerTenantAsync(ownertenant);
+            await _ownerTenenatApplicationService.EditOwnerTenantAsync(ownertenant);
             return Created(Request.Path, ownertenant.WrapResponse(Request.Path));
         }
-
-
-
     }
 }

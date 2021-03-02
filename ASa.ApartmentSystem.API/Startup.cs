@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Swashbuckle.Swagger;
 
 namespace Asa.ApartmentSystem.API
 {
@@ -39,9 +38,6 @@ namespace Asa.ApartmentSystem.API
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-
-
-            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

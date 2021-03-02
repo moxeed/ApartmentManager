@@ -4,6 +4,6 @@ namespace Asa.ApartmentManagement.Core.ChargeCalculation
 {
     public interface IFormula
     {
-        List<(int payerId, int share)> CalculateShares(ChargeBuilding building, IEnumerable<(int payerId, int DaysLived)> payers, int amount, int apartmentId);
+        IEnumerable<(int payerId, int share)> CalculateShares(BuildingTimeSpanInfoService building, int amount, int apartmentId);
     }
 }

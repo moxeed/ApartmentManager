@@ -14,7 +14,7 @@ namespace Asa.ApartmentManagement.Core.ChargeCalculation
         public IEnumerable<Charge> CalculateCharge(DateTime from, DateTime to, IEnumerable<ChargeExpense> expenses) 
         {
             var charges = new List<Charge>();
-            
+            expenses = expenses.Where(e => e.From < to && e.To > from);
             foreach (var apartment in Apartments)
             {
                 var charge = new Charge(apartment.ApartmentId, from, to);
@@ -33,9 +33,9 @@ namespace Asa.ApartmentManagement.Core.ChargeCalculation
             return apartment.Area;
         }
 
-        internal IEnumerable<(int PayerId, int DaysLived)> GetPayerResidenceInfos(DateTime from, DateTime to)
+        internal IEnumerable<(int PayerId, int DaysLived, int OccupantCount)> GetPayerResidenceInfos(DateTime from, DateTime to)
         {
-            var payerResidenceInfos = new List<(int, int)>();
+            var payerResidenceInfos = new List<(int, int, int)>();
             foreach (var apartment in Apartments)
             {
                 payerResidenceInfos.AddRange(apartment.GetPayerResisdenceInfo(from, to));
@@ -43,7 +43,7 @@ namespace Asa.ApartmentManagement.Core.ChargeCalculation
             return payerResidenceInfos;
         }
         
-        internal IEnumerable<(int PayerId, int DaysLived)> GetApartmentPayerResidenceInfos(DateTime from, DateTime to, int apartmentId)
+        internal IEnumerable<(int PayerId, int DaysLived, int OccupantCount)> GetApartmentPayerResidenceInfos(DateTime from, DateTime to, int apartmentId)
         {
             var apartment = Apartments.FirstOrDefault(a => a.ApartmentId == apartmentId);
             if (apartment is null)

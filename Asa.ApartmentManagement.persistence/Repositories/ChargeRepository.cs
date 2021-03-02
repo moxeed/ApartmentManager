@@ -31,12 +31,19 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
         }
 
         public async Task<IEnumerable<ChargeItem>> GetChargeApartmentChargesAsync(int apartmentId)
-            => await _context.ChargeItems.Where(i => _context.Payers.Any(p => p.ApartmentId == apartmentId && p.PersonId == i.PayerId)).ToListAsync();
+            => await _context.ChargeItems.Where(i => _context.Payers
+            .Any(p => p.ApartmentId == apartmentId && p.PersonId == i.PayerId))
+            .ToListAsync();
 
         public async Task<IEnumerable<ChargeItem>> GetChargePayerChargesAsync(int payerId)
             => await _context.ChargeItems.Where(i => i.PayerId == payerId).ToListAsync();
 
         public Task Commit() => _context.SaveChangesAsync();
 
+        public async Task<IEnumerable<Charge>> GetBuildingCharges (int buildingId, DateTime from, DateTime to)
+            => await _context.Charges.Where(c => _context.ChargeApartments
+            .Any(a => a.ApartmentId == c.ApartmentId && a.BuildingId == buildingId))
+            .Where(c => c.From < to && c.To >= from)
+            .ToListAsync();
     }
 }
