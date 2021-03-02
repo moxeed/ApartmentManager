@@ -17,6 +17,8 @@ namespace Asa.ApartmentManagement.Core.Interfaces.Repositories
         Task<IEnumerable<OwnerTenantDto>> GetAllCurrentOwnerTenants(int buildingId);
         Task<ChargeBuilding> GetChargeBuildingAsync(int buildingId);
         Task<int> GetBuildingIdByApartmentId(int apartmentId);
-    
+        Task<IEnumerable<OwnerTenantDto>> GetAllCurrrentOwnerOfApartment(int apartmentId);
+
+
     }
 }

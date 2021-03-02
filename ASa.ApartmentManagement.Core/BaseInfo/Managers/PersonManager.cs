@@ -88,29 +88,22 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
             await _personRepository.AddOwnerTenantAsync(ow);
         }
 
+
+
         public async Task EditOwnerTenantAsync(OwnerTenantDto ow)
         {
             var prevOwnerTenant = await GetCurrentOwnerTenantById(ow.OwnerTenantId);
-
             if (ow.OccupantCount != prevOwnerTenant.OccupantCount)
             {
                 ow.From = DateTime.Now;
                 prevOwnerTenant.To = DateTime.Now;
-                await _personRepository.AddOwnerTenantAsync(ow);
-                if (prevOwnerTenant.From != ow.From)
-                {
-                    //TODO : recalculate charge must happen
-                    await _personRepository.EditOwnerTenantAsync(ow);
-                }
- 
+                await _personRepository.AddOwnerTenantAsync(ow); 
             }
-            else if (prevOwnerTenant.From != ow.From)
-              {
-                    //TODO : recalculate charge must happen
-                    await _personRepository.EditOwnerTenantAsync(ow);
-              }
-
-           
+            if (prevOwnerTenant.From != ow.From)
+            {
+                //TODO : recalculate charge must happen
+                await _personRepository.EditOwnerTenantAsync(ow);
+            }
 
         }
 
