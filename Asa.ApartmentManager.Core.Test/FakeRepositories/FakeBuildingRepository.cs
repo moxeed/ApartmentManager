@@ -56,6 +56,11 @@ namespace Asa.ApartmentManagement.Persistence.FakeRepositories
             throw new NotImplementedException();
         }
 
+        public Task<ApartmentDto> GetApartment(int apartmentId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<ApartmentDto>> GetBuildingApartments(int buildingId)
         {
             return _apartments.Where(a => a.BuildingId == buildingId);

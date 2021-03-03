@@ -24,7 +24,7 @@ namespace Asa.ApartmentManager.Core.Test.Mappers.PersistanceMappers
             BuildingDto ow = otdto.ToDto();
 
             bool check = false;
-            if (ow.BuildingId == otdto.BuildingId&& ow.ApartmentCount== otdto.ApartmentCount&& 
+            if (ow.BuildingId == otdto.BuildingId&& ow.NumberOfUnits == otdto.ApartmentCount&& 
                    ow.Name == otdto.BuildingName)
             {
                 check = true;
@@ -40,12 +40,12 @@ namespace Asa.ApartmentManager.Core.Test.Mappers.PersistanceMappers
             {
                 BuildingId = 1,
                 Name = "gholam",
-                ApartmentCount = 4
+                NumberOfUnits = 4
             };
             BuildingInfo ow = otdto.ToEntry();
 
             bool check = false;
-            if (ow.BuildingId == otdto.BuildingId && ow.ApartmentCount == otdto.ApartmentCount &&
+            if (ow.BuildingId == otdto.BuildingId && ow.ApartmentCount == otdto.NumberOfUnits &&
                    otdto.Name == ow.BuildingName)
             {
                 check = true;
