@@ -18,7 +18,7 @@ namespace Asa.ApartmentManagement.Persistence.FakeRepositories
         public FakeBuildingRepository()
         {
             _buildings = new List<BuildingDto>();
-            BuildingDto building = new BuildingDto { BuildingId = 0, Name = "Test", NumberOfUnits = 10 };
+            BuildingDto building = new BuildingDto { BuildingId = 0, Name = "Test", ApartmentCount = 10 };
             _buildings.Add(building);
             _apartments = new List<ApartmentDto>();
         }

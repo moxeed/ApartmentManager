@@ -23,14 +23,14 @@ namespace Asa.ApartmentSystem.Core.Test
         [Test]
         public void Building_Name_Cannot_Be_Null_Or_Empty()
         {
-            BuildingDto building = new BuildingDto { BuildingId = 0, Name = string.Empty, NumberOfUnits = 10 };
+            BuildingDto building = new BuildingDto { BuildingId = 0, Name = string.Empty, ApartmentCount = 10 };
             Assert.CatchAsync(() => buildingManager.AddBuildingAsync(building));
         }
 
         [Test]
         public async Task Building_Added_Successfuly()
         {
-            BuildingDto building = new BuildingDto { BuildingId = 1, Name = "MyBuilding", NumberOfUnits = 10 };
+            BuildingDto building = new BuildingDto { BuildingId = 1, Name = "MyBuilding", ApartmentCount = 10 };
             await buildingManager.AddBuildingAsync(building);
             var addedbuilding = await _repository.GetBuildingAsync(building.BuildingId);
             Assert.AreEqual(1, addedbuilding.BuildingId);
@@ -40,7 +40,7 @@ namespace Asa.ApartmentSystem.Core.Test
         public async Task Buillding_Edit_Successfuly()
         {
             BuildingNameDto buildingname = new BuildingNameDto { BuildingId = 1, BuildingName = "Salam" };
-            BuildingDto building = new BuildingDto { BuildingId = 1, Name = "Khodafes", NumberOfUnits = 10 };
+            BuildingDto building = new BuildingDto { BuildingId = 1, Name = "Khodafes", ApartmentCount = 10 };
             await buildingManager.AddBuildingAsync(building);
             await buildingManager.EditBuldingNameAsync(buildingname);
             var editedbuilding  = await _repository.GetBuildingAsync(building.BuildingId);

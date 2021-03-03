@@ -16,7 +16,7 @@ namespace Asa.ApartmentSystem.API.Mappers
             {
                 BuildingId = building.BuildingId,
                 BuildingName = building.Name,
-                ApartmentCount = building.NumberOfUnits,
+                ApartmentCount = building.ApartmentCount,
                 OcuupantCount = 0,
                 Budget = 0
             };
@@ -29,7 +29,7 @@ namespace Asa.ApartmentSystem.API.Mappers
         {
             return new BuildingDto
             {
-                NumberOfUnits = addBuildingRequest.ApartmentCount 
+                ApartmentCount = addBuildingRequest.ApartmentCount 
                 ?? throw new NullReferenceException($"{nameof(addBuildingRequest.ApartmentCount)} Was Null"),
                 Name = addBuildingRequest.Name
             };

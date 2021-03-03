@@ -24,7 +24,7 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
                 throw new ValidationException(ErrorCodes.Invalid_Building_Name, $"Building name cannot be neither empty");
             }
             const int MINIMUM_BUILDING_UNITS_COUNT = 2;
-            if (building.NumberOfUnits < MINIMUM_BUILDING_UNITS_COUNT)
+            if (building.ApartmentCount < MINIMUM_BUILDING_UNITS_COUNT)
             {
                 throw new ValidationException(ErrorCodes.Invalid_Number_Of_Units, $"The number of units cannot be less than {MINIMUM_BUILDING_UNITS_COUNT }.");
             }
@@ -46,7 +46,7 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
                 throw new ValidationException(ErrorCodes.Invalid_Area, $"Area of an Apartment can not be smaller than 20");
             }
             var building  = await  _buildingrepository.GetBuildingAsync(apartment.BuildingId);
-            if(building.NumberOfUnits < apartment.Number)
+            if(building.ApartmentCount < apartment.Number)
             {
                 throw new ValidationException(ErrorCodes.Max_Apartment_Number, $"Number Unit should not be greater than counts of building aparment");
             }
