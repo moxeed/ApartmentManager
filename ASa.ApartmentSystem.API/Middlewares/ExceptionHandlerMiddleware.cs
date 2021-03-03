@@ -1,5 +1,4 @@
 ﻿using Asa.ApartmentSystem.API.Common;
-using Asa.ApartmentSystem.API.Common.Extenstions;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;

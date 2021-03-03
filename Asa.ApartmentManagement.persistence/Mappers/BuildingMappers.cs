@@ -15,7 +15,7 @@ namespace Asa.ApartmentManagement.Persistence.Mappers
             {
                 BuildingId = building.BuildingId,
                 Name = building.BuildingName,
-                ApartmentCount = building.ApartmentCount
+                NumberOfUnits = building.ApartmentCount
             };
         }
 
@@ -27,7 +27,7 @@ namespace Asa.ApartmentManagement.Persistence.Mappers
             {
                 BuildingId = building.BuildingId,
                 BuildingName= building.Name,
-                ApartmentCount= building.ApartmentCount
+                ApartmentCount= building.NumberOfUnits
             };
         }
 

@@ -1,22 +1,19 @@
 ﻿using Asa.ApartmentManagement.Core.ChargeCalculation;
+using Asa.ApartmentManagement.Core.ChargeCalculation.DTOs;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Asa.ApartmentManagement.Persistence.Context
 {
     public class ChargeDbContext : DbContext
     {
         public ChargeDbContext(DbContextOptions<ChargeDbContext> options) : base(options) { }
-
         public DbSet<ChargeBuilding> ChargeBuildings { get; set; }
         public DbSet<ChargeApartment> ChargeApartments { get; set; }
         public DbSet<ChargeExpense> ChargeExpenses { get; set; }
         public DbSet<Charge> Charges { get; set; }
         public DbSet<ChargeItem> ChargeItems { get; set; }
         public DbSet<Payer> Payers { get; set; }
-        public DbSet<CalculatedCharge> CalculatedCharges { get; set; }
+        public DbSet<CalculatedChargeDto> CalculatedCharges { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,9 +28,7 @@ namespace Asa.ApartmentManagement.Persistence.Context
             modelBuilder.Entity<ChargeApartment>().ToTable("Apartment").HasKey(e => e.ApartmentId);
             modelBuilder.Entity<ChargeExpense>().ToTable("Expense").HasKey(e => e.ExpenseId);
             modelBuilder.Entity<Payer>().ToTable("OwnerTenant").HasKey(e => e.OwnerTenantId);
-            modelBuilder.Entity<CalculatedCharge>().ToView("vwCalculatedCharges").HasNoKey();
-
-
+            modelBuilder.Entity<CalculatedChargeDto>().ToView("vwCalculatedCharges").HasNoKey();
         }
     }
 }

@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Asa.ApartmentSystem.API.Mappers;
 using Asa.ApartmentSystem.API.Areas.BaseInfo.Models.Requests;
+using System.Linq;
+using Asa.ApartmentManagement.ApplicationServices.Models;
 
 namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
 {
@@ -21,22 +23,37 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
         {
             var apartment = request.ToDto();
             await buildingManager.AddAppartment(apartment);
-            return Created(Request.Path, apartment);
+            return Created(Request.Path, apartment.WrapResponse(Request.Path));
         }
         [HttpGet("{buildingId:int}")]
         public async Task<IActionResult> GetBuildingApartments(int buildingId) 
         {
+            var ownerTenats = await buildingManager.GetAllCurrentOwnerTenants(buildingId);
             var apartments = await buildingManager.GetApartmentsOfBuilding(buildingId);
-            var apartmentmodels = apartments.Project();
-            return Ok(apartmentmodels.WrapResponse(Request.Path));
 
+            var apartmentModels = apartments.Select(a => new ApartmentOwnerTenantResponse
+            {
+                Apartment = a,
+                Owner = ownerTenats.FirstOrDefault(c => c.IsOwner && c.ApartmentId == a.ApartmentId),
+                Tenant = ownerTenats.FirstOrDefault(c => !c.IsOwner && c.ApartmentId == a.ApartmentId),
+            });
+
+            return Ok(apartmentModels.WrapResponse(Request.Path));
         }
         [HttpGet("Tenant/{apartmentId:int}")]
         public async Task<IActionResult> GetAllOwnerTenatsOfApartment(int apartmentId)
         {
-            var ownertenants = await buildingManager.GetAllCurrrentOwnerOfApartment(apartmentId);
-            var ownertenantmodels = ownertenants.Project();
-            return Ok(ownertenantmodels.WrapResponse(Request.Path));
+            var ownerTenats = await buildingManager.GetAllCurrrentOwnerOfApartment(apartmentId);
+            var apartment = await buildingManager.GetApartment(apartmentId);
+
+            var apartmentModels = new ApartmentOwnerTenantResponse
+            {
+                Apartment = apartment,
+                Owner = ownerTenats.FirstOrDefault(c => c.IsOwner),
+                Tenant = ownerTenats.FirstOrDefault(c => !c.IsOwner),
+            };
+
+            return Ok(apartmentModels.WrapResponse(Request.Path));
         }
     }
 }

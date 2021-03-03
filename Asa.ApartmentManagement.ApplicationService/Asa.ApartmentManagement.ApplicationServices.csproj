@@ -5,12 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ASa.ApartmentManagement.Core\Asa.ApartmentManagement.Core.csproj" />
-    <ProjectReference Include="..\Asa.ApartmentManagement.persistence\Asa.ApartmentManagement.Persistence.csproj" />
+    <Compile Remove="implementation\**" />
+    <EmbeddedResource Remove="implementation\**" />
+    <None Remove="implementation\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="implementation\" />
+    <ProjectReference Include="..\ASa.ApartmentManagement.Core\Asa.ApartmentManagement.Core.csproj" />
+    <ProjectReference Include="..\Asa.ApartmentManagement.persistence\Asa.ApartmentManagement.Persistence.csproj" />
   </ItemGroup>
 
   <ItemGroup>

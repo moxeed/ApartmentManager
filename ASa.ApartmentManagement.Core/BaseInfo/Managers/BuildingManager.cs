@@ -24,7 +24,7 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
                 throw new ValidationException(ErrorCodes.Invalid_Building_Name, $"Building name cannot be neither empty");
             }
             const int MINIMUM_BUILDING_UNITS_COUNT = 2;
-            if (building.ApartmentCount < MINIMUM_BUILDING_UNITS_COUNT)
+            if (building.NumberOfUnits < MINIMUM_BUILDING_UNITS_COUNT)
             {
                 throw new ValidationException(ErrorCodes.Invalid_Number_Of_Units, $"The number of units cannot be less than {MINIMUM_BUILDING_UNITS_COUNT }.");
             }
@@ -46,7 +46,7 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
                 throw new ValidationException(ErrorCodes.Invalid_Area, $"Area of an Apartment can not be smaller than 20");
             }
             var building  = await  _buildingrepository.GetBuildingAsync(apartment.BuildingId);
-            if(building.ApartmentCount < apartment.Number)
+            if(building.NumberOfUnits < apartment.Number)
             {
                 throw new ValidationException(ErrorCodes.Max_Apartment_Number, $"Number Unit should not be greater than counts of building aparment");
             }
@@ -82,7 +82,7 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
         public async Task AddAppartment(ApartmentDto apartment)
         {
             await ValidateApartment(apartment);
-            await _buildingrepository.AddApartmentAsync(apartment);   
+            await _buildingrepository.AddApartmentAsync(apartment);
         }
 
         public async Task<IEnumerable<ApartmentDto>> GetApartmentsOfBuilding(int buildingId)
@@ -91,7 +91,7 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
         }
         public async Task<IEnumerable<OwnerTenantDto>> GetAllCurrentOwnerTenants(int buildingId)
         {
-            return await _buildingrepository. GetAllCurrentOwnerTenants(buildingId);
+            return await _buildingrepository. GetAllCurrentApartmentOwnerTenants(buildingId);
         }
 
         public async Task<int> GetBuildingIdOfOwnerTenant(int apartmentId)
@@ -102,7 +102,10 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
 
         public async Task<IEnumerable<OwnerTenantDto>> GetAllCurrrentOwnerOfApartment(int apartmentId)
         {
-            return await _buildingrepository.GetAllCurrentOwnerTenants(apartmentId);
+            return await _buildingrepository.GetAllCurrentApartmentOwnerTenants(apartmentId);
         }
+
+        public Task<ApartmentDto> GetApartment(int apartmentId)
+            => _buildingrepository.GetApartment(apartmentId);
     }
 }

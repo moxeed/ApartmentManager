@@ -1,6 +1,8 @@
 ﻿using Asa.ApartmentManagement.Core.ChargeCalculation;
+using Asa.ApartmentManagement.Core.ChargeCalculation.DTOs;
 using Asa.ApartmentManagement.Core.Interfaces.Repositories;
 using Asa.ApartmentManagement.Persistence.Context;
+using Asa.ApartmentManagement.Persistence.Mappers;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -46,9 +48,17 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
             .Where(c => c.From < to && c.To >= from)
             .ToListAsync();
 
-        public async Task<IEnumerable<CalculatedCharge>> GetBuildingCharges()
+        public async Task<IEnumerable<CalculatedChargeDto>> GetPayerBuildingCharges()
         {
             return await _context.CalculatedCharges.ToListAsync();
+        }
+
+        public async Task<IEnumerable<ChargeDto>> GetBuildingCharges()
+        {
+            var charges = await _context.Charges.ToListAsync();
+            return charges
+                .GroupBy(c => c.CalculateDateTime)
+                .Select(c => c.First()).Project();
         }
     }
 }

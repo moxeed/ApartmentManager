@@ -50,7 +50,7 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
             await _baseInfoContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<OwnerTenantDto>> GetAllCurrentOwnerTenants(int buildingId)
+        public async Task<IEnumerable<OwnerTenantDto>> GetAllCurrentApartmentOwnerTenants(int buildingId)
         {
             var ownerTenants = await _baseInfoContext.OwnerTenants.Where(o => o.To == null).ToListAsync();
             return ownerTenants.Project();
@@ -100,6 +100,14 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
                 throw new NullReferenceException($"There is no Owners or Tenants in this apartment");
             }
             return AllCurrentOwnerTenats.Project();
+        }
+
+        public async Task<ApartmentDto> GetApartment(int apartmentId) 
+        {
+            var apartment = await _baseInfoContext.ApartmentInfos
+                .Include(a => a.OwnerTenants)
+                .FirstOrDefaultAsync(c => c.ApartmentId == apartmentId);
+            return apartment.ToDto();
         }
     }
 }

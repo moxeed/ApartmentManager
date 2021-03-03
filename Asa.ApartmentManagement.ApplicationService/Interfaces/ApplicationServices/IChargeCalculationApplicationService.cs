@@ -1,4 +1,4 @@
-﻿using Asa.ApartmentManagement.Core.ChargeCalculation;
+﻿using Asa.ApartmentManagement.Core.ChargeCalculation.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,6 +9,7 @@ namespace Asa.ApartmentManagement.ApplicationServices.Interfaces.ApplicationServ
     {
         Task CalculateChargeAsync(int buildbingId, DateTime from, DateTime to);
         Task ReCalculateChargeAsync(int buildbingId, DateTime from, DateTime? to);
-        Task<IEnumerable<CalculatedCharge>> GetCalaculatedChargesAsync();
+        Task<IEnumerable<CalculatedChargeDto>> GetPayerCalculatedChargesAsync();
+        Task<IEnumerable<ChargeDto>> GetCalculatedChargesAsync();
     }
 }
