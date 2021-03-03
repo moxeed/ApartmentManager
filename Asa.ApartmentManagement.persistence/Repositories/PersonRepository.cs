@@ -23,6 +23,7 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
             var entry = owner.ToEntry();
             await _baseInfoContext.OwnerTenants.AddAsync(entry);
             await _baseInfoContext.SaveChangesAsync();
+            owner.OwnerTenantId = entry.OwnerTenantId;
         }
 
         public async Task AddPersongAsync(PersonDto person)
@@ -30,6 +31,7 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
             var entry = person.ToEntry();
             await _baseInfoContext.PersonInfos.AddAsync(entry);
             await _baseInfoContext.SaveChangesAsync();
+            person.PersonId = entry.PersonId;
         }
 
         public async Task EditOwnerTenantAsync(OwnerTenantDto owner)

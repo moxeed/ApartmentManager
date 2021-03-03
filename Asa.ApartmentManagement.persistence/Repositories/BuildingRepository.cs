@@ -27,7 +27,6 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
             var entry = apartment.ToEntry();
             await _baseInfoContext.ApartmentInfos.AddAsync(entry);
             await _baseInfoContext.SaveChangesAsync();
-
             apartment.ApartmentId = entry.ApartmentId;
         }
 
@@ -36,7 +35,6 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
             var entry = building.ToEntry();
             await _baseInfoContext.BuildingInfos.AddAsync(entry);
             await _baseInfoContext.SaveChangesAsync();
-
             building.BuildingId = entry.BuildingId;
         }
 
