@@ -72,6 +72,11 @@ namespace Asa.ApartmentManagement.Persistence.FakeRepositories
         {
             throw new NotImplementedException();
         }
+
+        public Task<IEnumerable<PersonDto>> GetPersonsAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
