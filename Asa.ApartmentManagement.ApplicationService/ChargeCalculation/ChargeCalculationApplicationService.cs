@@ -1,5 +1,6 @@
 ﻿using Asa.ApartmentManagement.ApplicationServices.Interfaces.ApplicationServices;
 using Asa.ApartmentManagement.Core.ChargeCalculation;
+using Asa.ApartmentManagement.Core.ChargeCalculation.DTOs;
 using Asa.ApartmentManagement.Core.Interfaces.Repositories;
 using System;
 using System.Collections.Generic;
@@ -60,10 +61,12 @@ namespace Asa.ApartmentManagement.ApplicationServices.ChargeCalculation
 
             await _chargeRepository.Commit();
         }
-        public async Task<IEnumerable<CalculatedCharge>> GetCalaculatedChargesAsync()
-        {
-            return await _chargeRepository.GetBuildingCharges();   
-        }
+
+        public Task<IEnumerable<CalculatedChargeDto>> GetPayerCalculatedChargesAsync() 
+            =>_chargeRepository.GetPayerBuildingCharges();
+
+        public Task<IEnumerable<ChargeDto>> GetCalculatedChargesAsync()
+            => _chargeRepository.GetBuildingCharges();
 
     }
 }

@@ -56,7 +56,7 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
 
             foreach (var ot in allCurrentOwners)
             {
-                if (ot.ApartmentId == ownertenant.ApartmentId)
+                if (ot.ApartmentId == ownertenant.ApartmentId && ot.IsOwner == ownertenant.IsOwner)
                 {
                     throw new ValidationException(ErrorCodes.Apartment_Is_Taken, $"This apartment Is occupied");
                 }
@@ -101,9 +101,9 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
                 { 
                     await _personRepository.EditOwnerTenantAsync(ownerTenant);
                 }
- 
             }
             await _personRepository.EditOwnerTenantAsync(ownerTenant);
+            ownerTenant.ApartmentId = prevOwnerTenant.ApartmentId;
         }
 
         public Task<OwnerTenantDto> GetCurrentOwnerTenantById(int ownertenantId)

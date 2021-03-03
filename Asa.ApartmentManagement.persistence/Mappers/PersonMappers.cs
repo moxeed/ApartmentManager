@@ -26,6 +26,7 @@ namespace Asa.ApartmentManagement.Persistence.Mappers
         {
             return new OwnerTenant
             {
+                OwnerTenantId = ownertenantDto.OwnerTenantId,
                 OccupantCount = ownertenantDto.OccupantCount,
                 IsOwner = ownertenantDto.IsOwner,
                 From = ownertenantDto.From, 

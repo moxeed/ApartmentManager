@@ -36,13 +36,14 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
 
         public async Task EditOwnerTenantAsync(OwnerTenantDto owner)
         {
-
-            var ownertenant = await _baseInfoContext.OwnerTenants.FirstOrDefaultAsync(b => b.OwnerTenantId == owner.OwnerTenantId);
+            var ownertenant = await _baseInfoContext.OwnerTenants.AsNoTracking().FirstOrDefaultAsync(b => b.OwnerTenantId == owner.OwnerTenantId);
             if (ownertenant == null)
             {
                 throw new NullReferenceException($"Cannot Find OwnerTenant with {owner.OwnerTenantId} id");
             }
             var entry = owner.ToEntry();
+            entry.PersonId = ownertenant.PersonId;
+            entry.ApartmentId = ownertenant.ApartmentId;
             _baseInfoContext.OwnerTenants.Update(entry);
             await _baseInfoContext.SaveChangesAsync();
         }
@@ -58,7 +59,7 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
 
         public async Task<OwnerTenantDto> GetCurrentOwnerTenantById(int ownertenantId)
         {
-           var ownertenant =  await _baseInfoContext.OwnerTenants.FirstOrDefaultAsync(b => b.OwnerTenantId == ownertenantId);
+           var ownertenant =  await _baseInfoContext.OwnerTenants.AsNoTracking().FirstOrDefaultAsync(b => b.OwnerTenantId == ownertenantId);
            var ownertenantDto = ownertenant.ToDto();
            return ownertenantDto;
         }

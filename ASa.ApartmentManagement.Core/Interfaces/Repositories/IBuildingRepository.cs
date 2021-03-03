@@ -14,11 +14,10 @@ namespace Asa.ApartmentManagement.Core.Interfaces.Repositories
         Task<IEnumerable<BuildingDto>> GetBuildingsAsync();
         Task AddApartmentAsync(ApartmentDto apartment);
         Task<IEnumerable<ApartmentDto>> GetBuildingApartments(int buildingId);
-        Task<IEnumerable<OwnerTenantDto>> GetAllCurrentOwnerTenants(int buildingId);
+        Task<IEnumerable<OwnerTenantDto>> GetAllCurrentApartmentOwnerTenants(int apartmentId);
         Task<ChargeBuilding> GetChargeBuildingAsync(int buildingId);
         Task<int> GetBuildingIdByApartmentId(int apartmentId);
         Task<IEnumerable<OwnerTenantDto>> GetAllCurrrentOwnerOfApartment(int apartmentId);
-
-
+        Task<ApartmentDto> GetApartment(int apartmentId);
     }
 }

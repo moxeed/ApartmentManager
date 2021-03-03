@@ -1,4 +1,4 @@
-﻿using Asa.ApartmentManagement.Core.ChargeCalculation;
+﻿using Asa.ApartmentManagement.Core.ChargeCalculation.DTOs;
 using Asa.ApartmentSystem.API.Areas.Charge.Models.Response;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ namespace Asa.ApartmentSystem.API.Mappers
 {
     public static class ChargesMappingExtensions
     {
-        public static CalcultedChargesResponse ToModel(this CalculatedCharge ccharges)
+        public static CalcultedChargesResponse ToModel(this CalculatedChargeDto ccharges)
         {
             return new CalcultedChargesResponse
             {
@@ -20,7 +20,7 @@ namespace Asa.ApartmentSystem.API.Mappers
                TotalCharge = ccharges.TotalCharge
             };
         }
-        public static IEnumerable<CalcultedChargesResponse> Project(this IEnumerable<CalculatedCharge> charges)
+        public static IEnumerable<CalcultedChargesResponse> Project(this IEnumerable<CalculatedChargeDto> charges)
             => charges.Select(ToModel);
     }
 }

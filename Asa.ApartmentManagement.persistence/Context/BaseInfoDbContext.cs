@@ -19,6 +19,7 @@ namespace Asa.ApartmentManagement.Persistence.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            #region moxeeds
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<ApartmentInfo>().Property(a => a.Area).HasColumnType("decimal(10,2)");
@@ -29,6 +30,7 @@ namespace Asa.ApartmentManagement.Persistence.Context
             modelBuilder.Entity<ApartmentInfo>().ToTable("Apartment").HasKey(e => e.ApartmentId);
             modelBuilder.Entity<ExpenseInfo>().ToTable("Expense").HasKey(e => e.ExpenseId);
             modelBuilder.Entity<OwnerTenant>().ToTable("OwnerTenant").HasKey(e => e.OwnerTenantId);
+            #endregion
         }
 
         internal object firstOrDefalt()

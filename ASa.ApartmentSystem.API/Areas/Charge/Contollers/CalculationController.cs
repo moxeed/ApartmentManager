@@ -26,11 +26,18 @@ namespace Asa.ApartmentSystem.API.Areas.Charge.Contollers
         }
 
         [HttpGet]
+        public async Task<IActionResult> GetPayerCalculatedCharges()
+        {
+            var charges = await _chargeCalculationApplicationService.GetPayerCalculatedChargesAsync();
+            var chargesmodel = charges.Project();
+            return Ok(chargesmodel.WrapResponse(Request.Path));
+        }
+
+        [HttpGet("All")]
         public async Task<IActionResult> GetCalculatedCharges()
         {
-            var Charges = await _chargeCalculationApplicationService.GetCalaculatedChargesAsync();
-            var chargesmodel = Charges.Project();
-            return Ok(chargesmodel.WrapResponse(Request.Path));
+            var charges = await _chargeCalculationApplicationService.GetCalculatedChargesAsync();
+            return Ok(charges.WrapResponse(Request.Path));
         }
     }
 }

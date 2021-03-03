@@ -26,7 +26,7 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
             return Created(Request.Path, building.WrapResponse(Request.Path));
         }
 
-        [HttpPatch]
+        [HttpPut]
         public async Task<IActionResult> RenameBulding([FromBody] RenameBuildingRequest request) 
         {
             var buildingName = request.ToDto(); 
