@@ -31,7 +31,7 @@ namespace Asa.ApartmentManager.Core.Test.BaseInfo
         [Test]
         public async Task Person_Added_Successfuly()
         {
-            PersonDto person = new PersonDto { PersonId = 1, Name = "kamal",  LastName="kamali" , PhoneNumber= "0982717672" };
+            PersonDto person = new PersonDto { PersonId = 1, Name = "kamal",  LastName="kamali" , PhoneNumber= "09129876513" };
             await personManager.AddPersonAsync(person);
             var addedperson = await _personrepository.GetPersonById(person.PersonId);
             Assert.AreEqual(1, addedperson.PersonId);
@@ -40,24 +40,24 @@ namespace Asa.ApartmentManager.Core.Test.BaseInfo
         [Test]
         public void Person_Name_Cannot_Be_Null_Or_Empty()
         {
-            PersonDto person = new PersonDto { PersonId = 0, Name = string.Empty,LastName="TestAgain", PhoneNumber = "0999282618" };
+            PersonDto person = new PersonDto { PersonId = 0, Name = string.Empty,LastName="TestAgain", PhoneNumber = "09129876513" };
             Assert.CatchAsync(() => personManager.AddPersonAsync(person));
         }
         [Test]
         public void Person_LastName_Cannot_Be_Null_Or_Empty()
         {
-            PersonDto person = new PersonDto { PersonId = 0, Name = "mamad", PhoneNumber = "0999282618" };
+            PersonDto person = new PersonDto { PersonId = 0, Name = "mamad", PhoneNumber = "09129876513" };
             Assert.CatchAsync(() => personManager.AddPersonAsync(person));
         }
         [Test]
         public async Task Person_Edit_Successfuly()
         {
-            PersonDto editperson = new PersonDto { PersonId = 1, Name="salam" , LastName = "ha", PhoneNumber = "0999282618" };
-            PersonDto person = new PersonDto { PersonId = 1, Name = "Khodafes", LastName="ha" , PhoneNumber= "0999282618" };
+            PersonDto editperson = new PersonDto { PersonId = 1, Name="salam" , LastName = "ha", PhoneNumber = "09129876513" };
+            PersonDto person = new PersonDto { PersonId = 1, Name = "Khodafes", LastName="ha" , PhoneNumber= "09129876513" };
             await personManager.AddPersonAsync(person);
             await personManager.EditPersonAsync(editperson);
             var editedbuilding = await _personrepository.GetPersonById(person.PersonId);
-            Assert.AreEqual("salam", editperson.Name);
+            Assert.AreEqual("salam", editedbuilding.Name);
         }
 
 
