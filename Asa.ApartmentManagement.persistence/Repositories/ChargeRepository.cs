@@ -45,5 +45,10 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
             .Any(a => a.ApartmentId == c.ApartmentId && a.BuildingId == buildingId))
             .Where(c => c.From < to && c.To >= from)
             .ToListAsync();
+
+        public async Task<IEnumerable<CalculatedCharge>> GetBuildingCharges()
+        {
+            return await _context.CalculatedCharges.ToListAsync();
+        }
     }
 }

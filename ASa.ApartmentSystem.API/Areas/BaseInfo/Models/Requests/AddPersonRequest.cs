@@ -2,7 +2,7 @@
 
 namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Models.Requests
 {
-    public class PersonRequest
+    public class AddPersonRequests
     {
         [Required]
         public string Name { get; set; }

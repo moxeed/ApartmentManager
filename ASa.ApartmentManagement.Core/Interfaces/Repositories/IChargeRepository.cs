@@ -14,7 +14,7 @@ namespace Asa.ApartmentManagement.Core.Interfaces.Repositories
         Task<IEnumerable<Charge>> GetBuildingCharges(int buildingId, DateTime from, DateTime to);
         Task<IEnumerable<ChargeItem>> GetChargeApartmentChargesAsync(int apartmentId);
         Task<IEnumerable<ChargeItem>> GetChargePayerChargesAsync(int payerId);
-
+        Task<IEnumerable<CalculatedCharge>> GetBuildingCharges();
         Task Commit();
     }
 }

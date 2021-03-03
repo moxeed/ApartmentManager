@@ -35,7 +35,6 @@ namespace Asa.ApartmentManagement.ApplicationServices.ChargeCalculation
 
             await _chargeRepository.Commit();
         }
-
         public async Task ReCalculateChargeAsync(int apartmentId, DateTime from, DateTime? to)
         {
             to ??= DateTime.MaxValue;
@@ -61,5 +60,10 @@ namespace Asa.ApartmentManagement.ApplicationServices.ChargeCalculation
 
             await _chargeRepository.Commit();
         }
+        public async Task<IEnumerable<CalculatedCharge>> GetCalaculatedChargesAsync()
+        {
+            return await _chargeRepository.GetBuildingCharges();   
+        }
+
     }
 }

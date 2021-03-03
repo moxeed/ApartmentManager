@@ -23,7 +23,7 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPerson([FromBody] PersonRequest request) 
+        public async Task<IActionResult> AddPerson([FromBody] AddPersonRequests request) 
         {
             var person = request.ToDto();
             await _personManager.AddPersonAsync(person);
@@ -31,13 +31,21 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
         }
         
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> EditPerson(int id,[FromBody] PersonRequest request) 
+        public async Task<IActionResult> EditPerson(int id,[FromBody] AddPersonRequests request) 
         {
             var person = request.ToDto(id);
             await _personManager.EditPersonAsync(person);
             return Created(Request.Path, person.WrapResponse(Request.Path));
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAllPerson()
+        {
+            var persons = await _personManager.GetPersonsAsync();
+            var personModels = persons.Project();
+            return Ok(personModels.WrapResponse(Request.Path));
+        }
+    
         [HttpPost] 
         [Route("AddToUnit")]
         public async Task<IActionResult> AddOwnerTenant([FromBody] AddOwnerTenantRequest request)
