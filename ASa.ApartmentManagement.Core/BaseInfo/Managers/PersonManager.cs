@@ -36,8 +36,8 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
                 throw new ValidationException(ErrorCodes.Invalid_Person_LastName, $"Person LastName cannot be Empty");
             }
          
-            Regex re = new Regex(@"(\+98|0)?9\d{9}");
-            if (re.Match(person.PhoneNumber).Success)
+            Regex re = new Regex(@"^(\+98|0)9\d{9}$");
+            if (!(re.Match(person.PhoneNumber).Success))
             {
                 throw new ValidationException(ErrorCodes.Invalid_Phone_Number, $"Phone number is not Valid");
             }
