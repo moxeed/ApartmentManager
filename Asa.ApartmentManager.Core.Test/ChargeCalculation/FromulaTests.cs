@@ -39,7 +39,6 @@ namespace Asa.ApartmentManager.Core.Test.ChargeCalculation
             Assert.IsTrue(checkExistence);
         }
 
-
         [Test]
         public void Create_Formula_That_Not_Exist()
         {
@@ -55,7 +54,7 @@ namespace Asa.ApartmentManager.Core.Test.ChargeCalculation
             //formuls.CalculateShares();
         }
 
-     
+        
 
     }
 }
