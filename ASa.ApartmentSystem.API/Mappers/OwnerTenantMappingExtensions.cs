@@ -20,14 +20,14 @@ namespace Asa.ApartmentSystem.API.Mappers
                 To = request.To , 
                 PersonId = request.PersonId, 
                 ApartmentId = request.ApartmentId
-
             };
         }
         public static OwnerTenantDto ToDto(this EditOwnerTenantRequest request)
         {
             return new OwnerTenantDto
             {
-                OwnerTenantId = request.OwnerTenantId ,
+                PersonId = request.PersonId,
+                ApartmentId = request.ApartmentId,
                 OccupantCount = request.OccupantCount,
                 IsOwner = request.IsOwner,
                 From = request.From,

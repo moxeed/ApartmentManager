@@ -62,6 +62,5 @@ namespace Asa.ApartmentSystem.API.Areas.BaseInfo.Contollers
             await _ownerTenenatApplicationService.EditOwnerTenantAsync(ownertenant);
             return Created(Request.Path, ownertenant.WrapResponse(Request.Path));
         }
-
     }
 }

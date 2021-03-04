@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Asa.ApartmentManagement.Core.BaseInfo.Domain;
 using Asa.ApartmentManagement.Core.BaseInfo.DTOs;
 using Asa.ApartmentManagement.Core.ChargeCalculation;
 using Asa.ApartmentManagement.Core.Interfaces.Repositories;
@@ -95,11 +96,18 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
         public async Task<IEnumerable<OwnerTenantDto>> GetAllCurrrentOwnerOfApartment(int apartmentId)
         {
             var AllCurrentOwnerTenats =  await _baseInfoContext.OwnerTenants.Where(o => o.ApartmentId == apartmentId && o.To == null).ToListAsync();
-            if(AllCurrentOwnerTenats == null)
+            var ownerTenants = await _baseInfoContext.OwnerTenants.Where(o => o.ApartmentId == apartmentId)
+                .OrderBy(t => t.From)
+                .ToListAsync();
+
+            var owner = ownerTenants.LastOrDefault(t => t.IsOwner);
+            var tenant = ownerTenants.LastOrDefault(t => !t.IsOwner);
+
+            if (AllCurrentOwnerTenats == null)
             {
                 throw new NullReferenceException($"There is no Owners or Tenants in this apartment");
             }
-            return AllCurrentOwnerTenats.Project();
+            return new List<OwnerTenant>() { owner, tenant }.Where(c => c != null).Project();
         }
 
         public async Task<ApartmentDto> GetApartment(int apartmentId) 

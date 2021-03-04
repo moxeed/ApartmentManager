@@ -45,7 +45,13 @@ namespace Asa.ApartmentManagement.Persistence.Repositories
             entry.PersonId = ownertenant.PersonId;
             entry.ApartmentId = ownertenant.ApartmentId;
             _baseInfoContext.OwnerTenants.Update(entry);
-            await _baseInfoContext.SaveChangesAsync();
+            try
+            {
+                await _baseInfoContext.SaveChangesAsync();
+            }
+            catch (Exception e) 
+            {
+            }
         }
 
         public async Task EditPersongAsync(PersonDto person)

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using Asa.ApartmentManagement.Core.Interfaces.Repositories;
+using System.Linq;
 
 namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
 {
@@ -50,24 +51,20 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
                 throw new ValidationException(ErrorCodes.Invalid_Entrence_Time, $"Date entrance should not be greater than Exit Time ");
             }
 
-
-            var buildingId = await _buildingManager.GetBuildingIdOfOwnerTenant(ownertenant.ApartmentId);
-            var allCurrentOwners = await _buildingManager.GetAllCurrentOwnerTenants(buildingId);
+            var allCurrentOwners = await _buildingManager.GetAllCurrrentOwnerOfApartment(ownertenant.ApartmentId);
 
             foreach (var ot in allCurrentOwners)
             {
-                if (ot.ApartmentId == ownertenant.ApartmentId && ot.IsOwner == ownertenant.IsOwner)
+                if (ot.IsOwner == ownertenant.IsOwner && ot.From < ownertenant.To && ot.To >= ownertenant.From)
                 {
                     throw new ValidationException(ErrorCodes.Apartment_Is_Taken, $"This apartment Is occupied");
                 }
             }
 
-            if (!(ownertenant.IsOwner))
-                if (ownertenant.OccupantCount < 1)
-                {
-                    throw new ValidationException(ErrorCodes.OccupantCount_Error, $"The counts of the occupant should not be smaller than 1");
-                }
-
+            if (!ownertenant.IsOwner && ownertenant.OccupantCount < 1)
+            {
+                throw new ValidationException(ErrorCodes.OccupantCount_Error, $"The counts of the occupant should not be smaller than 1");
+            }
         }
 
         public async Task AddPersonAsync(PersonDto person)
@@ -90,20 +87,29 @@ namespace Asa.ApartmentManagement.Core.BaseInfo.Managers
 
         public async Task EditOwnerTenantAsync(OwnerTenantDto ownerTenant)
         {
-            var prevOwnerTenant = await GetCurrentOwnerTenantById(ownerTenant.OwnerTenantId);
+            var prevOwnerTenants = await _buildingManager.GetAllCurrrentOwnerOfApartment(ownerTenant.ApartmentId);
 
-            if (ownerTenant.OccupantCount != prevOwnerTenant.OccupantCount)
+            if (ownerTenant.IsOwner)
             {
-                ownerTenant.From = DateTime.Now;
-                prevOwnerTenant.To = DateTime.Now;
-                await _personRepository.AddOwnerTenantAsync(ownerTenant);
-                if (prevOwnerTenant.From != ownerTenant.From)
-                { 
-                    await _personRepository.EditOwnerTenantAsync(ownerTenant);
+                var owner = prevOwnerTenants.FirstOrDefault(t => t.IsOwner);
+                if (owner != null && ownerTenant.PersonId == owner.PersonId) 
+                {
+                    owner.To = ownerTenant.From;
+                    await EditOwnerTenantAsync(owner);
                 }
+                await _personRepository.AddOwnerTenantAsync(ownerTenant);
             }
-            await _personRepository.EditOwnerTenantAsync(ownerTenant);
-            ownerTenant.ApartmentId = prevOwnerTenant.ApartmentId;
+            else 
+            {
+                var tenant = prevOwnerTenants.FirstOrDefault(t => !t.IsOwner);
+                if (tenant != null && (tenant.PersonId != ownerTenant.PersonId || tenant.OccupantCount != ownerTenant.OccupantCount)) 
+                {
+                    tenant.To = DateTime.Now;
+                    await EditOwnerTenantAsync(tenant);
+
+                }
+                await _personRepository.AddOwnerTenantAsync(ownerTenant);
+            }
         }
 
         public Task<OwnerTenantDto> GetCurrentOwnerTenantById(int ownertenantId)
